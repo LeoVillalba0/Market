@@ -1,0 +1,13 @@
+{
+  "name": "blackmarket-reloaded",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TotomInc/blackmarket-reloaded.git"
+  },
+  "author": "TotomInc",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.8.5"
+  }
+}
