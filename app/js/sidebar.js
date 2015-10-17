@@ -3,20 +3,21 @@ var Sidebar = {
   show: function() {
     if (this.trigged) {
       $(".sidebar").css('transform', 'translate3d(-100%, 0, 0)');
-      $(".navbar").css('transform', 'translate3d(0%, 0, 0)');
       $(".pushed").css({
         'opacity': '1',
-        'overflow-x': 'visible'
+        'overflow-x': 'visible',
+        'transform': 'translate3d(0%, 0, 0)'
       });
-      $(".pushed").removeAttr('onclick');
+      $(".pushed").attr("class", "pushed");
       this.trigged = false;
     } else {
       $(".sidebar").css('transform', 'translate3d(0%, 0, 0)');
-      $(".navbar").css('transform', 'translate3d(290px, 0, 0)');
       $(".pushed").css({
         'opacity': '0.75',
-        'overflow-x': 'hidden'
+        'overflow-x': 'hidden',
+        'transform': 'translate3d(290px, 0, 0)'
       });
+      $(".pushed").attr("class", "pushed active");
       this.trigged = true;
     }
   }
