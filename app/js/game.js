@@ -18,12 +18,17 @@ var game = {
 		inflation: [1.08, 1.10, 1.12, 1.14, 1.12, 1.10],
 		progress: [],
 		owned: [],
-		price: [4, 120, 1500, 22500, 1000000, 22500000],
+		price: [4, 120, 1500, 22500, 1000000, 15000000],
 		pricePromo: [],
-		reward: [1, 60, 1200, 15000, 950000, 15000000],
+		reward: [1, 60, 1200, 15000, 950000, 10000000],
 		rewardMultiplier: [],
 		time: [3, 10, 30, 120, 600, 3600],
 		timeMultiplier: []
+	},
+
+	production: {
+		angularInit: false,
+		list: ["Weed", "Meth", "Cocaine"]
 	}
 };
 
@@ -89,6 +94,7 @@ game.actions.upgrade = function(index) {
 	if (game.money >= price) {
 		game.money -= price;
 		this.owned[index]++;
+		$("#action-upgrade-" + (index+1)).html("Upgrade");
 	};
 	this.display();
 };
@@ -106,6 +112,7 @@ game.actions.run = function(times) {
 				width = 100;
 			width = Math.max(width, 1);
 			$("#action-progress-" + (i+1)).css('width', width + '%');
+			$("#action-nb-" + (i+1)).html(Math.floor(width) + "%");
 		};
 	}
 };

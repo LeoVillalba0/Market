@@ -28,10 +28,11 @@
       <li><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>
       <li><a href="#/gangs"><i class="ion-ios-people"></i> Gangs</a></li>
       <li><a href="#/prestige"><i class="ion-android-star-outline"></i> Prestige</a></li>
+      <li><a href="#/prestige"><i class="ion-arrow-graph-up-right"></i> Upgrades</a></li>
       <li><a href="#/achievements"><i class="ion-ribbon-b"></i> Achievements</a></li>
       <li><a href="#/stats"><i class="ion-stats-bars"></i> Stats</a></li>
       <li><a href="#/options"><i class="fa fa-cog"></i> Options</a></li>
-      <li><a href="#/" id="sidebar-close"><i class="fa fa-times-circle"></i> Close menu</a></li>
+      <li><a class="sidebar-close" id="sidebar-close"><i class="fa fa-times-circle"></i> Close menu</a></li>
     </ul>
   </div>
 
@@ -50,13 +51,13 @@
 
         <div class="collapse navbar-collapse" id="navbar-mobile-extend">
           <ul class="nav navbar-nav navbar-right">
-            <li id="navbar-sidebar"><a href="#/"><i class="fa fa-bars"></i> Open menu</a></li>
+            <li id="navbar-sidebar"><a class="navbar-sidebar"><i class="fa fa-bars"></i> Open menu</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container small game-content" ng-view></div>
+    <div class="game-content" ng-view></div>
   </div>
 
   <script src="app/js/beautify.js"></script>
