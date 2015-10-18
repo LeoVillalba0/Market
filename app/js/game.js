@@ -5,8 +5,8 @@ var game = {
 	totalMoney: 0,
 
 	options: {
-		fps: 10,
-		interval: (1000/10),
+		fps: 20,
+		interval: (1000/20),
 		init: false,
 		before: new Date().getTime(),
 		after: new Date().getTime()
@@ -27,6 +27,10 @@ var game = {
 	}
 };
 
+game.actions.gainMoney = function(amount) {
+	game.money += amount;
+	game.totalMoney += amount;
+};
 game.actions.getTime = function(index) {
 	return (this.time[index] / this.timeMultiplier[index]);
 };
@@ -50,6 +54,11 @@ game.actions.init = function() {
 		this.owned[0] = 1;
 
 		$("#action-upgrade-" + (i+1)).attr('onclick', 'game.actions.upgrade(' + i + ');');
+
+		if (this.owned[i] < 1)
+			$("#action-upgrade-" + (i+1)).html("Unlock");
+		else
+			$("#action-upgrade-" + (i+1)).html("Upgrade");
 	}
 
 	this.display();
@@ -62,7 +71,17 @@ game.actions.display = function() {
 		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
 		$("#action-info-" + (i+1)).html("Earn $" + fix(reward) + " - " + fix(time) + " sec");
 		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
-		$("#action-progress-" + (i+1)).css('width', '50%');
+	}
+};
+game.actions.angularDisplay = function() {
+	for (var i = 0; i < this.list.length; i++) {
+		var price = this.getPrice(i);
+		var reward = this.getReward(i);
+		var time = this.getTime(i);
+		$("#action-upgrade-" + (i+1)).attr('onclick', 'game.actions.upgrade(' + i + ');');
+		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
+		$("#action-info-" + (i+1)).html("Earn $" + fix(reward) + " - " + fix(time) + " sec");
+		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
 	}
 };
 game.actions.upgrade = function(index) {
@@ -74,7 +93,37 @@ game.actions.upgrade = function(index) {
 	this.display();
 };
 game.actions.run = function(times) {
+	for (var i = 0; i < this.list.length; i++) {
+		if (this.owned[i] > 0) {
+			var fps = game.options.fps;
+			var time = this.getTime(i);
+			var reward = this.getReward(i);
+			this.progress[i] += times/fps;
+			this.gainMoney(Math.floor(this.progress[i]/time) * reward);
+			this.progress[i] %= time;
+			var width = ((this.progress[i]/time) * 100)
+			if (time < 0.1)
+				width = 100;
+			width = Math.max(width, 1);
+			$("#action-progress-" + (i+1)).css('width', width + '%');
+		};
+	}
 };
 
 game.options.coreLoop = function() {
+	var that = game.options;
+	that.now = new Date().getTime();
+	var elapsed = that.now - that.before;
+	if (elapsed > that.interval)
+		that.updateGame(Math.floor(elapsed/that.interval));
+	else
+		that.updateGame(1);
+	that.before = new Date().getTime();
+};
+game.options.updateGame = function(times) {
+	this.display();
+	game.actions.run(times);
+};
+game.options.display = function() {
+	$(".navbar-brand").html("$" + fix(game.money) + " - lvl. 1");
 };
