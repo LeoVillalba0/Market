@@ -1,23 +1,21 @@
-<div class="well">
+<div class="well" ng-init="init()">
   <div class="row">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
           <div class="action-content">
-            <h1>Shooting</h1>
-            <h2>Earn $1.00/shoot - 3.00 sec</h2>
-            <div class="progress progress-striped active mid-bar middle">
-              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
+            <h1 id="action-name-1">Shooting (lvl. 1)</h1>
+            <h2 id="action-info-1">Earn $1.00/shoot - 3.00 sec</h2>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-2">
+                <a id="action-upgrade-1" class="btn btn-primary btn-xs center-block">Upgrade</a>
+              </div>
+              <div class="col-md-5">
+                <h3 id="action-cost-1">Cost $1.234t</h3>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="action-content">
-            <h1>Shooting</h1>
-            <h2>Earn $1.00/shoot - 3.00 sec</h2>
             <div class="progress progress-striped active mid-bar middle">
-              <div class="progress-bar progress-bar-success" style="width: 20%"></div>
+              <div id="action-progress-1" class="progress-bar progress-bar-success"></div>
             </div>
           </div>
         </div>
