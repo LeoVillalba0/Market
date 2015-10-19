@@ -1,3 +1,4 @@
+// from stackoverflow.com/q/12944987/
 var log = console.log.bind(console, "DEBUG:");
 
 var game = {
@@ -7,13 +8,12 @@ var game = {
 	options: {
 		fps: 20,
 		interval: (1000/20),
-		init: false,
+		angularInit: false,
 		before: new Date().getTime(),
 		after: new Date().getTime()
 	},
 
 	actions: {
-		angularInit: false,
 		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery"],
 		inflation: [1.08, 1.10, 1.12, 1.14, 1.12, 1.10],
 		progress: [],
@@ -27,8 +27,22 @@ var game = {
 	},
 
 	production: {
-		angularInit: false,
-		list: ["Weed", "Meth", "Cocaine"]
+		list: ["Weed", "Meth", "Cocaine"],
+		prices: [50, 800, 4000],
+		prod: {
+			weed: [],
+			meth: [],
+			cocaine: [],
+			multipliers: [],
+			owned: []
+		},
+		sell: {
+			weed: [],
+			meth: [],
+			cocaine: [],
+			multipliers: [],
+			owned: []
+		}
 	}
 };
 
@@ -117,6 +131,45 @@ game.actions.run = function(times) {
 	}
 };
 
+game.production.getWhat = function(drugIndex, buildIndex, type) {
+	var part = (this.list[drugIndex]).toLowerCase();
+	var anotherPart = '[' + buildIndex + ']';
+	var want = (type).toLowerCase();
+	var str = eval('this.prod.' + part + anotherPart + '.' + want);
+	return str;
+};
+game.production.build = function(name, price, reward, inflation) {
+	this.name = name;
+	this.price = price;
+	this.reward = reward;
+	this.inflation = inflation;
+};
+game.production.init = function() {
+	this.prod.multipliers.push(1);
+	this.prod.owned.push(0);
+
+	this.prod.weed = [
+		new game.production.build("Weed build 1", 250, 			0.5, 	1.60),
+		new game.production.build("Weed build 2", 500000, 		2, 		1.50),
+		new game.production.build("Weed build 3", 25000000, 	4, 		1.40),
+		new game.production.build("Weed build 4", 750000000, 	8, 		1.30)
+	];
+
+	this.prod.meth = [
+		new game.production.build("Meth build 1", 250, 			0.5, 	1.60),
+		new game.production.build("Meth build 2", 500000, 		2, 		1.50),
+		new game.production.build("Meth build 3", 25000000, 	4, 		1.40),
+		new game.production.build("Meth build 4", 750000000, 	8, 		1.30)
+	];
+
+	this.prod.cocaine = [
+		new game.production.build("Cocaine build 1", 250, 			0.5, 	1.60),
+		new game.production.build("Cocaine build 2", 500000, 		2, 		1.50),
+		new game.production.build("Cocaine build 3", 25000000, 		4, 		1.40),
+		new game.production.build("Cocaine build 4", 750000000, 	8, 		1.30)
+	];
+};
+
 game.options.coreLoop = function() {
 	var that = game.options;
 	that.now = new Date().getTime();
@@ -133,4 +186,13 @@ game.options.updateGame = function(times) {
 };
 game.options.display = function() {
 	$(".navbar-brand").html("$" + fix(game.money) + " - lvl. 1");
+};
+game.options.init = function() {
+	game.actions.init();
+	game.production.init();
+
+	// from stackoverflow.com/q/22570357/
+	var controllerElement = $('.game-content');
+	var controllerScope = angular.element(controllerElement).scope();
+	controllerScope.setInt();
 };

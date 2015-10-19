@@ -42,6 +42,8 @@ a { color: inherit; text-decoration: inherit !important; }
 .production.row .panel ul li { transition: background 0.3s; cursor: pointer; font-size: 16px; }
 .production.row .panel ul li:hover { transition: background 0.3s; background-color: #eee; }
 .production.row .panel ul li span { float: right;  }
+.production.row h1 { margin: 0 0 15px 0; font-size: 22px; text-align: center; }
+.production.row h1 small { font-size: 75%; color: inherit; }
 
 .action.row .col-md-6 .progress { margin-bottom: 20px; }
 .action-content { width: 100%; text-align: center; }

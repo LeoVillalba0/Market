@@ -18,17 +18,30 @@ app.config(function($routeProvider) {
 
 app.controller('ActionsCtrl', ['$scope', '$interval', function($scope, $interval) {
 	$scope.init = function() {
-		if (game.actions.angularInit !== true || game.actions == undefined) {
-			game.actions.init();
-			$interval(game.options.coreLoop, game.options.interval);
-			game.actions.angularInit = true;
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
 		} else {
 			game.actions.angularDisplay();
 		};
 	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
+	};
 }]);
 
 app.controller('ProductionCtrl', ['$scope', '$interval', function($scope, $interval) {
-	$scope.init = function() {	
+	$scope.init = function() {
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
+		} else {
+			//game.production.angularDisplay();
+		};
+	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
 	};
 }]);
