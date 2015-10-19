@@ -31,17 +31,17 @@ var game = {
 		prices: [50, 800, 4000],
 		prod: {
 			weed: [],
+			weedOwned: [],
 			meth: [],
+			methOwned: [],
 			cocaine: [],
-			multipliers: [],
-			owned: []
+			cocaineOwned: []
 		},
 		sell: {
 			weed: [],
 			meth: [],
 			cocaine: [],
-			multipliers: [],
-			owned: []
+			multipliers: []
 		}
 	}
 };
@@ -145,29 +145,60 @@ game.production.build = function(name, price, reward, inflation) {
 	this.inflation = inflation;
 };
 game.production.init = function() {
-	this.prod.multipliers.push(1);
-	this.prod.owned.push(0);
-
 	this.prod.weed = [
 		new game.production.build("Weed build 1", 250, 			0.5, 	1.60),
 		new game.production.build("Weed build 2", 500000, 		2, 		1.50),
-		new game.production.build("Weed build 3", 25000000, 	4, 		1.40),
-		new game.production.build("Weed build 4", 750000000, 	8, 		1.30)
+		new game.production.build("Weed build 3", 25000000, 	4, 		1.40)
 	];
+
+	for (var i = 0; i < this.prod.weed.length; i++)
+		this.prod.weedOwned.push(0);
 
 	this.prod.meth = [
 		new game.production.build("Meth build 1", 250, 			0.5, 	1.60),
 		new game.production.build("Meth build 2", 500000, 		2, 		1.50),
-		new game.production.build("Meth build 3", 25000000, 	4, 		1.40),
-		new game.production.build("Meth build 4", 750000000, 	8, 		1.30)
+		new game.production.build("Meth build 3", 25000000, 	4, 		1.40)
 	];
+
+
+	for (var i = 0; i < this.prod.meth.length; i++)
+		this.prod.methOwned.push(0);
 
 	this.prod.cocaine = [
 		new game.production.build("Cocaine build 1", 250, 			0.5, 	1.60),
 		new game.production.build("Cocaine build 2", 500000, 		2, 		1.50),
-		new game.production.build("Cocaine build 3", 25000000, 		4, 		1.40),
-		new game.production.build("Cocaine build 4", 750000000, 	8, 		1.30)
+		new game.production.build("Cocaine build 3", 25000000, 		4, 		1.40)
 	];
+
+
+	for (var i = 0; i < this.prod.cocaine.length; i++)
+		this.prod.cocaineOwned.push(0);
+
+	this.display();
+};
+game.production.display = function() {
+	this.prod.display();
+};
+game.production.prod.getReward = function(drugIndex, buildIndex) {
+	var buildReward = game.production.getWhat(drugIndex, buildIndex, 'reward');
+	return (buildReward);
+};
+game.production.prod.getPrice = function(drugIndex, buildIndex) {
+	var buildPrice = game.production.getWhat(drugIndex, buildIndex, 'price');
+	var buildInflation = game.production.getWhat(drugIndex, buildIndex, 'inflation');
+	var part = (game.production.list[drugIndex]).toLowerCase();
+	var anotherPart = '[' + buildIndex + ']';
+	var owned = eval('game.production.prod.' + part + 'Owned' + anotherPart);
+	return (buildPrice * Math.pow(buildInflation, owned));
+};
+game.production.prod.display = function() {
+	for (var i = 0; i < game.production.list.length; i++) {
+		var drugIndex = (game.production.list[i]).toLowerCase();
+		var forwhat = eval('game.production.prod.' + drugIndex);
+		for (var e = 0; e < forwhat.length; e++)
+			$("#production-" + drugIndex + "-" + (e+1)).html(forwhat[e].name + '<span>' + game.production.prod.weedOwned[e] + ' owned</span><br>+' +
+				fix(this.getReward(i, e)) + 'g/sec' + '<span>$' + fix(this.getPrice(i, e), 2) + '</span>');
+	}
 };
 
 game.options.coreLoop = function() {
