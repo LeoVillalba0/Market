@@ -37,7 +37,7 @@ app.controller('ProductionCtrl', ['$scope', '$interval', function($scope, $inter
 			game.options.init();
 			game.options.angularInit = true;
 		} else {
-			//game.production.angularDisplay();
+			game.production.angularDisplay();
 		};
 	};
 
