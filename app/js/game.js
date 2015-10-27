@@ -181,7 +181,7 @@ game.production.init = function() {
 
 	for (var i = 0; i < game.production.list.length; i++) {
 		var drugIndex = (game.production.list[i]).toLowerCase();
-		var forwhat = eval('game.production.prod.' + drugIndex);
+		var forwhat = window["game"]["production"]["prod"][drugIndex];
 		this.stock.push(0);
 		this.multipliers.push(1);
 		for (var e = 0; e < forwhat.length; e++) {
@@ -195,32 +195,32 @@ game.production.display = function() {
 	this.prod.display();
 
 	for (var i = 0; i < this.list.length; i++) {
-		var part = (this.list[i]).toLowerCase();
-		var forwhat = eval('game.production.prod.' + part);
+		var drug = (this.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["prod"][drug];
 		for (var e = 0; e < forwhat.length; e++) {
 			var html = {
 				name: this.list[i],
 				stock: this.stock[i],
 				plus: this.prod.getDrugPerSec(i),
-				//minus:
 				price: this.getDrugReward(i)
 			};
-			//log(fix(html.plus, 2))
-			$("#" + part + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; - TODO)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>")
+			$("#" + drug + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; - TODO)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>")
 		}
 	}
 };
 game.production.angularDisplay = function() {
 	for (var i = 0; i < game.production.list.length; i++) {
-		var drugIndex = (game.production.list[i]).toLowerCase();
-		var forwhat = eval('game.production.prod.' + drugIndex);
+		var drug = (game.production.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["prod"][drug];
 		for (var e = 0; e < forwhat.length; e++) {
-			$("#production-" + drugIndex + "-" + (e+1)).attr('onclick', 'game.production.prod.buy(' + i + ',' + e + ');');
+			$("#production-" + drug + "-" + (e+1)).attr('onclick', 'game.production.prod.buy(' + i + ',' + e + ');');
 		}
 	};
 };
 game.production.prod.getDrugPerSec = function(drugIndex) {
-	var part = eval('game.production.prod.' + (game.production.list[drugIndex]).toLowerCase() + 'PerSec');
+	var drug = (game.production.list[drugIndex]).toLowerCase();
+	var str = (drug.toString() + "PerSec");
+	var part = window["game"]["production"]["prod"][str];
 	var amount = 0;
 	for (var i = 0; i < part.length; i++) {
 		amount += part[i]
@@ -232,32 +232,30 @@ game.production.prod.getReward = function(drugIndex, buildIndex) {
 	return (buildReward);
 };
 game.production.prod.getRewardOwned = function(drugIndex, buildIndex) {
-	var buildReward = game.production.getWhat(drugIndex, buildIndex, 'reward');
-	var part = (game.production.list[drugIndex]).toLowerCase();
-	var anotherPart = '[' + buildIndex + ']';
-	var owned = eval('game.production.prod.' + part + 'Owned' + anotherPart);
-	return (buildReward * owned);
+	var drug = (game.production.list[drugIndex]).toLowerCase();
+	var mainReward = game.production.getWhat(drugIndex, buildIndex, 'reward');
+	var owned = window["game"]["production"]["prod"][drug + "Owned"][buildIndex];
+	return (mainReward * owned);
 };
 game.production.prod.getPrice = function(drugIndex, buildIndex) {
+	var drug = (game.production.list[drugIndex]).toLowerCase();
 	var buildPrice = game.production.getWhat(drugIndex, buildIndex, 'price');
 	var buildInflation = game.production.getWhat(drugIndex, buildIndex, 'inflation');
-	var part = (game.production.list[drugIndex]).toLowerCase();
-	var anotherPart = '[' + buildIndex + ']';
-	var owned = eval('game.production.prod.' + part + 'Owned' + anotherPart);
+	var owned = window["game"]["production"]["prod"][drug + "Owned"][buildIndex];
 	return (buildPrice * Math.pow(buildInflation, owned));
 };
 game.production.prod.display = function() {
 	for (var i = 0; i < game.production.list.length; i++) {
-		var drugIndex = (game.production.list[i]).toLowerCase();
-		var forwhat = eval('game.production.prod.' + drugIndex);
+		var drug = (game.production.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["prod"][drug];
 		for (var e = 0; e < forwhat.length; e++) {
 			var html = {
 				name: forwhat[e].name,
-				owned: eval('game.production.prod.' + drugIndex + "Owned"),
+				owned: window["game"]["production"]["prod"][drug + "Owned"],
 				reward: this.getReward(i, e),
 				price: this.getPrice(i, e)
 			};
-			$("#production-" + drugIndex + "-" + (e+1)).html(html.name + '<span>' + html.owned[e] + ' owned</span><br>+' + fix(html.reward, 2) + 'g/sec' + '<span>$' + fix(html.price, 2) + '</span>');
+			$("#production-" + drug + "-" + (e+1)).html(html.name + '<span>' + html.owned[e] + ' owned</span><br>+' + fix(html.reward, 2) + 'g/sec' + '<span>$' + fix(html.price, 2) + '</span>');
 		}
 	}
 };
@@ -265,18 +263,17 @@ game.production.prod.buy = function(drugIndex, buildIndex) {
 	var price = this.getPrice(drugIndex, buildIndex);
 	if (game.money >= price) {
 		game.money -= price;
-		var part = (game.production.list[drugIndex]).toLowerCase();
-		var anotherPart = '[' + buildIndex + ']';
-		var owned = eval('game.production.prod.' + part + 'Owned' + anotherPart);
-		window["game"]["production"]["prod"][part + "Owned"][buildIndex]++;
-		window["game"]["production"]["prod"][part + "PerSec"][buildIndex] += this.getReward(drugIndex, buildIndex);
+		var drug = (game.production.list[drugIndex]).toLowerCase();
+		var owned = window["game"]["production"]["prod"][drug + "Owned"];
+		window["game"]["production"]["prod"][drug + "Owned"][buildIndex]++;
+		window["game"]["production"]["prod"][drug + "PerSec"][buildIndex] += this.getReward(drugIndex, buildIndex);
 		this.display();
 	}
 };
 game.production.prod.run = function(times) {
 	for (var i = 0; i < game.production.list.length; i++) {
-		var drugIndex = (game.production.list[i]).toLowerCase();
-		var forwhat = eval('game.production.prod.' + drugIndex);
+		var drug = (game.production.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["prod"][drug];
 		for (var e = 0; e < forwhat.length; e++) {
 			window["game"]["production"]["stock"][i] += (this.getRewardOwned(i, e) / game.options.fps);
 		}
