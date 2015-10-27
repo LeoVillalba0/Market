@@ -6,8 +6,8 @@ var game = {
 	totalMoney: 0,
 
 	options: {
-		fps: 5,
-		interval: (1000/5),
+		fps: 20,
+		interval: (1000/20),
 		angularInit: false,
 		before: new Date().getTime(),
 		after: new Date().getTime()
@@ -41,15 +41,13 @@ var game = {
 			cocaine: [],
 			cocaineOwned: [],
 			cocainePerSec: []
-		},
-		sell: {
-			weed: [],
-			meth: [],
-			cocaine: [],
-			multipliers: []
 		}
 	}
 };
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 game.actions.gainMoney = function(amount) {
 	game.money += amount;
@@ -137,11 +135,10 @@ game.actions.run = function(times) {
 };
 
 game.production.getWhat = function(drugIndex, buildIndex, type) {
-	var part = (this.list[drugIndex]).toLowerCase();
-	var anotherPart = '[' + buildIndex + ']';
-	var want = (type).toLowerCase();
-	var str = eval('this.prod.' + part + anotherPart + '.' + want);
-	return str;
+	var drug = (this.list[drugIndex]).toLowerCase();
+	var want = type.toLowerCase();
+	var result = window["game"]["production"]["prod"][drug][buildIndex][want];
+	return result;
 };
 game.production.getDrugReward = function(drugIndex) {
 	return (this.prices[drugIndex] * this.multipliers[drugIndex]);
