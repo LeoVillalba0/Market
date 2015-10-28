@@ -305,15 +305,16 @@ game.production.sell.display = function() {
 	}
 };
 game.production.sell.run = function(times) {
-	/*for (var i = 0; i < game.production.list.length; i++) {
-		var stock = game.production.stock[i];
+	for (var i = 0; i < 1; i++) {
 		var drugPrice = game.production.getDrugReward(i);
-		var sold = this.getDrugPerSec(i);
-		if (sold > stock) {
-			sold = stock
+		var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
+		var gain = (sold * drugPrice);
+		if (sold > game.production.stock[i]) {
+			sold = game.production.stock[i];
 		}
-		stock -= sold;
-	}*/
+		game.production.stock[i] -= sold;
+		this.gainMoney(gain);
+	}
 };
 game.production.sell.buy = function(drugIndex, buildIndex) {
 	var price = this.getPrice(drugIndex, buildIndex);
@@ -385,8 +386,8 @@ game.production.prod.buy = function(drugIndex, buildIndex) {
 };
 game.production.prod.run = function(times) {
 	for (var i = 0; i < game.production.list.length; i++) {
-		var gain = this.getDrugPerSec(i)
-		window["game"]["production"]["stock"][i] += (gain / game.options.fps);
+		var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
+		window["game"]["production"]["stock"][i] += gain;
 	}
 };
 
