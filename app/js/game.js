@@ -153,35 +153,35 @@ game.production.build = function(name, price, reward, inflation) {
 };
 game.production.init = function() {
 	this.prod.weed = [
-		new game.production.build("Weed build 1", 250, 			0.5, 	1.60),
-		new game.production.build("Weed build 2", 500000, 		2, 		1.50),
-		new game.production.build("Weed build 3", 25000000, 	4, 		1.40)
+		new game.production.build("Backyard", 					250, 			0.5, 	1.60),
+		new game.production.build("Green House", 				500000, 		2, 		1.50),
+		new game.production.build("Brazilian Farm",				25000000, 		4, 		1.40)
 	];
 	this.prod.meth = [
-		new game.production.build("Meth build 1", 250, 			0.5, 	1.60),
-		new game.production.build("Meth build 2", 500000, 		2, 		1.50),
-		new game.production.build("Meth build 3", 25000000, 	4, 		1.40)
+		new game.production.build("Mobile RV Lab", 				250, 			0.5, 	1.60),
+		new game.production.build("Basement Lab", 				500000, 		2, 		1.50),
+		new game.production.build("Professional Chemical Lab", 	25000000, 		4, 		1.40)
 	];
 	this.prod.cocaine = [
-		new game.production.build("Cocaine build 1", 250, 			0.5, 	1.60),
-		new game.production.build("Cocaine build 2", 500000, 		2, 		1.50),
-		new game.production.build("Cocaine build 3", 25000000, 		4, 		1.40)
+		new game.production.build("Small Farm", 				250, 			0.5, 	1.60),
+		new game.production.build("Bolivian Farm", 				500000, 		2, 		1.50),
+		new game.production.build("Columbian Estate", 			25000000, 		4, 		1.40)
 	];
 
 	this.sell.weed = [
-		new game.production.build("Weed sell 1", 	250, 			0.5, 	1.60),
-		new game.production.build("Weed sell 2", 	500000, 		2, 		1.50),
-		new game.production.build("Weed sell 3", 	25000000, 		4, 		1.40)
+		new game.production.build("Backyard Dealer", 			250, 			0.5, 	1.60),
+		new game.production.build("Downtown Dealer", 			500000, 		2, 		1.50),
+		new game.production.build("Nightclub Owner", 			25000000, 		4, 		1.40)
 	];
 	this.sell.meth = [
-		new game.production.build("Meth sell 1", 	250, 			0.5, 	1.60),
-		new game.production.build("Meth sell 2", 	500000, 		2, 		1.50),
-		new game.production.build("Meth sell 3", 	25000000, 		4, 		1.40)
+		new game.production.build("Dark Alley", 				250, 			0.5, 	1.60),
+		new game.production.build("Meth House", 				500000, 		2, 		1.50),
+		new game.production.build("Mafia Associates", 			25000000, 		4, 		1.40)
 	];
 	this.sell.cocaine = [
-		new game.production.build("Cocaine sell 1", 250, 			0.5, 	1.60),
-		new game.production.build("Cocaine sell 2", 500000, 		2, 		1.50),
-		new game.production.build("Cocaine sell 3", 25000000, 		4, 		1.40)
+		new game.production.build("Casino Owner", 				250, 			0.5, 	1.60),
+		new game.production.build("Executive's Club Chairman", 	500000, 		2, 		1.50),
+		new game.production.build("Drug Trafficking Syndicate",	25000000, 		4, 		1.40)
 	];
 
 	for (var i = 0; i < this.prod.weed.length; i++) {
@@ -229,10 +229,11 @@ game.production.display = function() {
 				name: this.list[i],
 				stock: this.stock[i],
 				plus: this.prod.getDrugPerSec(i),
+				minus: this.sell.getDrugPerSec(i),
 				price: this.getDrugReward(i)
 			};
 
-			$("#" + drug + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; - TODO)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>")
+			$("#" + drug + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; -" + fix(html.minus, 3) + "g/s)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>")
 		}
 	}
 };
@@ -264,6 +265,15 @@ game.production.sell.getDealerSell = function(drugIndex, buildIndex) {
 	var result = (owned * reward);
 	return result;
 };
+game.production.sell.getDrugPerSec = function(drugIndex) {
+	var drug = (game.production.list[drugIndex]).toLowerCase();
+	var part = window["game"]["production"]["sell"][drug + "PerSec"];
+	var amount = 0;
+	for (var i = 0; i < part.length; i++) {
+		amount += part[i];
+	}
+	return amount;
+};
 game.production.sell.getPrice = function(drugIndex, buildIndex) {
 	var drug = (game.production.list[drugIndex]).toLowerCase();
 	var buildPrice = game.production.sell.getWhat(drugIndex, buildIndex, 'price');
@@ -274,6 +284,10 @@ game.production.sell.getPrice = function(drugIndex, buildIndex) {
 game.production.sell.getReward = function(drugIndex, buildIndex) {
 	var buildReward = this.getWhat(drugIndex, buildIndex, 'reward');
 	return (buildReward);
+};
+game.production.sell.gainMoney = function(amount) {
+	game.money += amount;
+	game.totalMoney += amount;
 };
 game.production.sell.display = function() {
 	for (var i = 0; i < game.production.list.length; i++) {
@@ -291,14 +305,15 @@ game.production.sell.display = function() {
 	}
 };
 game.production.sell.run = function(times) {
-	for (var i = 0; i < game.production.list.length; i++) {
-		var drug = (game.production.list[i]).toLowerCase();
-		var forwhat = window["game"]["production"]["sell"][drug];
-
-		for (var e = 0; e < forwhat.length; e++) {
-			var sold = this.getDealerSell(i, e);
+	/*for (var i = 0; i < game.production.list.length; i++) {
+		var stock = game.production.stock[i];
+		var drugPrice = game.production.getDrugReward(i);
+		var sold = this.getDrugPerSec(i);
+		if (sold > stock) {
+			sold = stock
 		}
-	}
+		stock -= sold;
+	}*/
 };
 game.production.sell.buy = function(drugIndex, buildIndex) {
 	var price = this.getPrice(drugIndex, buildIndex);
@@ -319,8 +334,7 @@ game.production.prod.getWhat = function(drugIndex, buildIndex, type) {
 };
 game.production.prod.getDrugPerSec = function(drugIndex) {
 	var drug = (game.production.list[drugIndex]).toLowerCase();
-	var str = (drug.toString() + "PerSec");
-	var part = window["game"]["production"]["prod"][str];
+	var part = window["game"]["production"]["prod"][drug + "PerSec"];
 	var amount = 0;
 	for (var i = 0; i < part.length; i++) {
 		amount += part[i]
@@ -371,12 +385,8 @@ game.production.prod.buy = function(drugIndex, buildIndex) {
 };
 game.production.prod.run = function(times) {
 	for (var i = 0; i < game.production.list.length; i++) {
-		var drug = (game.production.list[i]).toLowerCase();
-		var forwhat = window["game"]["production"]["prod"][drug];
-
-		for (var e = 0; e < forwhat.length; e++) {
-			window["game"]["production"]["stock"][i] += (this.getRewardOwned(i, e) / game.options.fps);
-		}
+		var gain = this.getDrugPerSec(i)
+		window["game"]["production"]["stock"][i] += (gain / game.options.fps);
 	}
 };
 
@@ -397,7 +407,7 @@ game.options.updateGame = function(times) {
 	game.production.sell.run(times);
 };
 game.options.display = function() {
-	$(".navbar-brand").html("$" + fix(game.money) + "");
+	$(".navbar-brand").html("$" + fix(game.money));
 
 	game.production.display();
 };
