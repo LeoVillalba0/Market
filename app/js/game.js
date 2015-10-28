@@ -219,6 +219,7 @@ game.production.init = function() {
 };
 game.production.display = function() {
 	this.prod.display();
+	this.sell.display();
 
 	for (var i = 0; i < this.list.length; i++) {
 		var drug = (this.list[i]).toLowerCase();
@@ -255,6 +256,59 @@ game.production.sell.getWhat = function(drugIndex, buildIndex, type) {
 	var want = type.toLowerCase();
 	var result = window["game"]["production"]["sell"][drug][buildIndex][want];
 	return result;
+};
+game.production.sell.getDealerSell = function(drugIndex, buildIndex) {
+	var drug = (game.production.list[drugIndex]).toLowerCase();
+	var reward = window["game"]["production"]["sell"][drug][buildIndex]["reward"];
+	var owned = window["game"]["production"]["sell"][drug + "Owned"][buildIndex];
+	var result = (owned * reward);
+	return result;
+};
+game.production.sell.getPrice = function(drugIndex, buildIndex) {
+	var drug = (game.production.list[drugIndex]).toLowerCase();
+	var buildPrice = game.production.sell.getWhat(drugIndex, buildIndex, 'price');
+	var buildInflation = game.production.sell.getWhat(drugIndex, buildIndex, 'inflation');
+	var owned = window["game"]["production"]["sell"][drug + "Owned"][buildIndex];
+	return (buildPrice * Math.pow(buildInflation, owned));
+};
+game.production.sell.getReward = function(drugIndex, buildIndex) {
+	var buildReward = this.getWhat(drugIndex, buildIndex, 'reward');
+	return (buildReward);
+};
+game.production.sell.display = function() {
+	for (var i = 0; i < game.production.list.length; i++) {
+		var drug = (game.production.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["sell"][drug];
+		for (var e = 0; e < forwhat.length; e++) {
+			var html = {
+				name: forwhat[e].name,
+				owned: window["game"]["production"]["sell"][drug + "Owned"],
+				reward: this.getReward(i, e),
+				price: this.getPrice(i, e)
+			};
+			$("#selling-" + drug + "-" + (e+1)).html(html.name + '<span>' + html.owned[e] + ' owned</span><br>Sell ' + fix(html.reward, 2) + 'g/sec' + '<span>$' + fix(html.price, 2) + '</span>');
+		}
+	}
+};
+game.production.sell.run = function(times) {
+	for (var i = 0; i < game.production.list.length; i++) {
+		var drug = (game.production.list[i]).toLowerCase();
+		var forwhat = window["game"]["production"]["sell"][drug];
+
+		for (var e = 0; e < forwhat.length; e++) {
+			var sold = this.getDealerSell(i, e);
+		}
+	}
+};
+game.production.sell.buy = function(drugIndex, buildIndex) {
+	var price = this.getPrice(drugIndex, buildIndex);
+	if (game.money >= price) {
+		game.money -= price;
+		var drug = (game.production.list[drugIndex]).toLowerCase();
+		window["game"]["production"]["sell"][drug + "Owned"][buildIndex]++;
+		window["game"]["production"]["sell"][drug + "PerSec"][buildIndex] += this.getReward(drugIndex, buildIndex);
+		this.display();
+	}
 };
 
 game.production.prod.getWhat = function(drugIndex, buildIndex, type) {
@@ -310,7 +364,6 @@ game.production.prod.buy = function(drugIndex, buildIndex) {
 	if (game.money >= price) {
 		game.money -= price;
 		var drug = (game.production.list[drugIndex]).toLowerCase();
-		var owned = window["game"]["production"]["prod"][drug + "Owned"];
 		window["game"]["production"]["prod"][drug + "Owned"][buildIndex]++;
 		window["game"]["production"]["prod"][drug + "PerSec"][buildIndex] += this.getReward(drugIndex, buildIndex);
 		this.display();
@@ -320,6 +373,7 @@ game.production.prod.run = function(times) {
 	for (var i = 0; i < game.production.list.length; i++) {
 		var drug = (game.production.list[i]).toLowerCase();
 		var forwhat = window["game"]["production"]["prod"][drug];
+
 		for (var e = 0; e < forwhat.length; e++) {
 			window["game"]["production"]["stock"][i] += (this.getRewardOwned(i, e) / game.options.fps);
 		}
@@ -340,9 +394,10 @@ game.options.updateGame = function(times) {
 	this.display();
 	game.actions.run(times);
 	game.production.prod.run(times);
+	game.production.sell.run(times);
 };
 game.options.display = function() {
-	$(".navbar-brand").html("$" + fix(game.money) + " - lvl. 1");
+	$(".navbar-brand").html("$" + fix(game.money) + "");
 
 	game.production.display();
 };
