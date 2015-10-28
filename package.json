@@ -8,6 +8,7 @@
   "author": "TotomInc",
   "license": "MIT",
   "devDependencies": {
+    "bower-installer": "^1.2.0",
     "http-server": "^0.8.5"
   }
 }
