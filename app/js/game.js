@@ -97,23 +97,22 @@ game.upgrades.init = function() {
 	};
 
 	this.production.list = [
-		new game.upgrades.create("Test0", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test1", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test2", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test3", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test4", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test5", "test desc", 100, "multiplier", "0", "*3"),
-		new game.upgrades.create("Test6", "test desc", 100, "multiplier", "0", "*3")
+		new game.upgrades.create("Weed upgrade", 	"Weed reward x3", 		500, 	"multipliers", "0", "*3"),
+		new game.upgrades.create("Meth upgrade", 	"Meth reward x3", 		2500, 	"multipliers", "1", "*3"),
+		new game.upgrades.create("Cocaine upgrade",	"Cocaine reward x3",	10000,	"multipliers", "2", "*3")
 	];
 
 	for (var i = 0; i < this.production.list.length; i++) {
 		this.production.bought.push(false);
+		$("#upgrades-production").append('<li id="upgrades-production-upgrade-' + (i+1) + '" class="list-group-item"></li>');
+		$("#upgrades-production-upgrade-" + (i+1)).attr('onclick', 'game.upgrades.production.buy(' + i + ');');
 	};
 
 	this.display();
 };
 game.upgrades.display = function() {
 	this.actions.display();
+	this.production.display();
 };
 game.upgrades.angularDisplay = function() {
 	for (var i = 0; i < this.actions.list.length; i++) {
@@ -122,6 +121,13 @@ game.upgrades.angularDisplay = function() {
 	};
 
 	this.actions.display();
+
+	for (var i = 0; i < this.production.list.length; i++) {
+		$("#upgrades-production").append('<li id="upgrades-production-upgrade-' + (i+1) + '" class="list-group-item"></li>');
+		$("#upgrades-production-upgrade-" + (i+1)).attr('onclick', 'game.upgrades.production.buy(' + i + ');');
+	};
+
+	this.production.display();
 };
 
 game.upgrades.actions.buy = function(upgradeIndex) {
@@ -135,7 +141,7 @@ game.upgrades.actions.buy = function(upgradeIndex) {
 		game.money -= price;
 		this.bought[upgradeIndex] = true;
 		window["game"]["actions"][what][whoInWhat] = eval(value + effect);
-		this.display(upgradeIndex);
+		this.display();
 	};
 };
 game.upgrades.actions.display = function() {
@@ -154,6 +160,37 @@ game.upgrades.actions.display = function() {
 			$("#upgrades-actions-upgrade-" + (i+1)).html(html.name + "<span>Cost $" + fix(html.price, 2) + "</span><br>" + html.desc);
 		};
 	}
+};
+game.upgrades.production.buy = function(upgradeIndex) {
+	var price = this.list[upgradeIndex].price;
+	var what = this.list[upgradeIndex].str;
+	var whoInWhat = this.list[upgradeIndex].who;
+	var effect = this.list[upgradeIndex].effect;
+
+	if (game.money >= price && !this.bought[upgradeIndex]) {
+		var value = window["game"]["production"][what][whoInWhat];
+		game.money -= price;
+		this.bought[upgradeIndex] = true;
+		window["game"]["production"][what][whoInWhat] = eval(value + effect);
+		this.display();
+	};
+};
+game.upgrades.production.display = function() {
+	for (var i = 0; i < this.list.length; i++) {
+		var bought = this.bought[i];
+		var html = {
+			name: this.list[i].name,
+			desc: this.list[i].desc,
+			price: this.list[i].price
+		};
+
+		if (bought) {
+			$("#upgrades-production-upgrade-" + (i+1)).attr('class', 'list-group-item upgrade-bought');
+			$("#upgrades-production-upgrade-" + (i+1)).html(html.name + "<span>Owned</span><br>" + html.desc);
+		} else {
+			$("#upgrades-production-upgrade-" + (i+1)).html(html.name + "<span>Cost $"+ fix(html.price, 2) + '</span><br>' + html.desc);
+		};
+	};
 };
 
 game.actions.gainMoney = function(amount) {
