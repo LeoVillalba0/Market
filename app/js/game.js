@@ -13,6 +13,11 @@ var game = {
 		after: new Date().getTime()
 	},
 
+	upgrades: {
+		actions: {
+		}
+	},
+
 	actions: {
 		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery"],
 		inflation: [1.08, 1.10, 1.12, 1.14, 1.12, 1.10],
@@ -389,6 +394,13 @@ game.production.prod.run = function(times) {
 		var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
 		window["game"]["production"]["stock"][i] += gain;
 	}
+};
+
+game.upgrades.actions.create = function(name, desc, price, effect) {
+	this.name = name;
+	this.desc = desc;
+	this.price = price;
+	this.effect = effect;
 };
 
 game.options.coreLoop = function() {

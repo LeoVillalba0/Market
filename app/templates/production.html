@@ -1,25 +1,25 @@
 <div class="container well" ng-init="init()">
-    <div class="production row">
+    <div class="row">
         <div class="col-md-4">
-            <h1 id="weed-stock">Weed: 0.00g (0.00g/s)<br><small>(+0.5g/s ; -0.5g/s)</small><br><small>$50.00/g</small></h1>
+            <h1 id="weed-stock"></h1>
         </div>
         <div class="col-md-4">
-            <h1 id="meth-stock">Meth: 0.00g (0.00g/s)<br><small>(+0.5g/s ; -0.5g/s)</small><br><small>$800.00/g</small></h1>
+            <h1 id="meth-stock"></h1>
         </div>
         <div class="col-md-4">
-            <h1 id="cocaine-stock">Cocaine: 0.00g (0.00g/s)<br><small>(+0.5g/s ; -0.5g/s)</small><br><small>$4000.00/g</small></h1>
+            <h1 id="cocaine-stock"></h1>
         </div>
     </div>
 
-    <div class="production row">
+    <div class="row">
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-weed-builds" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-weed-builds" aria-expanded="true" href="javascript:">
                       Weed production <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-weed-builds" class="list-group collapse">
+              <ul id="production-weed-builds" class="list-group collapse in" aria-expanded="true">
                 <li id="production-weed-1" class="list-group-item"></li>
                 <li id="production-weed-2" class="list-group-item"></li>
                 <li id="production-weed-3" class="list-group-item"></li>
@@ -30,11 +30,11 @@
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-meth-builds" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-meth-builds" aria-expanded="true" href="javascript:">
                       Meth production <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-meth-builds" class="list-group collapse">
+              <ul id="production-meth-builds" class="list-group collapse in" aria-expanded="true">
                 <li id="production-meth-1" class="list-group-item"></li>
                 <li id="production-meth-2" class="list-group-item"></li>
                 <li id="production-meth-3" class="list-group-item"></li>
@@ -45,11 +45,11 @@
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-cocaine-builds" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-cocaine-builds" aria-expanded="true" href="javascript:">
                       Cocaine production <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-cocaine-builds" class="list-group collapse">
+              <ul id="production-cocaine-builds" class="list-group collapse in" aria-expanded="true">
                 <li id="production-cocaine-1" class="list-group-item"></li>
                 <li id="production-cocaine-2" class="list-group-item"></li>
                 <li id="production-cocaine-3" class="list-group-item"></li>
@@ -58,15 +58,15 @@
         </div>
     </div>
 
-    <div class="production row">
+    <div class="row">
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-weed-dealers" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-weed-dealers" aria-expanded="true" href="javascript:">
                       Weed selling <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-weed-dealers" class="list-group collapse">
+              <ul id="production-weed-dealers" class="list-group collapse in" aria-expanded="true">
                 <li id="selling-weed-1" class="list-group-item"></li>
                 <li id="selling-weed-2" class="list-group-item"></li>
                 <li id="selling-weed-3" class="list-group-item"></li>
@@ -77,11 +77,11 @@
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-meth-dealers" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-meth-dealers" aria-expanded="true" href="javascript:">
                       Meth selling <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-meth-dealers" class="list-group collapse">
+              <ul id="production-meth-dealers" class="list-group collapse in" aria-expanded="true">
                 <li id="selling-meth-1" class="list-group-item"></li>
                 <li id="selling-meth-2" class="list-group-item"></li>
                 <li id="selling-meth-3" class="list-group-item"></li>
@@ -92,11 +92,11 @@
         <div class="col-md-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-cocaine-dealers" href="javascript:">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#production-cocaine-dealers" aria-expanded="true" href="javascript:">
                       Cocaine selling <i class="fa fa-caret-down"></i>
                   </a>
               </div>
-              <ul id="production-cocaine-dealers" class="list-group collapse">
+              <ul id="production-cocaine-dealers" class="list-group collapse in" aria-expanded="true">
                 <li id="selling-cocaine-1" class="list-group-item"></li>
                 <li id="selling-cocaine-2" class="list-group-item"></li>
                 <li id="selling-cocaine-3" class="list-group-item"></li>

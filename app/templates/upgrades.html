@@ -1,0 +1,31 @@
+<div class="container well" ng-init="init()">
+    <div class="upgrades row">
+        <div class="upgrades-show">
+            <div class="checkbox text-center">
+                <label><input type="checkbox"> Show upgrades owned</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#upgrades-actions" aria-expanded="true" href="javascript:">
+                      Actions upgrades <i class="fa fa-caret-down"></i>
+                  </a>
+              </div>
+              <ul id="upgrades-actions" class="list-group collapse in upgrades-list" aria-expanded="true">
+              </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <a data-toggle="collapse" data-parent="#accordion" data-target="#upgrades-production" aria-expanded="true" href="javascript:">
+                      Production upgrades <i class="fa fa-caret-down"></i>
+                  </a>
+              </div>
+              <ul id="upgrades-production" class="list-group collapse in upgrades-list" aria-expanded="true">
+              </ul>
+            </div>
+        </div>
+    </div>
+</div>
