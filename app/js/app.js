@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
 			templateUrl: 'app/templates/upgrades.html',
 			controller: 'UpgradesCtrl'
 		})
+		.when('/kongregate', {
+			templateUrl: 'app/templates/kongregate.html',
+			controller: 'KongregateCtrl'
+		})
 		.otherwise({
 			redirectTo: '/404',
 			templateUrl: 'app/templates/404.html'
@@ -59,6 +63,22 @@ app.controller('UpgradesCtrl', ['$scope', '$interval', function($scope, $interva
 			game.options.angularInit = true;
 		} else {
 			game.upgrades.angularDisplay();
+		};
+	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
+	};
+}]);
+
+app.controller('KongregateCtrl', ['$scope', '$interval', function($scope, $interval) {
+	$scope.init = function() {
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
+		} else {
+			kongAngular();
 		};
 	};
 

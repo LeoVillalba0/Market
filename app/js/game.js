@@ -551,6 +551,7 @@ game.options.init = function() {
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
+	kongInit();
 
 	// from stackoverflow.com/q/22570357/
 	var controllerElement = $('.game-content');
