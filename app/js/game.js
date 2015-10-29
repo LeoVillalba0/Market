@@ -10,11 +10,18 @@ var game = {
 		interval: (1000/20),
 		angularInit: false,
 		before: new Date().getTime(),
-		after: new Date().getTime()
+		after: new Date().getTime(),
+		version: 0.001
 	},
 
 	upgrades: {
 		actions: {
+			list: [],
+			bought: []
+		},
+		production: {
+			list: [],
+			bought: []
 		}
 	},
 
@@ -64,6 +71,90 @@ var game = {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+game.upgrades.create = function(name, desc, price, str, who, effect) {
+	this.name = name;
+	this.desc = desc;
+	this.price = price;
+	this.str = str;
+	this.who = who;
+	this.effect = effect;
+};
+game.upgrades.init = function() {
+	this.actions.list = [
+		new game.upgrades.create("Shooting upgrade", 		"Shooting reward x3", 			100, 	"rewardMultiplier", "0", "*3"),
+		new game.upgrades.create("Street fight upgrade", 	"Street fight reward x3", 		500, 	"rewardMultiplier", "1", "*3"),
+		new game.upgrades.create("Pickpocket upgrade", 		"Pickpocket reward x3", 		10000, 	"rewardMultiplier", "2", "*3"),
+		new game.upgrades.create("Bank robbery upgrade", 	"Bank robbery reward x3", 		25000, 	"rewardMultiplier", "3", "*3"),
+		new game.upgrades.create("Steal car upgrade", 		"Steal car reward x3", 			75000, 	"rewardMultiplier", "4", "*3"),
+		new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 	150000,	"rewardMultiplier", "5", "*3")
+	];
+
+	for (var i = 0; i < this.actions.list.length; i++) {
+		this.actions.bought.push(false);
+		$("#upgrades-actions").append('<li id="upgrades-actions-upgrade-' + (i+1) + '" class="list-group-item"></li>');
+		$("#upgrades-actions-upgrade-" + (i+1)).attr('onclick', 'game.upgrades.actions.buy(' + i + ');');
+	};
+
+	this.production.list = [
+		new game.upgrades.create("Test0", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test1", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test2", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test3", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test4", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test5", "test desc", 100, "multiplier", "0", "*3"),
+		new game.upgrades.create("Test6", "test desc", 100, "multiplier", "0", "*3")
+	];
+
+	for (var i = 0; i < this.production.list.length; i++) {
+		this.production.bought.push(false);
+	};
+
+	this.display();
+};
+game.upgrades.display = function() {
+	this.actions.display();
+};
+game.upgrades.angularDisplay = function() {
+	for (var i = 0; i < this.actions.list.length; i++) {
+		$("#upgrades-actions").append('<li id="upgrades-actions-upgrade-' + (i+1) + '" class="list-group-item"></li>');
+		$("#upgrades-actions-upgrade-" + (i+1)).attr('onclick', 'game.upgrades.actions.buy(' + i + ');');
+	};
+
+	this.actions.display();
+};
+
+game.upgrades.actions.buy = function(upgradeIndex) {
+	var price = this.list[upgradeIndex].price;
+	var what = this.list[upgradeIndex].str;
+	var whoInWhat = this.list[upgradeIndex].who;
+	var effect = this.list[upgradeIndex].effect;
+
+	if (game.money >= price && !this.bought[upgradeIndex]) {
+		var value = window["game"]["actions"][what][whoInWhat];
+		game.money -= price;
+		this.bought[upgradeIndex] = true;
+		window["game"]["actions"][what][whoInWhat] = eval(value + effect);
+		this.display(upgradeIndex);
+	};
+};
+game.upgrades.actions.display = function() {
+	for (var i = 0; i < this.list.length; i++) {
+		var bought = this.bought[i];
+		var html = {
+			name: this.list[i].name,
+			desc: this.list[i].desc,
+			price: this.list[i].price
+		};
+
+		if (bought) {
+			$("#upgrades-actions-upgrade-" + (i+1)).attr('class', 'list-group-item upgrade-bought');
+			$("#upgrades-actions-upgrade-" + (i+1)).html(html.name + "<span>Owned</span><br>" + html.desc);
+		} else {
+			$("#upgrades-actions-upgrade-" + (i+1)).html(html.name + "<span>Cost $" + fix(html.price, 2) + "</span><br>" + html.desc);
+		};
+	}
+};
 
 game.actions.gainMoney = function(amount) {
 	game.money += amount;
@@ -396,13 +487,6 @@ game.production.prod.run = function(times) {
 	}
 };
 
-game.upgrades.actions.create = function(name, desc, price, effect) {
-	this.name = name;
-	this.desc = desc;
-	this.price = price;
-	this.effect = effect;
-};
-
 game.options.coreLoop = function() {
 	var that = game.options;
 	that.now = new Date().getTime();
@@ -427,6 +511,7 @@ game.options.display = function() {
 game.options.init = function() {
 	game.actions.init();
 	game.production.init();
+	game.upgrades.init();
 
 	// from stackoverflow.com/q/22570357/
 	var controllerElement = $('.game-content');

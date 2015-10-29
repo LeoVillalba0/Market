@@ -56,7 +56,7 @@ app.controller('UpgradesCtrl', ['$scope', '$interval', function($scope, $interva
 			game.options.init();
 			game.options.angularInit = true;
 		} else {
-			//game.upgrades.angularDisplay();
+			game.upgrades.angularDisplay();
 		};
 	};
 
