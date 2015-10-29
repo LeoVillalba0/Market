@@ -32,6 +32,7 @@ app.controller('ActionsCtrl', ['$scope', '$interval', function($scope, $interval
 
 	$scope.setInt = function() {
 		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
 	};
 }]);
 
@@ -47,6 +48,7 @@ app.controller('ProductionCtrl', ['$scope', '$interval', function($scope, $inter
 
 	$scope.setInt = function() {
 		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
 	};
 }]);
 
@@ -62,5 +64,6 @@ app.controller('UpgradesCtrl', ['$scope', '$interval', function($scope, $interva
 
 	$scope.setInt = function() {
 		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
 	};
 }]);

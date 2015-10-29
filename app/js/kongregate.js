@@ -10,7 +10,9 @@ function onComplete() {
         id: kongregate.services.getUserID(),
         token: kongregate.services.getGameAuthToken()
     }
-    var params = "kongregate_user_id=" + kongPlayer.id + "&kongregate_game_auth_token=" + kongPlayer.token;
-    kongregateAPI.embedFrame("kongregate-game.php?" + params, "kongdiv");
-    log("Kongregate player : " + kongPlayer);
+};
+
+function submitScore() {
+    var money = Math.floor(game.totalMoney);
+    kongregate.stats.submit("Money", money);
 };
