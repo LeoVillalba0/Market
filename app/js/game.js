@@ -1,5 +1,5 @@
 // from stackoverflow.com/q/12944987/
-var log = console.log.bind(console, "DEBUG:");
+var debug = console.log.bind(console, "DEBUG:");
 
 var game = {
 	money: 0,
@@ -67,6 +67,8 @@ var game = {
 		}
 	}
 };
+
+var log = console.info.bind(console, "BR-v" + game.options.version + ":");
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -554,4 +556,5 @@ game.options.init = function() {
 	var controllerElement = $('.game-content');
 	var controllerScope = angular.element(controllerElement).scope();
 	controllerScope.setInt();
+	log("Game sucessfully loaded.");
 };
