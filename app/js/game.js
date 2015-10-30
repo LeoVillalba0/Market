@@ -572,7 +572,6 @@ game.options.display = function() {
 	game.production.display();
 };
 game.options.init = function() {
-	kongInit();
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
@@ -581,5 +580,7 @@ game.options.init = function() {
 	var controllerElement = $('.game-content');
 	var controllerScope = angular.element(controllerElement).scope();
 	controllerScope.setInt();
+
+	kongInit();
 	log("Game sucessfully loaded.");
 };
