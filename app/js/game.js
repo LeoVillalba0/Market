@@ -1,6 +1,3 @@
-// from stackoverflow.com/q/12944987/
-var debug = console.log.bind(console, "DEBUG:");
-
 var game = {
 	money: 0,
 	totalMoney: 0,
@@ -34,8 +31,10 @@ var game = {
 		pricePromo: [],
 		reward: [1, 60, 1200, 15000, 950000, 10000000],
 		rewardMultiplier: [],
+		totalRewardMultiplier: 1,
 		time: [3, 10, 30, 120, 600, 3600],
-		timeMultiplier: []
+		timeMultiplier: [],
+		totalTimeMultiplier: 1
 	},
 
 	production: {
@@ -68,8 +67,11 @@ var game = {
 	}
 };
 
+// from stackoverflow.com/q/12944987/
+var debug = console.log.bind(console, "DEBUG:");
 var log = console.info.bind(console, "BR-v" + game.options.version + ":");
 
+// from stackoverflow.com/q/1026069/
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -84,12 +86,20 @@ game.upgrades.create = function(name, desc, price, str, who, effect) {
 };
 game.upgrades.init = function() {
 	this.actions.list = [
-		new game.upgrades.create("Shooting upgrade", 		"Shooting reward x3", 			100, 	"rewardMultiplier", "0", "*3"),
-		new game.upgrades.create("Street fight upgrade", 	"Street fight reward x3", 		500, 	"rewardMultiplier", "1", "*3"),
-		new game.upgrades.create("Pickpocket upgrade", 		"Pickpocket reward x3", 		10000, 	"rewardMultiplier", "2", "*3"),
-		new game.upgrades.create("Bank robbery upgrade", 	"Bank robbery reward x3", 		25000, 	"rewardMultiplier", "3", "*3"),
-		new game.upgrades.create("Steal car upgrade", 		"Steal car reward x3", 			75000, 	"rewardMultiplier", "4", "*3"),
-		new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 	150000,	"rewardMultiplier", "5", "*3")
+		new game.upgrades.create("Shooting upgrade", 		"Shooting reward x3", 			25000, 		"rewardMultiplier", 		"0", "*3"),
+		new game.upgrades.create("Street fight upgrade", 	"Street fight reward x3", 		75000, 		"rewardMultiplier", 		"1", "*3"),
+		new game.upgrades.create("Pickpocket upgrade", 		"Pickpocket reward x3", 		150000, 	"rewardMultiplier", 		"2", "*3"),
+		new game.upgrades.create("Bank robbery upgrade", 	"Bank robbery reward x3", 		500000, 	"rewardMultiplier", 		"3", "*3"),
+		new game.upgrades.create("Steal car upgrade", 		"Steal car reward x3", 			2500000, 	"rewardMultiplier", 		"4", "*3"),
+		new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 	10000000,	"rewardMultiplier", 		"5", "*3"),
+		new game.upgrades.create("All actions upgrade",		"All actions reward x3",		50000000,	"totalRewardMultiplier", 	"n", "*3"),
+		new game.upgrades.create("Shooting upgrade", 		"Shooting reward x3", 			100000000, 		"rewardMultiplier", 		"0", "*3"),
+		new game.upgrades.create("Street fight upgrade", 	"Street fight reward x3", 		250000000, 		"rewardMultiplier", 		"1", "*3"),
+		new game.upgrades.create("Pickpocket upgrade", 		"Pickpocket reward x3", 		500000000, 		"rewardMultiplier", 		"2", "*3"),
+		new game.upgrades.create("Bank robbery upgrade", 	"Bank robbery reward x3", 		2500000000, 	"rewardMultiplier", 		"3", "*3"),
+		new game.upgrades.create("Steal car upgrade", 		"Steal car reward x3", 			7500000000, 	"rewardMultiplier", 		"4", "*3"),
+		new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 	25000000000,	"rewardMultiplier", 		"5", "*3"),
+		new game.upgrades.create("All actions upgrade",		"All actions reward x3",		50000000000,	"totalRewardMultiplier", 	"n", "*3")
 	];
 
 	for (var i = 0; i < this.actions.list.length; i++) {
@@ -139,11 +149,19 @@ game.upgrades.actions.buy = function(upgradeIndex) {
 	var effect = this.list[upgradeIndex].effect;
 
 	if (game.money >= price && !this.bought[upgradeIndex]) {
-		var value = window["game"]["actions"][what][whoInWhat];
-		game.money -= price;
-		this.bought[upgradeIndex] = true;
-		window["game"]["actions"][what][whoInWhat] = eval(value + effect);
-		this.display();
+		if (whoInWhat !== "n") {
+			var value = window["game"]["actions"][what][whoInWhat];
+			game.money -= price;
+			this.bought[upgradeIndex] = true;
+			window["game"]["actions"][what][whoInWhat] = eval(value + effect);
+			this.display();
+		} else {
+			var value = window["game"]["actions"][what];
+			game.money -= price;
+			this.bought[upgradeIndex] = true;
+			window["game"]["actions"][what] = eval(value + effect);
+			this.display();
+		};
 	};
 };
 game.upgrades.actions.display = function() {
@@ -200,10 +218,10 @@ game.actions.gainMoney = function(amount) {
 	game.totalMoney += amount;
 };
 game.actions.getTime = function(index) {
-	return (this.time[index] / this.timeMultiplier[index]);
+	return ((this.time[index] / this.timeMultiplier[index]) / this.totalTimeMultiplier);
 };
 game.actions.getReward = function(index) {
-	return (this.owned[index] * this.reward[index] * this.rewardMultiplier[index]);
+	return ((this.owned[index] * this.reward[index] * this.rewardMultiplier[index]) * this.totalRewardMultiplier);
 };
 game.actions.getPrice = function(index) {
 	var initialPrice = (this.price[index] * Math.pow(this.inflation[index], this.owned[index]));
@@ -271,7 +289,7 @@ game.actions.run = function(times) {
 			this.gainMoney(Math.floor(this.progress[i]/time) * reward);
 			this.progress[i] %= time;
 			var width = ((this.progress[i]/time) * 100)
-			if (time < 0.1)
+			if (time < 0.15)
 				width = 100;
 			width = Math.max(width, 1);
 			$("#action-progress-" + (i+1)).css('width', width + '%');
@@ -290,33 +308,33 @@ game.production.init = function() {
 	this.prod.weed = [
 		new game.production.build("Backyard", 					250, 			0.5, 	1.60),
 		new game.production.build("Green House", 				500000, 		2, 		1.50),
-		new game.production.build("Brazilian Farm",				25000000, 		4, 		1.40)
+		new game.production.build("Brazilian Farm",				25000000, 		4, 		1.30)
 	];
 	this.prod.meth = [
-		new game.production.build("Mobile RV Lab", 				250, 			0.5, 	1.60),
-		new game.production.build("Basement Lab", 				500000, 		2, 		1.50),
-		new game.production.build("Professional Chemical Lab", 	25000000, 		4, 		1.40)
+		new game.production.build("Mobile RV Lab", 				1000000, 		0.5, 	1.60),
+		new game.production.build("Basement Lab", 				750000000, 		2, 		1.50),
+		new game.production.build("Professional Chemical Lab", 	50000000000, 	4, 		1.30)
 	];
 	this.prod.cocaine = [
-		new game.production.build("Small Farm", 				250, 			0.5, 	1.60),
-		new game.production.build("Bolivian Farm", 				500000, 		2, 		1.50),
-		new game.production.build("Columbian Estate", 			25000000, 		4, 		1.40)
+		new game.production.build("Small Farm", 				25000000000, 	0.5, 	1.60),
+		new game.production.build("Bolivian Farm", 				750000000000, 	2, 		1.50),
+		new game.production.build("Columbian Estate", 			2500000000000, 	4, 		1.30)
 	];
 
 	this.sell.weed = [
 		new game.production.build("Backyard Dealer", 			250, 			0.5, 	1.60),
 		new game.production.build("Downtown Dealer", 			500000, 		2, 		1.50),
-		new game.production.build("Nightclub Owner", 			25000000, 		4, 		1.40)
+		new game.production.build("Nightclub Owner", 			25000000, 		4, 		1.30)
 	];
 	this.sell.meth = [
-		new game.production.build("Dark Alley", 				250, 			0.5, 	1.60),
-		new game.production.build("Meth House", 				500000, 		2, 		1.50),
-		new game.production.build("Mafia Associates", 			25000000, 		4, 		1.40)
+		new game.production.build("Dark Alley", 				1000000, 		0.5, 	1.60),
+		new game.production.build("Meth House", 				750000000, 		2, 		1.50),
+		new game.production.build("Mafia Associates", 			50000000000, 	4, 		1.30)
 	];
 	this.sell.cocaine = [
-		new game.production.build("Casino Owner", 				250, 			0.5, 	1.60),
-		new game.production.build("Executive's Club Chairman", 	500000, 		2, 		1.50),
-		new game.production.build("Drug Trafficking Syndicate",	25000000, 		4, 		1.40)
+		new game.production.build("Casino Owner", 				25000000000, 	0.5, 	1.60),
+		new game.production.build("Executive's Club Chairman", 	750000000000, 	2, 		1.50),
+		new game.production.build("Drug Trafficking Syndicate",	2500000000000, 	4, 		1.30)
 	];
 
 	for (var i = 0; i < this.prod.weed.length; i++) {
