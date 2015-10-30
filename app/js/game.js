@@ -464,13 +464,16 @@ game.production.sell.display = function() {
 	}
 };
 game.production.sell.run = function(times) {
-	for (var i = 0; i < 1; i++) {
+	for (var i = 0; i < game.production.list.length; i++) {
 		var drugPrice = game.production.getDrugReward(i);
 		var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
-		var gain = (sold * drugPrice);
-		if (sold > game.production.stock[i]) {
+		var canSell = ((game.production.prod.getDrugPerSec(i) * times) / game.options.fps);
+		var gain = (canSell * drugPrice);
+
+		if (sold > canSell) {
 			sold = game.production.stock[i];
-		}
+		};
+
 		game.production.stock[i] -= sold;
 		this.gainMoney(gain);
 	}
