@@ -121,6 +121,8 @@ game.upgrades.init = function() {
 	};
 
 	this.display();
+
+	log("Game upgrades init.");
 };
 game.upgrades.display = function() {
 	this.actions.display();
@@ -248,6 +250,8 @@ game.actions.init = function() {
 	}
 
 	this.display();
+
+	log("Game actions init.");
 };
 game.actions.display = function() {
 	for (var i = 0; i < this.list.length; i++) {
@@ -369,6 +373,8 @@ game.production.init = function() {
 	};
 
 	this.display();
+
+	log("Game production init.");
 };
 game.production.display = function() {
 	this.prod.display();
@@ -566,10 +572,10 @@ game.options.display = function() {
 	game.production.display();
 };
 game.options.init = function() {
+	kongInit();
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
-	kongInit();
 
 	// from stackoverflow.com/q/22570357/
 	var controllerElement = $('.game-content');

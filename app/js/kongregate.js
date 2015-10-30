@@ -48,5 +48,7 @@ function kongInit() {
         };
 
         kongDisplay();
+
+        log("Kongregate init.");
     };
 };
