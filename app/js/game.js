@@ -581,6 +581,6 @@ game.options.init = function() {
 	var controllerScope = angular.element(controllerElement).scope();
 	controllerScope.setInt();
 
-	kongInit();
 	log("Game sucessfully loaded.");
+	kongInit();
 };
