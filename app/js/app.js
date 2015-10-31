@@ -14,6 +14,14 @@ app.config(function($routeProvider) {
 			templateUrl: 'app/templates/upgrades.html',
 			controller: 'UpgradesCtrl'
 		})
+		.when('/options', {
+			templateUrl: 'app/templates/options.html',
+			controller: 'OptionsCtrl'
+		})
+		.when('/notes', {
+			templateUrl: 'app/templates/notes.html',
+			controller: 'NotesCtrl'
+		})
 		.when('/kongregate', {
 			templateUrl: 'app/templates/kongregate.html',
 			controller: 'KongregateCtrl'
@@ -63,6 +71,34 @@ app.controller('UpgradesCtrl', ['$scope', '$interval', function($scope, $interva
 			game.options.angularInit = true;
 		} else {
 			game.upgrades.angularDisplay();
+		};
+	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
+	};
+}]);
+
+app.controller('OptionsCtrl', ['$scope', '$interval', function($scope, $interval) {
+	$scope.init = function() {
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
+		};
+	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
+	};
+}]);
+
+app.controller('NotesCtrl', ['$scope', '$interval', function($scope, $interval) {
+	$scope.init = function() {
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
 		};
 	};
 

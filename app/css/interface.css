@@ -44,6 +44,11 @@ a { color: inherit; text-decoration: inherit !important }
 .row h1 { margin: 0 0 15px; font-size: 22px; text-align: center }
 .row h1 small { font-size: 75%; color: inherit }
 
+.notes .panel ul li { cursor: default; }
+.notes .panel ul li:hover,
+.notes .panel ul li:active,
+.notes .panel ul li:focus { background-color: inherit; }
+
 .action.row .col-md-6 .progress { margin-bottom: 20px }
 
 .upgrades-list { max-height: 450px; overflow-y: auto; }
@@ -62,6 +67,12 @@ a { color: inherit; text-decoration: inherit !important }
 .kong.container h1 { font-size: 22px; }
 .kong.container h1 a { text-decoration: underline !important; }
 .kong.container h2 { font-size: 18px; }
+
+.options.container h1 { margin: 5px 0 15px 0; font-size: 28px; }
+.options.container h2 { margin: 10px 0 10px 0; font-size: 20px; }
+
+.notes.container h1 { margin: 5px 0 5px 0; text-align: left; font-size: 20px; }
+.notes ul li ul li { font-size: 18px; }
 
 .progress { height: 14px; background-color: #D7D8D8 }
 .progress.mid-bar { width: 65% }

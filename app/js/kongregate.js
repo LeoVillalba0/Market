@@ -39,7 +39,7 @@ function kongInit() {
                 $("#kong-speech").css('display', 'none');
                 $("#kong-player").css('display', 'block');
                 $("#kong-player-h1").html("Welcome " + kongPlayer.name + ".");
-                $("#kong-player-h2").html("Here is a special tab for Kongregate players. There will be Kreds items and specials features.");
+                $("#kong-player-h2").html("Here is a special tab for Kongregate players. There will be specials features soon!");
             };
         };
 
