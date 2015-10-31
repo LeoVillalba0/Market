@@ -41,6 +41,7 @@ var game = {
 		list: ["Weed", "Meth", "Cocaine"],
 		prices: [50, 800, 4000],
 		multipliers: [],
+		totalMultiplier: 1,
 		stock: [],
 		prod: {
 			weed: [],
@@ -408,7 +409,7 @@ game.production.angularDisplay = function() {
 	};
 };
 game.production.getDrugReward = function(drugIndex) {
-	return (this.prices[drugIndex] * this.multipliers[drugIndex]);
+	return ((this.prices[drugIndex] * this.multipliers[drugIndex]) * this.totalMultiplier);
 };
 
 game.production.sell.getWhat = function(drugIndex, buildIndex, type) {
@@ -472,6 +473,11 @@ game.production.sell.run = function(times) {
 
 		if (sold > canSell) {
 			sold = game.production.stock[i];
+		} else {
+			if (i == 0)
+				gain = (sold * drugPrice) * 2;
+			else
+				gain = (sold * drugPrice);
 		};
 
 		game.production.stock[i] -= sold;
