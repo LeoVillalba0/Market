@@ -1,6 +1,7 @@
 var game = {
 	money: 0,
 	totalMoney: 0,
+	allTimeMoney: 0,
 
 	options: {
 		fps: 20,
@@ -65,6 +66,13 @@ var game = {
 			cocaineOwned: [],
 			cocainePerSec: []
 		}
+	},
+
+	prestige: {
+		alert: true,
+		rank: 0,
+		rankList: [],
+		experience: 0,
 	}
 };
 
@@ -76,6 +84,52 @@ var log = console.info.bind(console, "BR-v" + game.options.version + ":");
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+game.prestige.closeAlert = function() {
+	this.alert = false;
+};
+game.prestige.create = function(name, exp, multiplier) {
+	this.name = name;
+	this.exp = exp;
+	this.multiplier = multiplier;
+};
+game.prestige.init = function() {
+	this.rankList = [
+	    new this.create("Street Rat I", 25, 2.22),
+	    new this.create("Street Rat II", 100, 4.44),
+	    new this.create("Street Rat III", 400, 6.66),
+	    new this.create("Petty Thief I", 1000, 8.88),
+	    new this.create("Petty Thief II", 2500, 20.00),
+	    new this.create("Petty Thief III", 10000, 30.00),
+	    new this.create("Dealer I", 25000, 40.00),
+	    new this.create("Dealer II", 50000, 50.00),
+	    new this.create("Dealer III", 100000, 75.00),
+	    new this.create("Prospective Supplier", 250000, 100.00),
+	    new this.create("Drug Supplier I", 1000000, 125.00),
+	    new this.create("Drug Supplier II", 5000000, 150.00),
+	    new this.create("Drug Supplier III", 17500000, 200.00),
+	    new this.create("Drug Advisor", 50000000, 300.00),
+	    new this.create("Gang Under-boss", 100000000, 400.00),
+	    new this.create("Gang Leader", 250000000, 500.00),
+	    new this.create("Mafia Associate", 500000000, 750.00),
+	    new this.create("Junior Enforcer", 1000000000, 1000.00),
+	    new this.create("Senior Enforcer", 2000000000, 1250.00),
+	    new this.create("Enforcer Captain", 5000000000, 1500.00)
+	];
+
+	this.display();
+
+	log("Game prestige init.");
+};
+game.prestige.angularDisplay = function() {
+	this.display();
+};
+game.prestige.display = function() {
+	if (this.alert)
+		$("#prestige-alert").css('display', 'block');
+	else
+		$("#prestige-alert").css('display', 'none');
+};
 
 game.upgrades.create = function(name, desc, price, str, who, effect) {
 	this.name = name;
@@ -581,6 +635,7 @@ game.options.display = function() {
 	game.production.display();
 };
 game.options.init = function() {
+	game.prestige.init();
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
