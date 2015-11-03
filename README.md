@@ -9,7 +9,7 @@ This game is totally text-based, build with Bootstrap, Angular-JS, jQuery.
 1. Clone the repo.
 2. Run `npm install` on the repo folder to install all Node dev-dependencies.
 3. Run `bower-installer` to install all web-dependencies ([bower-installer](https://github.com/blittle/bower-installer) is an amazing tool to install bower dev-dependencies and don't include entire repos).
-4. Start your CMD on the repo folder and emulate a local server with the command `http-server .` then go to `localhost:8080` on your browser (8080 port by default).
+4. Start your CMD on the repo folder and emulate a local server with the command `http-server .` then go to `localhost:8080` on your browser (port 8080 by default).
 
 ## Wanna help?
 

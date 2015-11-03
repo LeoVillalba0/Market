@@ -55,6 +55,9 @@ a { color: inherit; text-decoration: inherit !important }
 
 .action.row .col-md-6 .progress { margin-bottom: 20px }
 
+.production.well.container h1 { font-size: 26px; }
+.production.well.container h2 { font-size: 22px; }
+
 .upgrades-list { max-height: 450px; overflow-y: auto; }
 .upgrades-show { margin: 0 0 15px 0; }
 .upgrade-bought.list-group-item { background-color: rgba(22, 160, 133, 0.25); }
