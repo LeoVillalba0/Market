@@ -87,6 +87,10 @@ a { color: inherit; text-decoration: inherit !important }
 .notes.container h1 { margin: 5px 0 5px 0; text-align: left; font-size: 20px; }
 .notes ul li ul li { font-size: 18px; }
 
+.help h1 { font-size: 26px; margin: 15px 0; }
+.help h2 { font-size: 18px; margin: 8px 0; }
+.help h2 ul li { font-size: 16px; margin: 8px 0; }
+
 .progress { height: 14px; background-color: #D7D8D8 }
 .progress.mid-bar { width: 65% }
 .progress.middle { margin: 0 auto }

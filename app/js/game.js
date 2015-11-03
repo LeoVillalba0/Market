@@ -74,7 +74,7 @@ var game = {
 		rank: "nothing",
 		rankIndex: -1,
 		rankList: [],
-		experience: 0,
+		experience: 0
 	}
 };
 
