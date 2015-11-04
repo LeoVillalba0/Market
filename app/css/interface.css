@@ -7,10 +7,10 @@ body { background-color: #CFDAE6 }
 a { color: inherit; text-decoration: inherit !important }
 
 @media (min-width:1200px) {
-	.container.small { width: 930px; max-height: 930px; }
+	.container.small { width: 930px; }
 }
 @media (min-width:992px) {
-	.container.small { width: 830px; max-height: 830px; }
+	.container.small { width: 830px; }
 }
 
 .navbar-default { border-radius: 0; background-color: #375a7f }

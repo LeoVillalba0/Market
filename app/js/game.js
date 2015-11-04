@@ -2,6 +2,8 @@ var game = {
 	money: 0,
 	totalMoney: 0,
 
+	help: {},
+
 	options: {
 		fps: 20,
 		interval: (1000/20),
@@ -24,15 +26,15 @@ var game = {
 
 	actions: {
 		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery"],
-		inflation: [1.08, 1.10, 1.12, 1.14, 1.12, 1.10],
+		inflation: [1.10, 1.12, 1.14, 1.14, 1.12, 1.10],
 		progress: [],
 		owned: [],
-		price: [4, 120, 1500, 22500, 1000000, 15000000],
+		price: [2.5, 85, 1997, 49941, 1103113, 25923155],
 		pricePromo: [],
-		reward: [1, 60, 1200, 15000, 950000, 10000000],
+		reward: [0.8, 34, 798, 19976, 441245, 10369262],
 		rewardMultiplier: [],
 		totalRewardMultiplier: 1,
-		time: [3, 10, 30, 120, 600, 3600],
+		time: [2.5, 5, 12, 31, 78, 195],
 		timeMultiplier: [],
 		totalTimeMultiplier: 1
 	},
@@ -85,6 +87,28 @@ var log = console.info.bind(console, "BR-v" + game.options.version + ":");
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+game.help.init = function() {
+	log("Game help init.");
+	return this.display();
+};
+game.help.display = function() {
+	$("#prestige-ranks").append('<table id="prestige-ranks-table" class="table table-striped table-hover"></table>');
+	$("#prestige-ranks-table").append('<thead><tr><th>Rank name</th><th>Rank multiplier</th><th>Exp needed</th></tr></thead>' + '<tbody id="prestige-ranks-table-body"></tbody>');
+
+	for (var i = 0; i < game.prestige.rankList.length; i++) {
+		var html = {
+			name: game.prestige.rankList[i].name,
+			multiplier: game.prestige.rankList[i].multiplier,
+			need: game.prestige.rankList[i].exp
+		};
+
+		$("#prestige-ranks-table-body").append('<tr><th>' + html.name + '</th>' + '<td>x' + fix(html.multiplier, 3) + '</td>' + '<td>' + fix(html.need, 3) + ' exp.</td></tr>');
+	}
+};
+game.help.angularDisplay = function() {
+	return this.display();
+};
 
 game.prestige.getExperience = function() {
 	return (Math.floor(20 * Math.sqrt(game.totalMoney / 1e7)));
@@ -141,6 +165,7 @@ game.prestige.display = function() {
 		rank: this.rank,
 		multiplier: this.getMultiplier()
 	};
+
 	$("#prestige-exp").html("Current experience :<br>" + fix(html.curExp, 3) + "<br>Experience claimed with reset :<br>" + fix(html.expOn, 3));
 	$("#prestige-rank").html("Current rank :<br>" + html.rank + "<br>Rank multiplier :<br>x" + fix(html.multiplier, 0));
 
@@ -160,20 +185,20 @@ game.upgrades.create = function(name, desc, price, str, who, effect) {
 };
 game.upgrades.init = function() {
 	this.actions.list = [
-	    new game.upgrades.create("Shooting upgrade", "Shooting reward x3", 25000, "rewardMultiplier", "0", "*3"),
-	    new game.upgrades.create("Street fight upgrade", "Street fight reward x3", 75000, "rewardMultiplier", "1", "*3"),
-	    new game.upgrades.create("Pickpocket upgrade", "Pickpocket reward x3", 150000, "rewardMultiplier", "2", "*3"),
-	    new game.upgrades.create("Bank robbery upgrade", "Bank robbery reward x3", 500000, "rewardMultiplier", "3", "*3"),
-	    new game.upgrades.create("Steal car upgrade", "Steal car reward x3", 2500000, "rewardMultiplier", "4", "*3"),
-	    new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 10000000, "rewardMultiplier", "5", "*3"),
-	    new game.upgrades.create("All actions upgrade", "All actions reward x3", 50000000, "totalRewardMultiplier", "n", "*3"),
-	    new game.upgrades.create("Shooting upgrade", "Shooting reward x3", 100000000, "rewardMultiplier", "0", "*3"),
-	    new game.upgrades.create("Street fight upgrade", "Street fight reward x3", 250000000, "rewardMultiplier", "1", "*3"),
-	    new game.upgrades.create("Pickpocket upgrade", "Pickpocket reward x3", 500000000, "rewardMultiplier", "2", "*3"),
-	    new game.upgrades.create("Bank robbery upgrade", "Bank robbery reward x3", 2500000000, "rewardMultiplier", "3", "*3"),
-	    new game.upgrades.create("Steal car upgrade", "Steal car reward x3", 7500000000, "rewardMultiplier", "4", "*3"),
-	    new game.upgrades.create("Jewelry robbery upgrade", "Jewelry robbery reward x3", 25000000000, "rewardMultiplier", "5", "*3"),
-	    new game.upgrades.create("All actions upgrade", "All actions reward x3", 50000000000, "totalRewardMultiplier", "n", "*3")
+	    new game.upgrades.create("Shooting I", "Shooting reward x3", 25000, "rewardMultiplier", "0", "*3"),
+	    new game.upgrades.create("Street fight I", "Street fight reward x3", 75000, "rewardMultiplier", "1", "*3"),
+	    new game.upgrades.create("Pickpocket I", "Pickpocket reward x3", 150000, "rewardMultiplier", "2", "*3"),
+	    new game.upgrades.create("Bank robbery I", "Bank robbery reward x3", 500000, "rewardMultiplier", "3", "*3"),
+	    new game.upgrades.create("Steal car I", "Steal car reward x3", 2500000, "rewardMultiplier", "4", "*3"),
+	    new game.upgrades.create("Jewelry robbery I", "Jewelry robbery reward x3", 10000000, "rewardMultiplier", "5", "*3"),
+	    new game.upgrades.create("All actions I", "All actions reward x3", 50000000, "totalRewardMultiplier", "n", "*3"),
+	    new game.upgrades.create("Shooting II", "Shooting reward x3", 100000000, "rewardMultiplier", "0", "*3"),
+	    new game.upgrades.create("Street fight II", "Street fight reward x3", 250000000, "rewardMultiplier", "1", "*3"),
+	    new game.upgrades.create("Pickpocket II", "Pickpocket reward x3", 500000000, "rewardMultiplier", "2", "*3"),
+	    new game.upgrades.create("Bank robbery II", "Bank robbery reward x3", 2500000000, "rewardMultiplier", "3", "*3"),
+	    new game.upgrades.create("Steal car II", "Steal car reward x3", 7500000000, "rewardMultiplier", "4", "*3"),
+	    new game.upgrades.create("Jewelry robbery II", "Jewelry robbery reward x3", 25000000000, "rewardMultiplier", "5", "*3"),
+	    new game.upgrades.create("All actions II", "All actions reward x3", 50000000000, "totalRewardMultiplier", "n", "*3")
 	];
 
 	for (var i = 0; i < this.actions.list.length; i++) {
@@ -183,9 +208,9 @@ game.upgrades.init = function() {
 	};
 
 	this.production.list = [
-	    new game.upgrades.create("Weed upgrade", "Weed reward x3", 500, "multipliers", "0", "*3"),
-	    new game.upgrades.create("Meth upgrade", "Meth reward x3", 2500, "multipliers", "1", "*3"),
-	    new game.upgrades.create("Cocaine upgrade", "Cocaine reward x3", 10000, "multipliers", "2", "*3")
+	    new game.upgrades.create("Field Expansion I", "Weed price/g x3", 150e6, "multipliers", "0", "*3"),
+	    new game.upgrades.create("Beakers I", "Meth price/g x3", 250e8, "multipliers", "1", "*3"),
+	    new game.upgrades.create("Jungle Lab I", "Cocaine price/g x3", 750e10, "multipliers", "2", "*3")
 	];
 
 	for (var i = 0; i < this.production.list.length; i++) {
@@ -251,9 +276,9 @@ game.upgrades.actions.display = function() {
 
 		if (bought) {
 			$("#upgrades-actions-upgrade-" + (i+1)).attr('class', 'list-group-item upgrade-bought');
-			$("#upgrades-actions-upgrade-" + (i+1)).html(html.name + "<span>Owned</span><br>" + html.desc);
+			$("#upgrades-actions-upgrade-" + (i+1)).html("<b>" + html.name + "</b><span>Owned</span><br>" + html.desc);
 		} else {
-			$("#upgrades-actions-upgrade-" + (i+1)).html(html.name + "<span>Cost $" + fix(html.price, 2) + "</span><br>" + html.desc);
+			$("#upgrades-actions-upgrade-" + (i+1)).html("<b>" + html.name + "</b><span>Cost $" + fix(html.price, 2) + "</span><br>" + html.desc);
 		};
 	}
 };
@@ -282,9 +307,9 @@ game.upgrades.production.display = function() {
 
 		if (bought) {
 			$("#upgrades-production-upgrade-" + (i+1)).attr('class', 'list-group-item upgrade-bought');
-			$("#upgrades-production-upgrade-" + (i+1)).html(html.name + "<span>Owned</span><br>" + html.desc);
+			$("#upgrades-production-upgrade-" + (i+1)).html("<b>" + html.name + "</b><span>Owned</span><br>" + html.desc);
 		} else {
-			$("#upgrades-production-upgrade-" + (i+1)).html(html.name + "<span>Cost $"+ fix(html.price, 2) + '</span><br>' + html.desc);
+			$("#upgrades-production-upgrade-" + (i+1)).html("<b>" + html.name + "</b><span>Cost $"+ fix(html.price, 2) + '</span><br>' + html.desc);
 		};
 	};
 };
@@ -677,6 +702,7 @@ game.options.init = function() {
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
+	game.help.init();
 
 	// from stackoverflow.com/q/22570357/
 	var controllerElement = $('.game-content');

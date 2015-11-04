@@ -137,6 +137,8 @@ app.controller('HelpCtrl', ['$scope', '$interval', function($scope, $interval) {
 		if (game.options.angularInit !== true || game == undefined) {
 			game.options.init();
 			game.options.angularInit = true;
+		} else {
+			game.help.angularDisplay();
 		};
 	};
 
