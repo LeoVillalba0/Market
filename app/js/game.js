@@ -188,20 +188,27 @@ game.upgrades.create = function(name, desc, price, str, who, effect) {
 };
 game.upgrades.init = function() {
 	this.actions.list = [
-	    new game.upgrades.create("Shooting I", "Shooting reward x3", 25000, "rewardMultiplier", "0", "*3"),
-	    new game.upgrades.create("Street fight I", "Street fight reward x3", 75000, "rewardMultiplier", "1", "*3"),
-	    new game.upgrades.create("Pickpocket I", "Pickpocket reward x3", 150000, "rewardMultiplier", "2", "*3"),
-	    new game.upgrades.create("Bank robbery I", "Bank robbery reward x3", 500000, "rewardMultiplier", "3", "*3"),
-	    new game.upgrades.create("Steal car I", "Steal car reward x3", 2500000, "rewardMultiplier", "4", "*3"),
-	    new game.upgrades.create("Jewelry robbery I", "Jewelry robbery reward x3", 10000000, "rewardMultiplier", "5", "*3"),
-	    new game.upgrades.create("All actions I", "All actions reward x3", 50000000, "totalRewardMultiplier", "n", "*3"),
-	    new game.upgrades.create("Shooting II", "Shooting reward x3", 100000000, "rewardMultiplier", "0", "*3"),
-	    new game.upgrades.create("Street fight II", "Street fight reward x3", 250000000, "rewardMultiplier", "1", "*3"),
-	    new game.upgrades.create("Pickpocket II", "Pickpocket reward x3", 500000000, "rewardMultiplier", "2", "*3"),
-	    new game.upgrades.create("Bank robbery II", "Bank robbery reward x3", 2500000000, "rewardMultiplier", "3", "*3"),
-	    new game.upgrades.create("Steal car II", "Steal car reward x3", 7500000000, "rewardMultiplier", "4", "*3"),
-	    new game.upgrades.create("Jewelry robbery II", "Jewelry robbery reward x3", 25000000000, "rewardMultiplier", "5", "*3"),
-	    new game.upgrades.create("All actions II", "All actions reward x3", 50000000000, "totalRewardMultiplier", "n", "*3")
+	    new game.upgrades.create("Shooting I", "Shooting reward x3", 					25000, "rewardMultiplier", "0", "*3"),
+	    new game.upgrades.create("Street fight I", "Street fight reward x3", 			75000, "rewardMultiplier", "1", "*3"),
+	    new game.upgrades.create("Pickpocket I", "Pickpocket reward x3", 				150000, "rewardMultiplier", "2", "*3"),
+	    new game.upgrades.create("Bank robbery I", "Bank robbery reward x3", 			500000, "rewardMultiplier", "3", "*3"),
+	    new game.upgrades.create("Steal car I", "Steal car reward x3", 					2500000, "rewardMultiplier", "4", "*3"),
+	    new game.upgrades.create("Jewelry robbery I", "Jewelry robbery reward x3", 		10000000, "rewardMultiplier", "5", "*3"),
+	    new game.upgrades.create("All actions I", "All actions reward x3", 				50000000, "totalRewardMultiplier", "n", "*3"),
+	    new game.upgrades.create("Shooting II", "Shooting reward x3", 					100000000, "rewardMultiplier", "0", "*3"),
+	    new game.upgrades.create("Street fight II", "Street fight reward x3", 			250000000, "rewardMultiplier", "1", "*3"),
+	    new game.upgrades.create("Pickpocket II", "Pickpocket reward x3", 				500000000, "rewardMultiplier", "2", "*3"),
+	    new game.upgrades.create("Bank robbery II", "Bank robbery reward x3", 			2500000000, "rewardMultiplier", "3", "*3"),
+	    new game.upgrades.create("Steal car II", "Steal car reward x3", 				7500000000, "rewardMultiplier", "4", "*3"),
+	    new game.upgrades.create("Jewelry robbery II", "Jewelry robbery reward x3", 	25000000000, "rewardMultiplier", "5", "*3"),
+	    new game.upgrades.create("All actions II", "All actions reward x3", 			50000000000, "totalRewardMultiplier", "n", "*3"),
+		new game.upgrades.create("Shooting III", "Shooting reward x3", 					150000000000, "rewardMultiplier", "0", "*3"),
+	    new game.upgrades.create("Street fight III", "Street fight reward x3", 			250000000000, "rewardMultiplier", "1", "*3"),
+	    new game.upgrades.create("Pickpocket III", "Pickpocket reward x3", 				350000000000, "rewardMultiplier", "2", "*3"),
+	    new game.upgrades.create("Bank robbery III", "Bank robbery reward x3", 			450000000000, "rewardMultiplier", "3", "*3"),
+	    new game.upgrades.create("Steal car III", "Steal car reward x3", 				550000000000, "rewardMultiplier", "4", "*3"),
+	    new game.upgrades.create("Jewelry robbery III", "Jewelry robbery reward x3", 	650000000000, "rewardMultiplier", "5", "*3"),
+	    new game.upgrades.create("All actions III", "All actions reward x3", 			750000000000, "totalRewardMultiplier", "n", "*3")
 	];
 
 	for (var i = 0; i < this.actions.list.length; i++) {
