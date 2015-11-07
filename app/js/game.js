@@ -25,16 +25,16 @@ var game = {
 	},
 
 	actions: {
-		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery"],
-		inflation: [1.10, 1.11, 1.12, 1.12, 1.11, 1.10],
+		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery", "Hacking"],
+		inflation: [1.10, 1.11, 1.12, 1.13, 1.12, 1.11, 1.10],
 		progress: [],
 		owned: [],
-		price: [2.5, 85, 1997, 49941, 1103113, 25923155],
+		price: [2.5, 85, 1997, 49941, 1103113, 25923155, 777694650],
 		pricePromo: [],
-		reward: [0.32, 34, 798, 19976, 441245, 10369262],
+		reward: [0.32, 34, 798, 19976, 441245, 10369262, 311077860],
 		rewardMultiplier: [],
 		totalRewardMultiplier: 1,
-		time: [2.5, 5, 12, 31, 78, 195],
+		time: [2.5, 7.5, 22.5, 67.5, 202.5, 607.5, 1822.5],
 		timeMultiplier: [],
 		totalTimeMultiplier: 1
 	},
