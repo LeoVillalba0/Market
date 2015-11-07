@@ -28,7 +28,7 @@ a { color: inherit; text-decoration: inherit !important }
 .well.infos h1 { margin: 0; font-size: 22px; text-align: center; color: #333 }
 
 .sidebar { position: absolute; width: 300px; height: 100%; top: 0; left: 0; z-index: 100; background-color: #2c3e50; border-right: 1px solid #171A1D; transition: transform .5s; -webkit-transition: -webkit-transform .5s; transform: translate3d(-100%, 0, 0); color: #fff; transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
-.sidebar h1 { margin: 25px 0; font-size: 24px; text-align: center; text-transform: uppercase; letter-spacing: 1px }
+.sidebar h1 { margin: 25px 0 15px 0; font-size: 24px; text-align: center; text-transform: uppercase; letter-spacing: 1px }
 .sidebar ul { margin: 0; padding: 0; list-style: none }
 .sidebar ul li a { display: block; padding: 13px; text-transform: uppercase; letter-spacing: 1px; color: #fff; text-shadow: 0 0 1px rgba(255, 255, 255, 0.1) }
 .sidebar ul li { transition: background .3s; border-bottom: 1px solid #171A1D }
@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: inherit !important }
 .sidebar ul li:hover,
 .sidebar ul li:active { background-color: #171A1D }
 .sidebar ul li img { margin: -2px 0 0 0; }
-.sidebar-close { cursor: pointer }
+.sidebar-close { font-size: 24px; margin: 0 139.5px 15px; cursor: pointer }
 
 .row .panel .panel-heading { text-align: center; background-color: #375a7f; color: #fff; font-size: 18px }
 .row .panel .panel-heading a:hover,
@@ -77,17 +77,18 @@ a { color: inherit; text-decoration: inherit !important }
 .prestige.well.container h2 { font-size: 18px; }
 .prestige.well.container h3 { font-size: 16px; }
 
-.kong.container h1 { font-size: 22px; }
+.kong.container h1 { font-size: 28px; }
 .kong.container h1 a { text-decoration: underline !important; }
 .kong.container h2 { font-size: 18px; }
 
 .options.container h1 { margin: 5px 0 15px 0; font-size: 28px; }
 .options.container h2 { margin: 10px 0 10px 0; font-size: 20px; }
 
-.notes.container h1 { margin: 5px 0 5px 0; text-align: left; font-size: 20px; }
+.notes.container h1 { margin: 5px 0 15px 0; font-size: 28px; }
+.notes.container h2 { margin: 5px 0 5px 0; text-align: left; font-size: 20px; }
 .notes ul li ul li { font-size: 18px; }
 
-.help h1 { font-size: 26px; margin: 15px 0; }
+.help h1 { font-size: 28px; margin: 15px 0; }
 .help h2 { font-size: 18px; margin: 8px 0; }
 .help h2 ul li { font-size: 16px; margin: 8px 0; }
 

@@ -77,6 +77,9 @@ var game = {
 		rankIndex: -1,
 		rankList: [],
 		experience: 0
+	},
+
+	achievements: {
 	}
 };
 
