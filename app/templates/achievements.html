@@ -1,3 +1,25 @@
 <div class="container well achievements" ng-init="init()">
-    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" data-target="#achievements-actions" aria-expanded="false" href="javascript">
+                        Actions achievements <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+                <ul id="achievements-actions" class="list-group collapse" aria-expanded="false"></ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#accordion" data-target="#achievements-production" aria-expanded="false" href="javascript">
+                        Production achievements <i class="fa fa-caret-down"></i>
+                    </a>
+                </div>
+                <ul id="achievements-production" class="list-group collapse" aria-expanded="false"></ul>
+            </div>
+        </div>
+    </div>
 </div>

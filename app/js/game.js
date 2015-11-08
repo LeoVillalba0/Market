@@ -5,10 +5,11 @@ var game = {
 	help: {},
 
 	options: {
+		buy: 1,
 		fps: 20,
 		interval: (1000/20),
 		angularInit: false,
-		firstTime: true,
+		firstTime: false,
 		pause: true,
 		before: new Date().getTime(),
 		after: new Date().getTime(),
