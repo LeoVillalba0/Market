@@ -18,6 +18,10 @@ app.config(function($routeProvider) {
 			templateUrl: 'app/templates/prestige.html',
 			controller: 'PrestigeCtrl'
 		})
+		.when('/achievements', {
+			templateUrl: 'app/templates/achievements.html',
+			controller: 'AchievementsCtrl'
+		})
 		.when('/options', {
 			templateUrl: 'app/templates/options.html',
 			controller: 'OptionsCtrl'
@@ -95,6 +99,22 @@ app.controller('PrestigeCtrl', ['$scope', '$interval', function($scope, $interva
 			game.options.angularInit = true;
 		} else {
 			game.prestige.angularDisplay();
+		};
+	};
+
+	$scope.setInt = function() {
+		$interval(game.options.coreLoop, game.options.interval);
+		$interval(submitScore, 60000);
+	};
+}]);
+
+app.controller('AchievementsCtrl', ['$scope', '$interval', function($scope, $interval) {
+	$scope.init = function() {
+		if (game.options.angularInit !== true || game == undefined) {
+			game.options.init();
+			game.options.angularInit = true;
+		} else {
+			game.achievements.angularDisplay();
 		};
 	};
 

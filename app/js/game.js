@@ -8,6 +8,8 @@ var game = {
 		fps: 20,
 		interval: (1000/20),
 		angularInit: false,
+		firstTime: true,
+		pause: true,
 		before: new Date().getTime(),
 		after: new Date().getTime(),
 		version: 0.001
@@ -25,7 +27,7 @@ var game = {
 	},
 
 	actions: {
-		list: ["Shooting", "Street fight", "Pickpocket", "Bank robbery", "Steal car", "Jewelry robbery", "Hacking", "Arms sales"],
+		list: ["Shooting", "Street fight", "Pickpocket", "Scam", "Steal car", "Jewelry robbery", "Hacking", "Arms sales"],
 		inflation: [1.10, 1.11, 1.12, 1.13, 1.12, 1.11, 1.10],
 		progress: [],
 		owned: [],
@@ -80,6 +82,18 @@ var game = {
 	},
 
 	achievements: {
+		actions: {
+			list: [],
+			complete: []
+		},
+		production: {
+			list: [],
+			complete: []
+		},
+		gangs: {
+			list: [],
+			complete: []
+		}
 	}
 };
 
@@ -111,6 +125,39 @@ game.help.display = function() {
 };
 game.help.angularDisplay = function() {
 	return this.display();
+};
+
+game.achievements.create = function(name, desc, desc2, part, reqName, reqValue, changeName, changeValue) {
+	this.name = name;
+	this.desc = desc;
+	this.desc2 = desc2;
+	this.part = part; // actions or production or prestige for example
+	this.reqName = reqName;
+	this.reqValue = reqValue;
+	this.changeName = changeName;
+	this.changeValue = changeValue;
+};
+game.achievements.init = function() {
+	this.actions.list = [
+		new game.achievements.create("Shooter I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 25, "timeMultiplier[0]", "*2")
+	];
+
+	log("Game achievements init.");
+};
+game.achievements.display = function() {};
+game.achievements.angularDisplay = function() {};
+game.achievements.isComplete = function(index) {
+};
+game.achievements.achieve = function(index) {};
+game.achievements.loop = function() {};
+game.achievements.actions.loop = function() {
+	for (var i = 0; i < this.list.length; i++) {
+		if (game.achievements.isComplete(i) && !this.complete) {
+			game.achievements.achieve(i);
+			this.complete[i] = true;
+			// html display todo
+		};
+	}
 };
 
 game.prestige.getExperience = function() {
@@ -252,7 +299,6 @@ game.upgrades.angularDisplay = function() {
 
 	this.production.display();
 };
-
 game.upgrades.actions.buy = function(upgradeIndex) {
 	var price = this.list[upgradeIndex].price;
 	var what = this.list[upgradeIndex].str;
@@ -393,22 +439,24 @@ game.actions.upgrade = function(index) {
 	this.display();
 };
 game.actions.run = function(times) {
-	for (var i = 0; i < this.list.length; i++) {
-		if (this.owned[i] > 0) {
-			var fps = game.options.fps;
-			var time = this.getTime(i);
-			var reward = this.getReward(i);
-			this.progress[i] += times/fps;
-			this.gainMoney(Math.floor(this.progress[i]/time) * reward);
-			this.progress[i] %= time;
-			var width = ((this.progress[i]/time) * 100)
-			if (time < 0.15)
-				width = 100;
-			width = Math.max(width, 1);
-			$("#action-progress-" + (i+1)).css('width', width + '%');
-			$("#action-nb-" + (i+1)).html(Math.floor(width) + "%");
-		};
-	}
+	if (!game.options.pause) {
+		for (var i = 0; i < this.list.length; i++) {
+			if (this.owned[i] > 0) {
+				var fps = game.options.fps;
+				var time = this.getTime(i);
+				var reward = this.getReward(i);
+				this.progress[i] += times/fps;
+				this.gainMoney(Math.floor(this.progress[i]/time) * reward);
+				this.progress[i] %= time;
+				var width = ((this.progress[i]/time) * 100)
+				if (time < 0.15)
+					width = 100;
+				width = Math.max(width, 1);
+				$("#action-progress-" + (i+1)).css('width', width + '%');
+				$("#action-nb-" + (i+1)).html(Math.floor(width) + "%");
+			};
+		}
+	};
 };
 
 game.production.build = function(name, price, reward, inflation) {
@@ -537,7 +585,6 @@ game.production.invest = function() {
 		$("#production-unlocked").css('display', 'block');
 	};
 };
-
 game.production.sell.getWhat = function(drugIndex, buildIndex, type) {
 	var drug = (game.production.list[drugIndex]).toLowerCase();
 	var want = type.toLowerCase();
@@ -591,24 +638,26 @@ game.production.sell.display = function() {
 	}
 };
 game.production.sell.run = function(times) {
-	for (var i = 0; i < game.production.list.length; i++) {
-		var drugPrice = game.production.getDrugReward(i);
-		var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
-		var canSell = ((game.production.prod.getDrugPerSec(i) * times) / game.options.fps);
-		var gain = (canSell * drugPrice);
+	if (!game.options.pause) {
+		for (var i = 0; i < game.production.list.length; i++) {
+			var drugPrice = game.production.getDrugReward(i);
+			var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
+			var canSell = ((game.production.prod.getDrugPerSec(i) * times) / game.options.fps);
+			var gain = (canSell * drugPrice);
 
-		if (sold > canSell) {
-			sold = game.production.stock[i];
-		} else {
-			if (i == 0)
-				gain = (sold * drugPrice) * 2;
-			else
-				gain = (sold * drugPrice);
-		};
+			if (sold > canSell) {
+				sold = game.production.stock[i];
+			} else {
+				if (i == 0)
+					gain = (sold * drugPrice) * 2;
+				else
+					gain = (sold * drugPrice);
+			};
 
-		game.production.stock[i] -= sold;
-		this.gainMoney(gain);
-	}
+			game.production.stock[i] -= sold;
+			this.gainMoney(gain);
+		}
+	};
 };
 game.production.sell.buy = function(drugIndex, buildIndex) {
 	var price = this.getPrice(drugIndex, buildIndex);
@@ -620,7 +669,6 @@ game.production.sell.buy = function(drugIndex, buildIndex) {
 		this.display();
 	}
 };
-
 game.production.prod.getWhat = function(drugIndex, buildIndex, type) {
 	var drug = (game.production.list[drugIndex]).toLowerCase();
 	var want = type.toLowerCase();
@@ -679,10 +727,12 @@ game.production.prod.buy = function(drugIndex, buildIndex) {
 	}
 };
 game.production.prod.run = function(times) {
-	for (var i = 0; i < game.production.list.length; i++) {
-		var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
-		window["game"]["production"]["stock"][i] += gain;
-	}
+	if (!game.options.pause) {
+		for (var i = 0; i < game.production.list.length; i++) {
+			var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
+			window["game"]["production"]["stock"][i] += gain;
+		}
+	};
 };
 
 game.options.coreLoop = function() {
@@ -708,10 +758,11 @@ game.options.display = function() {
 	game.prestige.display();
 };
 game.options.init = function() {
-	game.prestige.init();
 	game.actions.init();
 	game.production.init();
 	game.upgrades.init();
+	game.achievements.init();
+	game.prestige.init();
 	game.help.init();
 
 	// from stackoverflow.com/q/22570357/
@@ -720,5 +771,15 @@ game.options.init = function() {
 	controllerScope.setInt();
 
 	log("Game sucessfully loaded.");
+	this.showModal();
 	kongInit();
+};
+game.options.showModal = function() {
+	if (!this.firstTime)
+		this.pause = false;
+	else
+		$('#newbie-modal').modal('show');
+};
+game.options.togglePause = function() {
+	this.pause = !this.pause;
 };

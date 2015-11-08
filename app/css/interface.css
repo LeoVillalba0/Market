@@ -2,8 +2,8 @@
 ::-webkit-scrollbar-track { border-radius: 0; }
 ::-webkit-scrollbar-thumb { border-radius: 6px; background-color: #ccc; }
 
-html { -webkit-font-smoothing: antialiased; text-shadow: none; text-rendering: optimizeLegibility }
-body { background-color: #CFDAE6 }
+html { height: 100%; -webkit-font-smoothing: antialiased; text-shadow: none; text-rendering: optimizeLegibility }
+body { height: 100%; background-color: #CFDAE6 }
 a { color: inherit; text-decoration: inherit !important }
 
 @media (min-width:1200px) {
@@ -21,7 +21,11 @@ a { color: inherit; text-decoration: inherit !important }
 .navbar-brand { cursor: default }
 .navbar-sidebar { cursor: pointer }
 
-.pushed { transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
+.row { margin-bottom: 15px; }
+
+.game-content { min-height: 100%; }
+
+.pushed { min-height: 100%; transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
 .pushed.active { cursor: default; -webkit-user-select: none; -moz-user-select: none }
 
 .well { border-radius: 2px; background-color: #EFEFEF }

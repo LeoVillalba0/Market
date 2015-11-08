@@ -70,6 +70,30 @@
         <div class="game-content" ng-view></div>
     </div>
 
+    <div class="modal fade" id="newbie-modal" tabindex="-1" role="dialog" aria-labelledby="newbie-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Welcome to Blackmarket-Reloaded!</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Hello, we recommend you to read this before starting to play.</p>
+
+                    <p>The game may be hard to understand at certain points, if you need help take a look at the <b>help tab</b>.</p>
+
+                    <p>I hope you will like Blackmarket-Reloaded which is my second biggest project, have fun!</p>
+                <div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="game.options.togglePause()">It's good, let me play!</button>
+                <div>
+            </div>
+        </div>
+    </div>
+
     <div class="kongdiv" style="visible: none; display: none;"></div>
 
     <script src="app/js/beautify.js"></script>
