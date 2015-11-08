@@ -9,7 +9,7 @@ var game = {
 		fps: 20,
 		interval: (1000/20),
 		angularInit: false,
-		firstTime: false,
+		firstTime: true,
 		pause: true,
 		before: new Date().getTime(),
 		after: new Date().getTime(),
@@ -29,7 +29,7 @@ var game = {
 
 	actions: {
 		list: ["Shooting", "Street fight", "Pickpocket", "Scam", "Steal car", "Jewelry robbery", "Hacking", "Arms sales"],
-		inflation: [1.10, 1.11, 1.12, 1.13, 1.12, 1.11, 1.10],
+		inflation: [1.10, 1.11, 1.12, 1.13, 1.13, 1.12, 1.11, 1.10],
 		progress: [],
 		owned: [],
 		price: [2.5, 85, 1997, 49941, 1103113, 25923155, 777694650, 33052022625],
@@ -128,8 +128,9 @@ game.help.angularDisplay = function() {
 	return this.display();
 };
 
-game.achievements.create = function(name, desc, desc2, part, reqName, reqValue, changeName, changeValue) {
+game.achievements.create = function(name, type, desc, desc2, part, reqName, reqValue, changeName, changeValue) {
 	this.name = name;
+	this.type = type;
 	this.desc = desc;
 	this.desc2 = desc2;
 	this.part = part; // actions or production or prestige for example
@@ -140,16 +141,81 @@ game.achievements.create = function(name, desc, desc2, part, reqName, reqValue, 
 };
 game.achievements.init = function() {
 	this.actions.list = [
-		new game.achievements.create("Shooter I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 2, "timeMultiplier[0]", "*2"),
-		new game.achievements.create("Figther I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[1]", 2, "timeMultiplier[1]", "*2")
+		new game.achievements.create("Shooter I",	0, "Shooting at level 25", 	"Shooting speed x2", 	"actions", "owned[0]", 25, 	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter II", 	0, "Shooting at level 50", 	"Shooting speed x2", 	"actions", "owned[0]", 50, 	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter III",	0, "Shooting at level 100",	"Shooting speed x2", 	"actions", "owned[0]", 100,	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter IV", 	0, "Shooting at level 200",	"Shooting speed x2", 	"actions", "owned[0]", 200,	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter V", 	0, "Shooting at level 300",	"Shooting speed x2", 	"actions", "owned[0]", 300,	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter VI",	0, "Shooting at level 400",	"Shooting speed x2", 	"actions", "owned[0]", 400,	"timeMultiplier[0]",	"*2"),
+		new game.achievements.create("Shooter VII",	0, "Shooting at level 500",	"Shooting reward x3", 	"actions", "owned[0]", 500,	"rewardMultiplier[0]",	"*3"),
+
+		new game.achievements.create("Fighter I",	1, "Street fight at level 25", 	"Street fight speed x2", 	"actions", "owned[1]", 25, 	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter II", 	1, "Street fight at level 50", 	"Street fight speed x2", 	"actions", "owned[1]", 50, 	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter III",	1, "Street fight at level 100",	"Street fight speed x2", 	"actions", "owned[1]", 100,	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter IV", 	1, "Street fight at level 200",	"Street fight speed x2", 	"actions", "owned[1]", 200,	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter V", 	1, "Street fight at level 300",	"Street fight speed x2", 	"actions", "owned[1]", 300,	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter VI",	1, "Street fight at level 400",	"Street fight speed x2", 	"actions", "owned[1]", 400,	"timeMultiplier[1]",	"*2"),
+		new game.achievements.create("Fighter VII",	1, "Street fight at level 500",	"Street fight reward x3", 	"actions", "owned[1]", 500,	"rewardMultiplier[1]",	"*3"),
+
+		new game.achievements.create("Pickpocket I",	2, "Pickpocket at level 25", 	"Pickpocket speed x2", 	"actions", "owned[2]", 25, 	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket II", 	2, "Pickpocket at level 50", 	"Pickpocket speed x2", 	"actions", "owned[2]", 50, 	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket III",	2, "Pickpocket at level 100",	"Pickpocket speed x2", 	"actions", "owned[2]", 100,	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket IV", 	2, "Pickpocket at level 200",	"Pickpocket speed x2", 	"actions", "owned[2]", 200,	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket V", 	2, "Pickpocket at level 300",	"Pickpocket speed x2", 	"actions", "owned[2]", 300,	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket VI",	2, "Pickpocket at level 400",	"Pickpocket speed x2", 	"actions", "owned[2]", 400,	"timeMultiplier[2]",	"*2"),
+		new game.achievements.create("Pickpocket VII",	2, "Pickpocket at level 500",	"Pickpocket reward x3",	"actions", "owned[2]", 500,	"rewardMultiplier[2]",	"*3"),
+
+		new game.achievements.create("Scammer I",	3, "Scamm at level 25", 	"Scamm speed x2", 	"actions", "owned[3]", 25, 	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer II", 	3, "Scamm at level 50", 	"Scamm speed x2", 	"actions", "owned[3]", 50, 	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer III",	3, "Scamm at level 100",	"Scamm speed x2", 	"actions", "owned[3]", 100,	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer IV", 	3, "Scamm at level 200",	"Scamm speed x2", 	"actions", "owned[3]", 200,	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer V", 	3, "Scamm at level 300",	"Scamm speed x2", 	"actions", "owned[3]", 300,	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer VI",	3, "Scamm at level 400",	"Scamm speed x2", 	"actions", "owned[3]", 400,	"timeMultiplier[3]",	"*2"),
+		new game.achievements.create("Scammer VII",	3, "Scamm at level 500",	"Scamm reward x3",	"actions", "owned[3]", 500,	"rewardMultiplier[3]",	"*3"),
+
+		new game.achievements.create("Car dealer I",	4, "Steal car at level 25", 	"Steal car speed x2", 	"actions", "owned[4]", 25, 	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer II", 	4, "Steal car at level 50", 	"Steal car speed x2", 	"actions", "owned[4]", 50, 	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer III",	4, "Steal car at level 100",	"Steal car speed x2", 	"actions", "owned[4]", 100,	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer IV", 	4, "Steal car at level 200",	"Steal car speed x2", 	"actions", "owned[4]", 200,	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer V", 	4, "Steal car at level 300",	"Steal car speed x2", 	"actions", "owned[4]", 300,	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer VI",	4, "Steal car at level 400",	"Steal car speed x2", 	"actions", "owned[4]", 400,	"timeMultiplier[4]",	"*2"),
+		new game.achievements.create("Car dealer VII",	4, "Steal car at level 500",	"Steal car reward x3",	"actions", "owned[4]", 500,	"rewardMultiplier[4]",	"*3"),
+
+		new game.achievements.create("Robber I",	5, "Jewelry robbery at level 25", 	"Jewelry robbery speed x2", 	"actions", "owned[5]", 25, 	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber II", 	5, "Jewelry robbery at level 50", 	"Jewelry robbery speed x2", 	"actions", "owned[5]", 50, 	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber III",	5, "Jewelry robbery at level 100",	"Jewelry robbery speed x2", 	"actions", "owned[5]", 100,	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber IV", 	5, "Jewelry robbery at level 200",	"Jewelry robbery speed x2", 	"actions", "owned[5]", 200,	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber V", 	5, "Jewelry robbery at level 300",	"Jewelry robbery speed x2", 	"actions", "owned[5]", 300,	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber VI",	5, "Jewelry robbery at level 400",	"Jewelry robbery speed x2", 	"actions", "owned[5]", 400,	"timeMultiplier[5]",	"*2"),
+		new game.achievements.create("Robber VII",	5, "Jewelry robbery at level 500",	"Jewelry robbery reward x3",	"actions", "owned[5]", 500,	"rewardMultiplier[5]",	"*3"),
+
+		new game.achievements.create("Hacker I",	6, "Hacking at level 25", 	"Hacking speed x2", 	"actions", "owned[6]", 25, 	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker II", 	6, "Hacking at level 50", 	"Hacking speed x2", 	"actions", "owned[6]", 50, 	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker III",	6, "Hacking at level 100",	"Hacking speed x2", 	"actions", "owned[6]", 100,	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker IV", 	6, "Hacking at level 200",	"Hacking speed x2", 	"actions", "owned[6]", 200,	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker V", 	6, "Hacking at level 300",	"Hacking speed x2", 	"actions", "owned[6]", 300,	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker VI",	6, "Hacking at level 400",	"Hacking speed x2", 	"actions", "owned[6]", 400,	"timeMultiplier[6]",	"*2"),
+		new game.achievements.create("Hacker VII",	6, "Hacking at level 500",	"Hacking reward x3",	"actions", "owned[6]", 500,	"rewardMultiplier[6]",	"*3"),
+
+		new game.achievements.create("Arms dealers I",		7, "Arms sales at level 25", 	"Arms sales speed x2", 	"actions", "owned[7]", 25, 	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers II", 	7, "Arms sales at level 50", 	"Arms sales speed x2", 	"actions", "owned[7]", 50, 	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers III",	7, "Arms sales at level 100",	"Arms sales speed x2", 	"actions", "owned[7]", 100,	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers IV", 	7, "Arms sales at level 200",	"Arms sales speed x2", 	"actions", "owned[7]", 200,	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers V",		7, "Arms sales at level 300",	"Arms sales speed x2", 	"actions", "owned[7]", 300,	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers VI",		7, "Arms sales at level 400",	"Arms sales speed x2", 	"actions", "owned[7]", 400,	"timeMultiplier[7]",	"*2"),
+		new game.achievements.create("Arms dealers VII",	7, "Arms sales at level 500",	"Arms sales reward x3",	"actions", "owned[7]", 500,	"rewardMultiplier[7]",	"*3"),
 	];
 
 	for (var i = 0; i < this.actions.list.length; i++)
 		this.actions.complete.push(false);
 
+	this.display();
+
 	log("Game achievements init.");
 };
-game.achievements.display = function() {};
+game.achievements.display = function() {
+	this.actions.display();
+};
 game.achievements.angularDisplay = function() {
 	this.display();
 };
@@ -166,6 +232,7 @@ game.achievements.achieve = function(index, part) {
 	var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
 	var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
 	window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue);
+	this.display();
 };
 game.achievements.loop = function() {
 	this.actions.loop();
@@ -178,6 +245,28 @@ game.achievements.actions.loop = function() {
 			// html display todo
 		};
 	}
+};
+game.achievements.actions.display = function() {
+	for (var e = 0; e < game.actions.list.length; e++) {
+		var index = this.getCurrent(e);
+		var html = {
+			name: this.list[index].name,
+			desc: this.list[index].desc,
+			desc2: this.list[index].desc2
+		};
+
+		$("#achievements-actions-" + (e+1)).html("<b>" + html.name + " :</b><span>" + html.desc + "</span><br>" + html.desc2);
+	};
+};
+game.achievements.actions.getCurrent = function(actionIndex) {
+	var index;
+	for (var i = 0; i < this.list.length; i++) {
+		if (!this.complete[i] && this.list[i].type == actionIndex) {
+			index = i;
+			i = this.list.length;
+		};
+	};
+	return index;
 };
 
 game.prestige.getExperience = function() {
@@ -390,6 +479,7 @@ game.upgrades.production.display = function() {
 	};
 };
 
+
 game.actions.gainMoney = function(amount) {
 	game.money += amount;
 	game.totalMoney += amount;
@@ -406,6 +496,11 @@ game.actions.getPrice = function(index) {
 		return (initialPrice * (this.pricePromo[index] / 100));
 	else
 		return (initialPrice);
+};
+game.actions.getPerSec = function(index) {
+	var reward = this.getReward(index);
+	var time = this.getTime(index);
+	return reward / time;
 };
 game.actions.init = function() {
 	for (var i = 0; i < this.list.length; i++) {
@@ -433,8 +528,9 @@ game.actions.display = function() {
 		var price = this.getPrice(i);
 		var reward = this.getReward(i);
 		var time = this.getTime(i);
+		var perSec = this.getPerSec(i);
 		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
-		$("#action-info-" + (i+1)).html("Earn $" + fix(reward) + " - " + fix(time) + " sec");
+		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec");
 		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
 	}
 };
@@ -443,9 +539,10 @@ game.actions.angularDisplay = function() {
 		var price = this.getPrice(i);
 		var reward = this.getReward(i);
 		var time = this.getTime(i);
+		var perSec = this.getPerSec(i);
 		$("#action-upgrade-" + (i+1)).attr('onclick', 'game.actions.upgrade(' + i + ');');
 		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
-		$("#action-info-" + (i+1)).html("Earn $" + fix(reward) + " - " + fix(time) + " sec");
+		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec");
 		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
 	}
 };
