@@ -139,21 +139,40 @@ game.achievements.create = function(name, desc, desc2, part, reqName, reqValue, 
 };
 game.achievements.init = function() {
 	this.actions.list = [
-		new game.achievements.create("Shooter I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 25, "timeMultiplier[0]", "*2")
+		new game.achievements.create("Shooter I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 2, "timeMultiplier[0]", "*2"),
+		new game.achievements.create("Figther I", "Shooting at level 25", "Shooting speed x2", "actions", "owned[1]", 2, "timeMultiplier[1]", "*2")
 	];
+
+	for (var i = 0; i < this.actions.list.length; i++)
+		this.actions.complete.push(false);
 
 	log("Game achievements init.");
 };
 game.achievements.display = function() {};
-game.achievements.angularDisplay = function() {};
-game.achievements.isComplete = function(index) {
+game.achievements.angularDisplay = function() {
+	this.display();
 };
-game.achievements.achieve = function(index) {};
-game.achievements.loop = function() {};
+game.achievements.isComplete = function(index, part) {
+	var need = window["game"]["achievements"][part]["list"][index]["reqValue"];
+	var reqName = window["game"]["achievements"][part]["list"][index]["reqName"];
+	var reqNameIndex = reqName.substring(reqName.indexOf('[') + 1, reqName.indexOf(']'));
+	var actual = window["game"][part][reqName.substring(0, reqName.indexOf('['))][reqNameIndex];
+	return actual >= need;
+};
+game.achievements.achieve = function(index, part) {
+	var changeValue = window["game"]["achievements"][part]["list"][index]["changeValue"];
+	var changeName = window["game"]["achievements"][part]["list"][index]["changeName"];
+	var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
+	var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
+	window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue);
+};
+game.achievements.loop = function() {
+	this.actions.loop();
+};
 game.achievements.actions.loop = function() {
 	for (var i = 0; i < this.list.length; i++) {
-		if (game.achievements.isComplete(i) && !this.complete) {
-			game.achievements.achieve(i);
+		if (game.achievements.isComplete(i, 'actions') && !this.complete[i]) {
+			game.achievements.achieve(i, 'actions');
 			this.complete[i] = true;
 			// html display todo
 		};
@@ -434,6 +453,7 @@ game.actions.upgrade = function(index) {
 	if (game.money >= price) {
 		game.money -= price;
 		this.owned[index]++;
+		game.achievements.loop();
 		$("#action-upgrade-" + (index+1)).html("Upgrade");
 	};
 	this.display();
