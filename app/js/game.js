@@ -44,9 +44,9 @@ var game = {
 
 	production: {
 		unlocked: false,
-		investNeed: 15000000,
+		investNeed: 15e6,
 		list: ["Weed", "Meth", "Cocaine"],
-		prices: [50, 800, 4000],
+		prices: [1e5, 15e7, 75e8],
 		multipliers: [],
 		totalMultiplier: 1,
 		stock: [],
@@ -95,7 +95,9 @@ var game = {
 			list: [],
 			complete: []
 		}
-	}
+	},
+
+	save: {}
 };
 
 // from stackoverflow.com/q/12944987/
