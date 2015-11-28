@@ -3,10 +3,58 @@
 <head>
     <meta charset="utf-8">
     <title>Blackmarket-Reloaded</title>
-    <script data-main="app/require-config" src="bower_components/requirejs/require.js"></script>
+    <script data-main="app/require-config" src="lib/requirejs/js/require.min.js"></script>
+
+    <link rel="stylesheet" href="lib/bootswatch-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="lib/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="app/css/interface.css">
 </head>
 
 <body>
-    <div ng-view></div>
+    <div class="sidebar">
+        <h1>
+            Blackmarket<br>
+            Reloaded<br>
+            <small>v0.001</small>
+        </h1>
+
+        <i id="sidebar-close" class="fa fa-times-circle sidebar-close"></i>
+
+        <ul>
+            <li><a href="#/"><i class="fa fa-hand-rock-o"></i> Actions</a></li>
+            <li><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>
+            <li><a href="#/upgrades"><i class="ion-arrow-graph-up-right"></i> Upgrades</a></li>
+            <li><a href="#/gangs"><i class="ion-ios-people"></i> Gangs</a></li>
+            <li><a href="#/prestige"><i class="ion-android-star-outline"></i> Prestige</a></li>
+            <li><a href="#/achievements"><i class="ion-ribbon-b"></i> Achievements</a></li>
+            <li><a href="#/help"><i class="fa fa-question-circle"></i> Help</a></li>
+            <li><a href="#/options"><i class="fa fa-cog"></i> Options</a></li>
+        </ul>
+    </div>
+
+    <div class="pushed">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand">$0.00</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile-extend">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar-mobile-extend">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="navbar-sidebar"><a class="navbar-sidebar"><i class="fa fa-bars"></i> Open menu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div ng-view></div>
+    </div>
 </body>
 </html>

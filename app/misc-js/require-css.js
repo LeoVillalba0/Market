@@ -1,4 +1,4 @@
-define([], function(app) {
+define([], function() {
     // this code is bad, made for personal use
     var requirecss = {
         load: function(url) {
@@ -21,11 +21,12 @@ define([], function(app) {
             window["requirecss"] = requirecss;
         },
 
-        toLoad: {
+        toLoad: {/*
             'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
             'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
-            'ionicons': 'lib/Ionicons/css/ionicons.min.css'
-        }
+            'ionicons': 'lib/Ionicons/css/ionicons.min.css',
+            'interface': 'app/css/interface.css'
+        */}
     };
 
     return requirecss.init();

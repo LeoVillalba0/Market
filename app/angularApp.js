@@ -3,18 +3,14 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
 
     app.config(function($routeProvider) {
         $routeProvider
-            .when("/home", angularAMD.route({
-                templateUrl: 'app/templates/view_home.html',
-                controller: 'HomeCtrl',
-                controllerUrl: 'app/controllers/controller_home'
-            }))
-            .when("/view1", angularAMD.route({
-                templateUrl: 'app/templates/view_view1.html',
-                controller: 'View1Ctrl',
-                controllerUrl: 'app/controllers/controller_view1'
+            .when("/", angularAMD.route({
+                templateUrl: 'app/templates/actions.html',
+                controller: 'ActionsCtrl',
+                controllerUrl: 'app/controllers/actions'
             }))
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: "/404",
+                templateUrl: 'app/templates/404.html'
             });
     });
 
