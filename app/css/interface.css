@@ -41,6 +41,10 @@ a { color: inherit; text-decoration: inherit !important }
 .pushed { padding-top: 70px; min-height: 100%; transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
 .pushed.active { cursor: default; -webkit-user-select: none; -moz-user-select: none }
 
+.help h1 { font-size: 28px; margin: 15px 0; }
+.help h2 { font-size: 18px; margin: 8px 0; }
+.help h2 ul li { font-size: 16px; margin: 8px 0; }
+
 .well.actions { padding: 0; }
 .action-content { margin: 0 0 8px 0; width: 100%; text-align: center }
 .action-content h1 { margin: 0 0 6px; font-size: 20px }
