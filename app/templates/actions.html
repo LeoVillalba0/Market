@@ -1,3 +1,27 @@
-<div class="container small well" ng-init="init()">
-    
+<div class="container small well">
+    <p id="test"></p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6" ng-repeat="action in actions.action">
+                <div class="action-content">
+                    <h1 id="action-name-{{$index+1}}"></h1>
+                    <h2 id="action-info-{{$index+1}}"></h2>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-2">
+                            <a id="action-upgrade-{{$index+1}}" class="btn btn-primary btn-xs center-block">Upgrade</a>
+                        </div>
+                        <div class="col-md-5">
+                            <h3 id="action-cost-{{$index+1}}"></h3>
+                        </div>
+                    </div>
+                    <div class="progress progress-striped active mid-bar middle">
+                        <div id="action-progress-{{$index+1}}" class="progress-bar progress-bar-success">
+                            <span id="action-nb-{{$index+1}}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

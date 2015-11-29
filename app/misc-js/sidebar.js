@@ -1,4 +1,4 @@
-define(['jquery'], function() {
+define([], function() {
     var sidebar = {
         trigged: false,
 
@@ -27,6 +27,7 @@ define(['jquery'], function() {
                 sidebar.show();
             });
             window["sidebar"] = sidebar;
+            log("Sidebar init.");
         }
     }
 

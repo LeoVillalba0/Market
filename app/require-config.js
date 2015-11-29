@@ -1,14 +1,18 @@
 requirejs.config({
+    waitSeconds: 0,
     baseUrl: '',
     paths: {
         'angular': 'lib/angular/js/angular.min',
         'angular-route': 'lib/angular-route/js/angular-route.min',
         'angularAMD': 'lib/angularAMD/js/angularAMD.min',
-        'jquery': 'lib/jquery/js/jquery.min',
 
         'require-css': 'app/misc-js/require-css',
         'sidebar': 'app/misc-js/sidebar',
-        'angularApp': 'app/angularApp'
+        'beautify': 'app/misc-js/beautify',
+        'angularApp': 'app/angularApp',
+
+        'core': 'app/game/core',
+        'actions': 'app/game/actions'
     },
 
     shim: {
@@ -16,5 +20,5 @@ requirejs.config({
         'angular-route': ['angular']
     },
 
-    deps: ['angularApp', 'jquery', 'require-css', 'sidebar']
+    deps: ['angularApp', 'core']
 });
