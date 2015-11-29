@@ -14,7 +14,7 @@ a { color: inherit; text-decoration: inherit !important }
 }
 
 .row { margin-bottom: 15px; }
-.well { padding: 0px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
+.well { padding: 16px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
 
 .navbar-default { border-radius: 0; background-color: #375a7f }
 .navbar-default .navbar-brand:hover,
@@ -38,6 +38,7 @@ a { color: inherit; text-decoration: inherit !important }
 .pushed { padding-top: 70px; min-height: 100%; transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
 .pushed.active { cursor: default; -webkit-user-select: none; -moz-user-select: none }
 
+.well.actions { padding: 0; }
 .action-content { margin: 0 0 8px 0; width: 100%; text-align: center }
 .action-content h1 { margin: 0 0 6px; font-size: 20px }
 .action-content h2 { margin: 0 0 6px; font-size: 16px }
