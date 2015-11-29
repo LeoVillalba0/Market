@@ -1,4 +1,8 @@
 define([], function() {
+    function fix(x, n) {
+        return beautify.fix(x, n);
+    };
+
     var beautify = {
         prefixes: ["m ", "b ", "t ", "q ", "Q ", "s ", "S ", "o ", "n ",
             "D ", "UD ", "DD ", "TD ", "qD ", "QD ", "sD ", "SD ", "OD ", "ND ",
@@ -40,6 +44,7 @@ define([], function() {
 
         init: function() {
             window["beautify"] = this;
+            window["fix"] = fix;
             log("Beautify init.");
         }
     };

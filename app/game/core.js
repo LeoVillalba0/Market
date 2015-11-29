@@ -2,6 +2,9 @@ define([], function() {
     var game = {
         money: 0,
     	totalMoney: 0,
+        level: 1,
+        reputation: 0,
+        reputationNeed: 100,
 
         options: {
             fps: 20,
@@ -23,8 +26,18 @@ define([], function() {
             this.totalMoney += amount;
         },
 
+        repLevelUp: function() {
+            if (this.reputation >= this.reputationNeed) {
+                while (this.reputation >= this.reputationNeed) {
+                    this.level++;
+                    this.reputation -= this.reputationNeed;
+                    this.reputationNeed = Math.floor(100 * Math.pow(1.30, this.level));
+                };
+            };
+        },
+
         display: function() {
-            $(".navbar-brand").html("$" + beautify.fix(game.money));
+            $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
         },
 
         coreLoop: function() {

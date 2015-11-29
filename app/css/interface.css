@@ -14,7 +14,7 @@ a { color: inherit; text-decoration: inherit !important }
 }
 
 .row { margin-bottom: 15px; }
-.well { border-radius: 2px; background-color: #EFEFEF }
+.well { padding: 0px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
 
 .navbar-default { border-radius: 0; background-color: #375a7f }
 .navbar-default .navbar-brand:hover,
@@ -35,11 +35,10 @@ a { color: inherit; text-decoration: inherit !important }
 .sidebar ul li img { margin: -2px 0 0 0; }
 .sidebar-close { font-size: 24px; margin: 0 139.5px 15px; cursor: pointer }
 
-.pushed { min-height: 100%; transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
+.pushed { padding-top: 70px; min-height: 100%; transition: all .5s; -webkit-transition: all .5s; transform: translate3d(0%, 0, 0); transition-timing-function: cubic-bezier(0.4, 0, 1, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1) }
 .pushed.active { cursor: default; -webkit-user-select: none; -moz-user-select: none }
 
-.action.row .col-md-6 .progress { margin-bottom: 20px }
-.action-content { margin: 0 0 15px 0; width: 100%; text-align: center }
+.action-content { margin: 0 0 8px 0; width: 100%; text-align: center }
 .action-content h1 { margin: 0 0 6px; font-size: 20px }
 .action-content h2 { margin: 0 0 6px; font-size: 16px }
 .action-content h2 span { font-size: 14px; }
@@ -48,6 +47,6 @@ a { color: inherit; text-decoration: inherit !important }
 
 .progress { height: 14px; background-color: #D7D8D8 }
 .progress.mid-bar { width: 65% }
-.progress.middle { margin: 0 auto }
+.progress.middle { margin: 0 auto 5px; }
 .progress-bar { -webkit-transition: none; transition: none; -o-transition: none; -moz-transition: none }
 .progress span { line-height: 14px; font-size: 12px }
