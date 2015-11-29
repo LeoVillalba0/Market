@@ -64,16 +64,23 @@ define([], function() {
         				this.progress[i] += times/fps;
         				game.gainMoney(Math.floor(this.progress[i]/time) * reward);
                         this.currentRep[i] += (Math.floor(this.progress[i]/time) * rep);
+
+                        if (Math.floor(this.progress[i]/time) == 1)
+                            this.display();
+
         				this.progress[i] %= time;
         				var width = ((this.progress[i]/time) * 100)
                         var repWidth = ((this.currentRep[i]/this.reputation[i]) * 100);
+
         				if (time < 0.15)
         					width = 100;
                         if (this.currentRep[i] >= this.reputation[i]) {
                             this.currentRep[i] -= this.reputation[i];
                             game.reputation += this.reputation[i];
                             game.repLevelUp();
+                            this.display();
                         };
+
         				width = Math.max(width, 1);
                         repWidth = Math.max(repWidth, 1);
 
@@ -92,11 +99,12 @@ define([], function() {
         		var reward = this.getReward(i);
         		var time = this.getTime(i);
         		var perSec = this.getPerSec(i);
-                var rep = this.getRep(i) * this.reputationDivider;
+                var rep = this.getRep(i);
                 var currep = this.currentRep[i];
                 var maxrep = this.reputation[i];
         		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
-        		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec<br>+" + fix(rep, 0) + " rep <span>(" + fix(currep, 0) + "/" + fix(maxrep, 0) + ")");
+        		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>+" + fix(rep, 0) +
+                " rep <span>(" + fix(currep, 0) + "/" + fix(maxrep, 0) +")</span><br>" + fix(time) + " sec");
         		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
         },
