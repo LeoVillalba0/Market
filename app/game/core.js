@@ -21,6 +21,10 @@ define([], function() {
             return angular.element(selector).scope();
         },
 
+        togglePause: function() {
+            this.options.pause = !this.options.pause;
+        },
+
         gainMoney: function(amount) {
             this.money += amount;
             this.totalMoney += amount;

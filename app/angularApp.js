@@ -8,6 +8,11 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
                 controller: 'ActionsCtrl',
                 controllerUrl: 'app/controllers/actions'
             }))
+            .when('/options', angularAMD.route({
+                templateUrl: 'app/templates/options.html',
+                controller: 'OptionsCtrl',
+                controllerUrl: 'app/controllers/options'
+            }))
             .otherwise({
                 redirectTo: "/404",
                 templateUrl: 'app/templates/404.html'
