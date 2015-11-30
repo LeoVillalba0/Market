@@ -13,6 +13,11 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
                 controller: 'ResearchCenterCtrl',
                 controllerUrl: 'app/controllers/research-center'
             }))
+            .when('/achievements', angularAMD.route({
+                templateUrl: 'app/templates/achievements.html',
+                controller: 'AchievementsCtrl',
+                controllerUrl: 'app/controllers/achievements'
+            }))
             .when('/options', angularAMD.route({
                 templateUrl: 'app/templates/options.html',
                 controller: 'OptionsCtrl',

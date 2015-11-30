@@ -13,7 +13,8 @@ requirejs.config({
 
         'core': 'app/game/core',
         'actions': 'app/game/actions',
-        'research-center': 'app/game/research-center'
+        'research-center': 'app/game/research-center',
+        'achievements': 'app/game/achievements'
     },
 
     shim: {

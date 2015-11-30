@@ -65,7 +65,7 @@ define([], function() {
             window["log"] = console.info.bind(console, "BR :");
             require(['beautify', 'sidebar'], function() {
                 log("App core libs end init.");
-                require(['angular', 'actions', 'research-center'], function() {
+                require(['angular', 'actions', 'research-center', 'achievements'], function() {
                     // intervals goes here
                     log("Game scripts end init.");
                 });
