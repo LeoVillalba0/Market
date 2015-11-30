@@ -7,12 +7,10 @@ define(['angularApp'], function(app) {
 
         $scope.init = function() {
             if (!game.options.angularInit) {
-                game.actions.angularInit();
                 game.options.angularInit = true;
                 $scope.setInt();
-            } else {
-                //game.actions.angularInit();
             };
+            game.research.angularInit();
         };
 
         $timeout($scope.init);

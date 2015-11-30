@@ -2,19 +2,19 @@ define([], function() {
     var actions = {
         list: ["Shooting", "Street fight", "Pickpocket", "Scam", "Steal car", "Jewelry robbery", "Hacking", "Arms sales"],
 		inflation: [1.10, 1.11, 1.12, 1.13, 1.13, 1.12, 1.11, 1.10],
-		progress: [],
-		owned: [],
+		progress: new Array(),
+		owned: new Array(),
 		price: [2.5, 85, 1997, 49941, 1103113, 25923155, 777694650, 33052022625],
-		pricePromo: [],
+		pricePromo: new Array(),
 		reward: [0.32, 34, 798, 19976, 441245, 10369262, 311077860, 13220809050],
-		rewardMultiplier: [],
+		rewardMultiplier: new Array(),
 		totalRewardMultiplier: 1,
 		time: [2.5, 7.5, 22.5, 67.5, 202.5, 607.5, 1822.5, 5437.5],
-		timeMultiplier: [],
+		timeMultiplier: new Array(),
 		totalTimeMultiplier: 1,
         reputation: [1, 3, 9, 27, 81, 243, 729, 2187],
         reputationDivider: 6,
-        currentRep: [],
+        currentRep: new Array(),
 
         getTime: function(index) {
             return ((this.time[index] / this.timeMultiplier[index]) / this.totalTimeMultiplier);
