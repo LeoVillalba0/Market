@@ -14,7 +14,7 @@ define([], function() {
             } else {
                 $(".sidebar").css('transform', 'translate3d(0%, 0, 0)');
                 $(".pushed").css({
-                    'opacity': '0.75',
+                    'opacity': '0.30',
                     'transform': 'translate3d(290px, 0, 0)'
                 });
                 $(".pushed").attr("class", "pushed active");
