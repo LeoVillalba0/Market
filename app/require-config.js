@@ -12,7 +12,8 @@ requirejs.config({
         'angularApp': 'app/angularApp',
 
         'core': 'app/game/core',
-        'actions': 'app/game/actions'
+        'actions': 'app/game/actions',
+        'research-center': 'app/game/research-center'
     },
 
     shim: {
