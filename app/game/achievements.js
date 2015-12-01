@@ -59,10 +59,12 @@ define([], function() {
         			this.actions.complete[i] = true;
         		};
         	};
+
+            this.display();
         },
 
         display: function() {
-            for (var i = 0; i < this.actions.list.length; i++) {
+            for (var i = 0; i < game.actions.list.length; i++) {
                 var index = this.getCurrent(0, i);
                 var html = {
                     name: this.actions.list[index].name,
