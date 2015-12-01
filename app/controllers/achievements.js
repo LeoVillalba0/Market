@@ -10,7 +10,7 @@ define(['angularApp'], function(app) {
                 game.options.angularInit = true;
                 $scope.setInt();
             };
-            //game.achievements.angularInit();
+            game.achievements.angularInit();
         };
 
         $timeout($scope.init);

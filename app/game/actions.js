@@ -47,6 +47,7 @@ define([], function() {
         	if (game.money >= price) {
         		game.money -= price;
         		this.owned[index]++;
+                game.achievements.loop();
         		$("#action-upgrade-" + (index+1)).html("Upgrade");
         	};
         	this.display();
