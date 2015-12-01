@@ -49,5 +49,5 @@ define([], function() {
         }
     };
 
-    beautify.init();
+    return beautify.init();
 });

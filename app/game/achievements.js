@@ -17,6 +17,9 @@ define([], function() {
         	this.changeValue = changeValue;
         },
 
+        popup: function() {
+        },
+
         getCurrent: function(type, Index) {
             var index;
             switch (type) {

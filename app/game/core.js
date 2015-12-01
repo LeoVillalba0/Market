@@ -63,7 +63,7 @@ define([], function() {
         init: function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR :");
-            require(['beautify', 'sidebar'], function() {
+            require(['beautify', 'sidebar', 'notify'], function() {
                 log("App core libs end init.");
                 require(['angular', 'actions', 'research-center', 'achievements'], function() {
                     // intervals goes here

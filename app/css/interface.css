@@ -13,9 +13,13 @@ a { color: inherit; text-decoration: inherit !important }
 	.container.small { width: 830px; }
 }
 
+.btn,
+.btn:hover { transition: all 100ms; }
 .row { margin-bottom: 15px; }
 .well { padding: 16px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
 .panel { margin-bottom: 10px; }
+
+.notify { position: absolute; top: 70px; right: 30px; width: 350px; border-radius: 4px; opacity: 0.95; color: white; }
 
 .row .panel .panel-heading { text-align: center; background-color: #375a7f; color: #fff; font-size: 18px }
 .row .panel .panel-heading a:hover,
@@ -26,9 +30,6 @@ a { color: inherit; text-decoration: inherit !important }
 .row .panel ul li span { float: right }
 .row h1 { margin: 0 0 15px; font-size: 22px; text-align: center }
 .row h1 small { font-size: 75%; color: inherit }
-
-.btn,
-.btn:hover { transition: all 100ms; }
 
 .navbar-default { border-radius: 0; background-color: #375a7f }
 .navbar-default .navbar-brand:hover,

@@ -9,6 +9,7 @@ requirejs.config({
         'require-css': 'app/misc-js/require-css',
         'sidebar': 'app/misc-js/sidebar',
         'beautify': 'app/misc-js/beautify',
+        'notify': 'app/misc-js/notify',
         'angularApp': 'app/angularApp',
 
         'core': 'app/game/core',
