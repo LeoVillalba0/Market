@@ -10,6 +10,7 @@ define([], function() {
                     'transform': 'translate3d(0%, 0, 0)'
                 });
                 $(".pushed").attr("class", "pushed");
+                $("#game-content").attr('onclick', '');
                 this.trigged = false;
             } else {
                 $(".sidebar").css('transform', 'translate3d(0%, 0, 0)');
@@ -18,6 +19,7 @@ define([], function() {
                     'transform': 'translate3d(290px, 0, 0)'
                 });
                 $(".pushed").attr("class", "pushed active");
+                $("#game-content").attr('onclick', 'sidebar.show();');
                 this.trigged = true;
             }
         },
