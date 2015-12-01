@@ -17,9 +17,6 @@ define([], function() {
         	this.changeValue = changeValue;
         },
 
-        popup: function() {
-        },
-
         getCurrent: function(type, Index) {
             var index;
             switch (type) {
@@ -53,6 +50,10 @@ define([], function() {
         	var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
         	window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue);
         	this.display();
+
+            var name = window["game"]["achievements"][part]["list"][index]["name"];
+            var effect = window["game"]["achievements"][part]["list"][index]["desc2"];
+            notify.pop("<strong>Achievement earned :</strong> " + name + "<br><strong>" + effect + "</strong>");
         },
 
         loop: function() {
