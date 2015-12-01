@@ -75,9 +75,11 @@ define([], function() {
         				if (time < 0.15)
         					width = 100;
                         if (this.currentRep[i] >= this.reputation[i]) {
-                            this.currentRep[i] -= this.reputation[i];
-                            game.reputation += this.reputation[i];
-                            game.repLevelUp();
+                            while (this.currentRep[i] >= this.reputation[i]) {
+                                this.currentRep[i] -= this.reputation[i];
+                                game.reputation += this.reputation[i];
+                                game.repLevelUp();
+                            };
                             this.display();
                         };
 
