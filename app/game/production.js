@@ -5,6 +5,8 @@ define([], function() {
         multipliers: new Array(),
         totalMultiplier: 1,
         stock: new Array(),
+        invested: false,
+        investPrice: 15e11,
 
         prod: {
             weed: new Array(),
@@ -195,6 +197,17 @@ define([], function() {
 
         getDrugReward: function(drugIndex) {
             return ((this.prices[drugIndex] * this.multipliers[drugIndex]) * this.totalMultiplier);
+        },
+
+        invest: function() {
+            if (game.money >= this.investPrice && !this.invested) {
+        		game.money -= this.investPrice;
+        		this.invested = true;
+
+                $("#production-locked").fadeOut("slow", function() {
+                    $("#production-unlocked").fadeIn("slow");
+                });
+        	};
         },
 
         create: function(name, price, reward, inflation) {
