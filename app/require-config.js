@@ -17,6 +17,7 @@ requirejs.config({
         'research-center': 'app/game/research-center',
         'achievements': 'app/game/achievements',
         'production': 'app/game/production',
+        'prestige': 'app/game/prestige',
         'save': 'app/game/save'
     },
 

@@ -84,6 +84,11 @@ a { color: inherit; text-decoration: inherit !important }
 .action-content h3 { margin: 0; font-size: 14px; line-height: 25px }
 .action-content .row { margin: 0 -15px 10px }
 
+.prestige.well { margin-bottom: 0; }
+.prestige.well.container h1 { margin: 15px 0 15px 0; font-size: 22px; }
+.prestige.well.container h2 { font-size: 18px; }
+.prestige.well.container h3 { font-size: 16px; }
+
 .progress { height: 14px; background-color: #D7D8D8 }
 .progress.mid-bar { width: 65% }
 .progress.middle { margin: 0 auto 5px; }

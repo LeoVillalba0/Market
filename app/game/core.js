@@ -71,7 +71,7 @@ define([], function() {
             require(['beautify', 'sidebar', 'notify'], function() {
                 log("App core libs end init.");
 
-                require(['actions', 'production', 'research-center', 'achievements'], function() {
+                require(['actions', 'production', 'research-center', 'achievements', 'prestige'], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {

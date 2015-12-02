@@ -18,6 +18,11 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
                 controller: 'ResearchCenterCtrl',
                 controllerUrl: 'app/controllers/research-center'
             }))
+            .when('/prestige', angularAMD.route({
+                templateUrl: 'app/templates/prestige.html',
+                controller: 'PrestigeCtrl',
+                controllerUrl: 'app/controllers/prestige'
+            }))
             .when('/achievements', angularAMD.route({
                 templateUrl: 'app/templates/achievements.html',
                 controller: 'AchievementsCtrl',
