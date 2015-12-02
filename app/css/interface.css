@@ -56,6 +56,9 @@ a { color: inherit; text-decoration: inherit !important }
 
 .list-group-item.achievement { cursor: default !important; }
 
+.production.well.container h1 { font-size: 24px; }
+.production.well.container h2 { font-size: 20px; }
+
 .help h1 { font-size: 28px; margin: 15px 0; }
 .help h2 { font-size: 18px; margin: 8px 0; }
 .help h2 ul li { font-size: 16px; margin: 8px 0; }

@@ -8,6 +8,11 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
                 controller: 'ActionsCtrl',
                 controllerUrl: 'app/controllers/actions'
             }))
+            .when('/production', angularAMD.route({
+                templateUrl: 'app/templates/production.html',
+                controller: 'ProductionCtrl',
+                controllerUrl: 'app/controllers/production'
+            }))
             .when('/research-center', angularAMD.route({
                 templateUrl: 'app/templates/research-center.html',
                 controller: 'ResearchCenterCtrl',

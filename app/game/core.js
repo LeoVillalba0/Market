@@ -41,6 +41,8 @@ define([], function() {
         },
 
         display: function() {
+            this.production.displayDrugs();
+
             $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
         },
 
@@ -57,16 +59,19 @@ define([], function() {
 
         updateGame: function(times) {
             this.display();
+
         	game.actions.run(times);
+            game.production.run(times);
         },
 
         init: function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR :");
+
             require(['beautify', 'sidebar', 'notify'], function() {
                 log("App core libs end init.");
-                require(['angular', 'actions', 'research-center', 'achievements'], function() {
-                    // intervals goes here
+                
+                require(['angular', 'actions', 'production', 'research-center', 'achievements'], function() {
                     log("Game scripts end init.");
                 });
             });
