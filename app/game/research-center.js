@@ -96,6 +96,7 @@ define([], function() {
             this.varInit();
 
             window["game"]["research"] = this;
+            log("Research center init.");
         }
     };
 
