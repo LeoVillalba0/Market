@@ -16,7 +16,8 @@ requirejs.config({
         'actions': 'app/game/actions',
         'research-center': 'app/game/research-center',
         'achievements': 'app/game/achievements',
-        'production': 'app/game/production'
+        'production': 'app/game/production',
+        'save': 'app/game/save'
     },
 
     shim: {
