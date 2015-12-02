@@ -76,7 +76,7 @@ a { color: inherit; text-decoration: inherit !important }
 .research-bought.list-group-item:active,
 .research-bought.list-group-item:focus { background-color: rgba(22, 160, 133, 0.35) !important; }
 
-.well.actions { padding: 0; }
+.well.actions { padding-bottom: 0; }
 .action-content { margin: 0 0 8px 0; width: 100%; text-align: center }
 .action-content h1 { margin: 0 0 6px; font-size: 20px }
 .action-content h2 { margin: 0 0 6px; font-size: 16px }
