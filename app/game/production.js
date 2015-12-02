@@ -100,7 +100,97 @@ define([], function() {
 			methPerSec: new Array(),
 			cocaine: new Array(),
 			cocaineOwned: new Array(),
-			cocainePerSec: new Array()
+			cocainePerSec: new Array(),
+
+            getWhat: function(drugIndex, buildIndex, type) {
+                var drug = (game.production.list[drugIndex]).toLowerCase();
+            	var want = type.toLowerCase();
+            	var result = window["game"]["production"]["sell"][drug][buildIndex][want];
+            	return result;
+            },
+
+            getDealerSell: function(drugIndex, buildIndex) {
+                var drug = (game.production.list[drugIndex]).toLowerCase();
+            	var reward = window["game"]["production"]["sell"][drug][buildIndex]["reward"];
+            	var owned = window["game"]["production"]["sell"][drug + "Owned"][buildIndex];
+            	var result = (owned * reward);
+            	return result;
+            },
+
+            getDrugPerSec: function(drugIndex) {
+                var drug = (game.production.list[drugIndex]).toLowerCase();
+            	var part = window["game"]["production"]["sell"][drug + "PerSec"];
+            	var amount = 0;
+            	for (var i = 0; i < part.length; i++) {
+            		amount += part[i];
+            	};
+            	return amount;
+            },
+
+            getPrice: function(drugIndex, buildIndex) {
+                var drug = (game.production.list[drugIndex]).toLowerCase();
+            	var buildPrice = game.production.sell.getWhat(drugIndex, buildIndex, 'price');
+            	var buildInflation = game.production.sell.getWhat(drugIndex, buildIndex, 'inflation');
+            	var owned = window["game"]["production"]["sell"][drug + "Owned"][buildIndex];
+            	return (buildPrice * Math.pow(buildInflation, owned));
+            },
+
+            getReward: function(drugIndex, buildIndex) {
+                var buildReward = this.getWhat(drugIndex, buildIndex, 'reward');
+            	return buildReward;
+            },
+
+            display: function() {
+                for (var i = 0; i < game.production.list.length; i++) {
+            		var drug = (game.production.list[i]).toLowerCase();
+            		var forwhat = window["game"]["production"]["sell"][drug];
+
+            		for (var e = 0; e < forwhat.length; e++) {
+            			var html = {
+            				name: forwhat[e].name,
+            				owned: window["game"]["production"]["sell"][drug + "Owned"],
+            				reward: this.getReward(i, e),
+            				price: this.getPrice(i, e)
+            			};
+
+            			$("#selling-" + drug + "-" + (e+1)).html(html.name + '<span>' + html.owned[e] + ' owned</span><br>Sell ' + fix(html.reward, 2) + 'g/sec' + '<span>$' + fix(html.price, 2) + '</span>');
+            		};
+            	};
+            },
+
+            run: function(times) {
+                if (!game.options.pause) {
+            		for (var i = 0; i < game.production.list.length; i++) {
+            			var drugPrice = game.production.getDrugReward(i);
+            			var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
+            			var canSell = ((game.production.prod.getDrugPerSec(i) * times) / game.options.fps);
+            			var gain = (canSell * drugPrice);
+
+            			if (sold > canSell) {
+            				sold = game.production.stock[i];
+            			} else {
+            				if (i == 0)
+            					gain = (sold * drugPrice) * 2;
+            				else
+            					gain = (sold * drugPrice);
+            			};
+
+            			game.production.stock[i] -= sold;
+            			game.gainMoney(gain);
+            		};
+            	};
+            },
+
+            buy: function(drugIndex, buildIndex) {
+                var price = this.getPrice(drugIndex, buildIndex);
+            	if (game.money >= price) {
+            		game.money -= price;
+            		var drug = (game.production.list[drugIndex]).toLowerCase();
+            		window["game"]["production"]["sell"][drug + "Owned"][buildIndex]++;
+            		window["game"]["production"]["sell"][drug + "PerSec"][buildIndex] += this.getReward(drugIndex, buildIndex);
+            		this.display();
+            	};
+            }
 		},
 
         getDrugReward: function(drugIndex) {
@@ -116,6 +206,7 @@ define([], function() {
 
         display: function() {
             this.prod.display();
+            this.sell.display();
         },
 
         displayDrugs: function() {
@@ -138,6 +229,7 @@ define([], function() {
 
         run: function(times) {
             this.prod.run(times);
+            this.sell.run(times);
         },
 
         varInit: function() {
