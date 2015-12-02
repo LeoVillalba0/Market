@@ -215,15 +215,16 @@ define([], function() {
                 var forwhat = window["game"]["production"]["prod"][drug];
 
                 for (var e = 0; e < forwhat.length; e++) {
-                    var html = {
-                        name: this.list[i],
-                        stock: this.stock[i],
-                        plus: this.prod.getDrugPerSec(i),
-                        price: this.getDrugReward(i)
-                    };
+        			var html = {
+        				name: this.list[i],
+        				stock: this.stock[i],
+        				plus: this.prod.getDrugPerSec(i),
+        				minus: this.sell.getDrugPerSec(i),
+        				price: this.getDrugReward(i)
+        			};
 
-                    $("#" + drug + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; - TODO g/s)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>");
-                };
+        			$("#" + drug + "-stock").html(html.name + ": " + fix(html.stock, 2) + "g<br><small>(+" + fix(html.plus, 3) + "g/s ; -" + fix(html.minus, 3) + "g/s)</small><br>" + "<small>($" + fix(html.price, 2) + "/g)</small>")
+        		};
             };
         },
 
