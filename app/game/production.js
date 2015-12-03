@@ -7,6 +7,7 @@ define([], function() {
         stock: new Array(),
         invested: false,
         investPrice: 15e11,
+        alert: [false, false, false],
 
         prod: {
             weed: new Array(),
@@ -70,8 +71,10 @@ define([], function() {
             run: function(times) {
                 if (!game.options.pause) {
             		for (var i = 0; i < game.production.list.length; i++) {
-            			var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
-            			window["game"]["production"]["stock"][i] += gain;
+                        if (!game.production.alert[i]) {
+                			var gain = ((this.getDrugPerSec(i) * times) / game.options.fps)
+                			window["game"]["production"]["stock"][i] += gain;
+                        };
             		};
             	};
             },
@@ -142,6 +145,20 @@ define([], function() {
             	return buildReward;
             },
 
+            getSellAllPrice: function(drugIndex) {
+                var sellPrice = game.production.getDrugReward(drugIndex);
+                var newPrice = (25 * sellPrice) / 100;
+                return newPrice;
+            },
+
+            sellAll: function(drugIndex) {
+                var sellPrice = game.production.getDrugReward(drugIndex);
+                var newPrice = (25 * sellPrice) / 100;
+                var sold = newPrice * game.production.stock[drugIndex];
+                game.production.stock[drugIndex] = 0;
+                game.gainMoney(sold);
+            },
+
             display: function() {
                 for (var i = 0; i < game.production.list.length; i++) {
             		var drug = (game.production.list[i]).toLowerCase();
@@ -163,22 +180,48 @@ define([], function() {
             run: function(times) {
                 if (!game.options.pause) {
             		for (var i = 0; i < game.production.list.length; i++) {
+                        var drug = (game.production.list[i]).toLowerCase();
             			var drugPrice = game.production.getDrugReward(i);
             			var sold = ((this.getDrugPerSec(i) * times) / game.options.fps);
             			var canSell = ((game.production.prod.getDrugPerSec(i) * times) / game.options.fps);
             			var gain = (canSell * drugPrice);
 
-            			if (sold > canSell) {
-            				sold = game.production.stock[i];
-            			} else {
-            				if (i == 0)
-            					gain = (sold * drugPrice) * 2;
-            				else
-            					gain = (sold * drugPrice);
-            			};
+                        if (game.production.alert[i] == false) {
+                            if (sold > canSell) {
+                                game.production.alert[i] = "notify";
+                                if (game.production.alert[i] == "notify") {
+                                    notify.pop("alert", "<b>Production warning :</b> you sell more " + drug + " than you can produce, selling for " + drug + " is disabled until you can sell as much as you produce.");
+                                    game.production.alert[i] = true;
+                                };
+                            };
+                            if (sold <= canSell) {
+                                gain = (sold * drugPrice);
+                                game.production.stock[i] -= sold;
+                                game.gainMoney(gain);
+                            };
+                        } else {
+                            if (sold <= canSell) {
+                                notify.pop("success", "<b>Production news:</b> you now produce enough " + drug + " to sell it.");
+                                game.production.alert[i] = false;
+                            };
+                        };
 
-            			game.production.stock[i] -= sold;
-            			game.gainMoney(gain);
+                        /*if (game.production.alert) {
+                            if (canSell < sold) {
+                                game.production.alert = false;
+                            };
+                        } else {
+                            if (sold > canSell) {
+                                if (!game.production.alert) {
+                                    notify.pop("alert", "<b>Production warning :</b> you sell more than you can produce, selling is disabled until you can sell as much as you produce.");
+                                    game.production.alert = true;
+                                };
+                            } else {
+                				gain = (sold * drugPrice);
+                                game.production.stock[i] -= sold;
+                                game.gainMoney(gain);
+                			};
+                        };*/
             		};
             	};
             },
@@ -307,15 +350,26 @@ define([], function() {
         },
 
         domInit: function() {
-            for (var i = 0; i < game.production.list.length; i++) {
-        		var drug = (game.production.list[i]).toLowerCase();
-        		var forwhat = window["game"]["production"]["prod"][drug];
+            $("#production-invest").attr('onclick', 'game.production.invest();');
 
-        		for (var e = 0; e < forwhat.length; e++) {
-        			$("#production-" + drug + "-" + (e+1)).attr('onclick', 'game.production.prod.buy(' + i + ',' + e + ');');
-        			$("#selling-" + drug + "-" + (e+1)).attr('onclick', 'game.production.sell.buy(' + i + ',' + e + ');');
-        		};
-        	};
+            if (this.invested) {
+                $("#production-locked").css('display', 'none');
+                $("#production-unlocked").css('display', 'block');
+            };
+
+            for (var i = 0; i < game.production.list.length; i++) {
+                var sellAllPrice = this.sell.getSellAllPrice(i);
+                var drug = (game.production.list[i]).toLowerCase();
+                var forwhat = window["game"]["production"]["prod"][drug];
+
+                $("#" + drug + '-sellall').attr('onclick', 'game.production.sell.sellAll(' + i + ');');
+                $("#" + drug + '-sellall').html("Sell " + drug + " stock :<br>$" + fix(sellAllPrice, 0) + "/g")
+
+                for (var e = 0; e < forwhat.length; e++) {
+                    $("#production-" + drug + "-" + (e+1)).attr('onclick', 'game.production.prod.buy(' + i + ',' + e + ');');
+                    $("#selling-" + drug + "-" + (e+1)).attr('onclick', 'game.production.sell.buy(' + i + ',' + e + ');');
+                };
+            };
 
             this.display();
         },

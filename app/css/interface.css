@@ -15,9 +15,9 @@ a { color: inherit; text-decoration: inherit !important }
 
 .btn,
 .btn:hover { transition: all 100ms; }
-.row { margin-bottom: 15px; }
+.row { margin-bottom: 10px; }
 .well { padding: 16px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
-.panel { margin-bottom: 10px; }
+.panel { margin-bottom: 0px; }
 
 .notify { position: absolute; top: 70px; right: 30px; width: 350px; border-radius: 4px; opacity: 0.95; color: white; }
 
@@ -57,8 +57,8 @@ a { color: inherit; text-decoration: inherit !important }
 .list-group-item.achievement { cursor: default !important; }
 
 .well.production { padding-bottom: 0; }
-.production.well.container h1 { font-size: 24px; }
-.production.well.container h2 { font-size: 20px; }
+.production.well.container h1 { font-size: 22px; }
+.production.well.container h2 { font-size: 18px; }
 
 .help h1 { font-size: 28px; margin: 15px 0; }
 .help h2 { font-size: 18px; margin: 8px 0; }
