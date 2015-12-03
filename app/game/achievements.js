@@ -53,7 +53,7 @@ define([], function() {
 
             var name = window["game"]["achievements"][part]["list"][index]["name"];
             var effect = window["game"]["achievements"][part]["list"][index]["desc2"];
-            notify.pop("<strong>Achievement earned :</strong> " + name + "<br><strong>" + effect + "</strong>");
+            notify.pop("success", "<strong>Achievement earned :</strong> " + name + "<br><strong>" + effect + "</strong>");
         },
 
         loop: function() {
