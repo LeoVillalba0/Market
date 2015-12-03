@@ -1,7 +1,5 @@
 define([], function() {
     var notify = {
-        autoclose: 15000,
-
         close: function() {
             $("#notify-div").fadeOut("slow");
         },
@@ -23,7 +21,7 @@ define([], function() {
             $("#notify-div").fadeIn("slow", function() {
                 window.setTimeout(function() {
                     $("#notify-div").fadeOut("slow");
-                }, this.autoclose);
+                }, 15000);
             });
         },
 
