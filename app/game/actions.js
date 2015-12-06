@@ -12,6 +12,7 @@ define([], function() {
 		time: [1.5, 3, 6, 12, 24, 96, 384, 1536, 6144],
 		timeMultiplier: new Array(),
 		totalTimeMultiplier: 1,
+        buy: 1,
 
         getTime: function(index) {
             return ((this.time[index] / this.timeMultiplier[index]) / this.totalTimeMultiplier);
@@ -35,8 +36,25 @@ define([], function() {
         	return (reward / time);
         },
 
+        multiplier: function() {
+            switch (this.buy) {
+                case 1:
+                this.buy = 10;
+                    break;
+                case 10:
+                this.buy = 100;
+                    break;
+                case 100:
+                this.buy = 1000;
+                    break;
+                case 1000:
+                this.buy = 1;
+                    break;
+            };
+            this.display();
+        },
+
         upgrade: function(index) {
-            var price = this.getPrice(index);
         	if (game.money >= price) {
         		game.money -= price;
         		this.owned[index]++;
@@ -83,6 +101,8 @@ define([], function() {
         		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec");
         		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
+
+            $("#action-buy-button").html("Buy x" + this.buy);
         },
 
         varInit: function() {
