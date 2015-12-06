@@ -1,15 +1,15 @@
 define([], function() {
     var actions = {
-        list: ["Shooting", "Street fight", "Pickpocket", "Scam", "Steal car", "Jewelry robbery", "Hacking", "Arms sales"],
-		inflation: [1.10, 1.11, 1.12, 1.13, 1.13, 1.12, 1.11, 1.10],
+        list: ["Shooting", "Fight club", "Pickpocket", "Scam", "Car theft", "Theft of jewels", "Hacking", "Arms sales", "Drugs sales"],
+		inflation: [1.07, 1.14, 1.13, 1.12, 1.11, 1.10, 1.09, 1.08, 1.07],
 		progress: new Array(),
 		owned: new Array(),
-		price: [2.5, 85, 1997, 49941, 1103113, 25923155, 777694650, 33052022625],
+		price: [4, 92, 2116, 48668, 1119364, 25745372, 592143556, 13619301788, 313243941124],
 		pricePromo: new Array(),
-		reward: [0.32, 34, 798, 19976, 441245, 10369262, 311077860, 13220809050],
+		reward: [1, 23, 529, 12167, 279841, 6436343, 148035889, 3404825447, 78310985281],
 		rewardMultiplier: new Array(),
 		totalRewardMultiplier: 1,
-		time: [2.5, 7.5, 22.5, 67.5, 202.5, 607.5, 1822.5, 5437.5],
+		time: [1.5, 3, 6, 12, 24, 96, 384, 1536, 6144],
 		timeMultiplier: new Array(),
 		totalTimeMultiplier: 1,
 
