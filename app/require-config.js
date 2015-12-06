@@ -18,6 +18,7 @@ requirejs.config({
         'achievements': 'app/game/achievements',
         'production': 'app/game/production',
         'prestige': 'app/game/prestige',
+        'gangs': 'app/game/gangs',
         'save': 'app/game/save'
     },
 
