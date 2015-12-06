@@ -144,7 +144,15 @@ define([], function() {
         		new this.create("Arms dealers IV", 7, "Arms sales at level 200", "Arms sales speed x2", "actions", "owned[7]", 200, "timeMultiplier[7]", "*2"),
         		new this.create("Arms dealers V", 7, "Arms sales at level 300", "Arms sales speed x2", "actions", "owned[7]", 300, "timeMultiplier[7]", "*2"),
         		new this.create("Arms dealers VI", 7, "Arms sales at level 400", "Arms sales speed x2", "actions", "owned[7]", 400, "timeMultiplier[7]", "*2"),
-        		new this.create("Arms dealers VII", 7, "Arms sales at level 500", "Arms sales reward x3", "actions", "owned[7]", 500, "rewardMultiplier[7]", "*3")
+        		new this.create("Arms dealers VII", 7, "Arms sales at level 500", "Arms sales reward x3", "actions", "owned[7]", 500, "rewardMultiplier[7]", "*3"),
+
+                new this.create("Mafia I", 8, "Arms sales at level 25", "Arms sales speed x2", "actions", "owned[8]", 25, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia II", 8, "Arms sales at level 50", "Arms sales speed x2", "actions", "owned[8]", 50, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia III", 8, "Arms sales at level 100", "Arms sales speed x2", "actions", "owned[8]", 100, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia IV", 8, "Arms sales at level 200", "Arms sales speed x2", "actions", "owned[8]", 200, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia V", 8, "Arms sales at level 300", "Arms sales speed x2", "actions", "owned[8]", 300, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia VI", 8, "Arms sales at level 400", "Arms sales speed x2", "actions", "owned[8]", 400, "timeMultiplier[8]", "*2"),
+        		new this.create("Mafia VII", 8, "Arms sales at level 500", "Arms sales reward x3", "actions", "owned[8]", 500, "rewardMultiplier[8]", "*3")
         	];
 
             for (var i = 0; i < this.actions.list.length; i++) {

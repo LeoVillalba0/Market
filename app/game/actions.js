@@ -1,7 +1,7 @@
 define([], function() {
     var actions = {
-        list: ["Shooting", "Fight club", "Pickpocket", "Scam", "Car theft", "Theft of jewels", "Hacking", "Arms sales", "Drugs sales"],
-		inflation: [1.07, 1.14, 1.13, 1.12, 1.11, 1.10, 1.09, 1.08, 1.07],
+        list: ["Shooting", "Fight Club", "Pickpocket", "Scam", "Car Theft", "Theft of Jewels", "Hacking", "Arms Sales", "Drugs Sales"],
+		inflation: [1.09, 1.15, 1.15, 1.14, 1.13, 1.12, 1.11, 1.10, 1.09],
 		progress: new Array(),
 		owned: new Array(),
 		price: [4, 92, 2116, 48668, 1119364, 25745372, 592143556, 13619301788, 313243941124],
@@ -42,8 +42,8 @@ define([], function() {
         		this.owned[index]++;
                 game.achievements.loop();
         		$("#action-upgrade-" + (index+1)).html("Upgrade");
+                this.display();
         	};
-        	this.display();
         },
 
         run: function(times) {
@@ -69,7 +69,7 @@ define([], function() {
         				$("#action-progress-" + (i+1)).css('width', width + '%');
         				$("#action-progress-" + (i+1) + "-info").html(Math.floor(width) + "%");
         			};
-        		}
+        		};
         	};
         },
 
