@@ -45,23 +45,40 @@ define([], function() {
                 this.buy = 100;
                     break;
                 case 100:
-                this.buy = 1000;
+                this.buy = 250;
                     break;
-                case 1000:
+                case 250:
                 this.buy = 1;
                     break;
             };
+
             this.display();
         },
 
         upgrade: function(index) {
-        	if (game.money >= price) {
-        		game.money -= price;
-        		this.owned[index]++;
-                game.achievements.loop();
-        		$("#action-upgrade-" + (index+1)).html("Upgrade");
-                this.display();
-        	};
+            var price = this.getPrice(index);
+            var buy = this.buy;
+
+            if (buy > 1) {
+                for (var i = 0; i < buy; i++)
+                    this.upgradeOnce(index);
+            }
+            else
+                this.upgradeOnce(index);
+        },
+
+        upgradeOnce: function(index) {
+            var price = this.getPrice(index);
+
+            if (game.money < price)
+                return;
+            else {
+                game.money -= price;
+                this.owned[index]++;
+            };
+            this.display();
+            game.achievements.loop();
+            $("#action-upgrade-" + (index+1)).html("Upgrade");
         },
 
         run: function(times) {
@@ -93,16 +110,33 @@ define([], function() {
 
         display: function() {
             for (var i = 0; i < this.list.length; i++) {
-        		var price = this.getPrice(i);
+        		var price = this.displayPrice(i);
         		var reward = this.getReward(i);
         		var time = this.getTime(i);
         		var perSec = this.getPerSec(i);
+                var totalPrice = this.displayPrice(i);
+
         		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
         		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec");
         		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
 
             $("#action-buy-button").html("Buy x" + this.buy);
+        },
+
+        displayPrice: function(i) {
+            var amount = this.buy;
+            var owned = this.owned[i];
+            var totalPrice = 0;
+            var totalOwned = amount + this.owned[i];
+
+            while (totalOwned > owned) {
+                amount--;
+                totalOwned = amount + owned;
+                totalPrice += (this.price[i] * Math.pow(this.inflation[i], totalOwned));;
+            };
+
+            return totalPrice;
         },
 
         varInit: function() {
