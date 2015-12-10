@@ -12,7 +12,14 @@ define([], function() {
 		time: [1.5, 3, 6, 12, 24, 96, 384, 1536, 6144],
 		timeMultiplier: new Array(),
 		totalTimeMultiplier: 1,
+        reputation: [1, 3, 9, 27, 81, 243, 729, 2187, 6561],
+        reputationDivider: 6,
+        currentRep: new Array(),
         buy: 1,
+
+        getRep: function(index) {
+            return (this.reputation[index] / this.reputationDivider) * Math.pow(1.01, this.owned[index]);
+        },
 
         getTime: function(index) {
             return ((this.time[index] / this.timeMultiplier[index]) / this.totalTimeMultiplier);
@@ -88,21 +95,40 @@ define([], function() {
         				var fps = game.options.fps;
         				var time = this.getTime(i);
         				var reward = this.getReward(i);
+                        var rep = this.getRep(i);
 
         				this.progress[i] += times/fps;
         				game.gainMoney(Math.floor(this.progress[i]/time) * reward);
+                        this.currentRep[i] += (Math.floor(this.progress[i] / time) * rep);
+
+                        if (Math.floor(this.progress[i] / time) == 1) {
+                            this.display();
+                        };
 
         				this.progress[i] %= time;
-
         				var width = ((this.progress[i]/time) * 100);
+                        var repWidth = ((this.currentRep[i] / this.reputation[i]) * 100);
 
-        				if (time < 0.15)
+        				if (time < 0.15) {
         					width = 100;
+                        };
+
+                        if (this.currentRep[i] >= this.reputation[i]) {
+                            while (this.currentRep[i] >= this.reputation[i]) {
+                                this.currentRep[i] -= this.reputation[i];
+                                game.reputation += this.reputation[i];
+                                game.repLevelUp();
+                            };
+                            this.display();
+                        };
 
         				width = Math.max(width, 1);
+                        repWidth = Math.max(repWidth, 1);
 
         				$("#action-progress-" + (i+1)).css('width', width + '%');
         				$("#action-progress-" + (i+1) + "-info").html(Math.floor(width) + "%");
+                        $("#action-progress-" + (i+1) + "-rep").css('width', repWidth + '%');
+                        $("#action-progress-" + (i+1) + "-rep-info").html(Math.floor(repWidth) + "%");
         			};
         		};
         	};
@@ -115,9 +141,11 @@ define([], function() {
         		var time = this.getTime(i);
         		var perSec = this.getPerSec(i);
                 var totalPrice = this.displayPrice(i);
+                var currep = this.currentRep[i];
+                var maxrep = this.reputation[i];
 
         		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
-        		$("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" + fix(time) + " sec");
+                $("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>Rep. " + fix(currep, 0) + "/" + fix(maxrep, 0) +"<br>" + fix(time) + " sec.");
         		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
 
@@ -147,6 +175,7 @@ define([], function() {
         		this.pricePromo.push(0);
         		this.owned.push(0);
         		this.owned[0] = 1;
+                this.currentRep.push(0);
             };
         },
 
