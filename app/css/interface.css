@@ -19,7 +19,7 @@ a { color: inherit; text-decoration: inherit !important }
 .well { padding: 16px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
 .panel { margin-bottom: 0px; }
 
-.notify { position: absolute; top: 70px; right: 30px; width: 350px; border-radius: 4px; opacity: 0.95; color: white; }
+.notify { position: absolute; top: 70px; right: 30px; width: 350px; border-radius: 4px; opacity: 0.9; color: white; }
 
 .row .panel .panel-heading { text-align: center; background-color: #375a7f; color: #fff; font-size: 18px }
 .row .panel .panel-heading a:hover,
