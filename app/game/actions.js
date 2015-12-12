@@ -105,8 +105,9 @@ define([], function() {
         				var width = ((this.progress[i]/time) * 100);
                         var repWidth = ((this.currentRep[i] / this.reputation[i]) * 100);
 
-        				if (time < 0.15) {
+        				if (time < 0.20) {
         					width = 100;
+                            repWidth = 100;
                         };
 
                         if (this.currentRep[i] >= this.reputation[i]) {
@@ -140,9 +141,9 @@ define([], function() {
                 var currep = this.currentRep[i];
                 var maxrep = this.reputation[i];
 
-        		$("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
+                $("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
                 $("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>Rep. " + fix(currep, 0) + "/" + fix(maxrep, 0) +"<br>" + fix(time) + " sec.");
-        		$("#action-cost-" + (i+1)).html("Cost $" + fix(price));
+                $("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
 
             $("#action-buy-button").html("Buy x" + this.buy);

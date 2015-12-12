@@ -55,7 +55,7 @@ define([], function() {
 
         reset: function(yes, no) {
             $("#options-reset").html("Really want to hard-reset?");
-            $("#options-yes, #options-no").fadeIn('slow');
+            $("#options-yes, #options-no").show();
 
             if (yes) {
                 localStorage.removeItem((this.name + this.salt));
@@ -65,7 +65,7 @@ define([], function() {
 
             if (no) {
                 $("#options-reset").html("Hard-reset");
-                $("#options-yes, #options-no").fadeOut('slow');
+                $("#options-yes, #options-no").hide();
             };
         },
 

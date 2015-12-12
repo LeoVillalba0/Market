@@ -22,6 +22,11 @@ define([], function() {
 
         togglePause: function() {
             this.options.pause = !this.options.pause;
+
+            if (this.options.pause)
+                notify.pop("alert", "<strong>Game paused...</strong>");
+            else
+                notify.pop("alert", "<strong>Game un-paused.</strong>");
         },
 
         gainMoney: function(amount) {
