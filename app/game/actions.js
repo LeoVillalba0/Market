@@ -5,7 +5,6 @@ define([], function() {
 		progress: new Array(),
 		owned: new Array(),
 		price: [4, 92, 2116, 48668, 1119364, 25745372, 592143556, 13619301788, 313243941124],
-		pricePromo: new Array(),
 		reward: [1, 23, 529, 12167, 279841, 6436343, 148035889, 3404825447, 78310985281],
 		rewardMultiplier: new Array(),
 		totalRewardMultiplier: 1,
@@ -30,11 +29,8 @@ define([], function() {
         },
 
         getPrice: function(index) {
-            var initial = (this.price[index] * Math.pow(this.inflation[index], this.owned[index]));
-        	if (this.pricePromo[index] > 0)
-        		return (initial * (this.pricePromo[index] / 100));
-        	else
-        		return initial;
+            var price = (this.price[index] * Math.pow(this.inflation[index], this.owned[index]));
+        	return price;
         },
 
         getPerSec: function(index) {
@@ -172,7 +168,6 @@ define([], function() {
                 this.progress.push(0);
         		this.rewardMultiplier.push(1);
         		this.timeMultiplier.push(1);
-        		this.pricePromo.push(0);
         		this.owned.push(0);
         		this.owned[0] = 1;
                 this.currentRep.push(0);
