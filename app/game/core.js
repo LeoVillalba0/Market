@@ -12,7 +12,6 @@ define([], function() {
             firstTime: true,
             pause: false,
             before: new Date().getTime(),
-            after: new Date().getTime(),
             now: new Date().getTime(),
             version: 0.001
         },
@@ -75,6 +74,7 @@ define([], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {
+                        game.save.load();
                         log("Save.js end init");
 
                         require(['angular'], function() {

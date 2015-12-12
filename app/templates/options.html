@@ -1,19 +1,25 @@
 <div class="container small well options">
     <div class="row">
         <div class="col-xs-4 col-md-4">
-            <a class="btn btn-primary btn-block">Save-game</a>
+            <a class="btn btn-primary btn-block" onclick="game.save.save('user');">Save-game</a>
         </div>
         <div class="col-xs-4 col-md-4">
-            <a class="btn btn-success btn-block">Load-game</a>
+            <a class="btn btn-success btn-block" onclick="game.save.load();">Load-game</a>
         </div>
         <div class="col-xs-4 col-md-4">
-            <a class="btn btn-danger btn-block">Hard-reset</a>
+            <a id="options-reset" class="btn btn-danger btn-block" onclick="game.save.reset();">Hard-reset</a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4">
+        <div class="col-xs-4 col-sm-4 col-md-4">
             <a class="btn btn-info btn-block" onclick="game.togglePause();">Toggle pause</a>
+        </div>
+        <div class="col-md-offset-4 col-md-2">
+            <a id="options-yes" class="btn btn-warning btn-block" onclick="game.save.reset(true, false);" style="display: none;">Yes</a>
+        </div>
+        <div class="col-md-2">
+            <a id="options-no" class="btn btn-warning btn-block" onclick="game.save.reset(false, true);" style="display: none;">No</a>
         </div>
     </div>
 </div>
