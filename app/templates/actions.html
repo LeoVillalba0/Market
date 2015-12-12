@@ -1,167 +1,36 @@
-<div class="container small well" ng-init="init()">
+<div class="container well actions">
     <div class="row">
-        <div class="col-md-12">
-            <div class="action row">
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-1"></h1>
-                        <h2 id="action-info-1"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-1" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-1"></h3>
-                            </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-6 col-sm-6 col-md-4" ng-repeat="action in actions.action">
+                <div class="action-content">
+                    <h1 id="action-name-{{$index+1}}"></h1>
+                    <h2 id="action-info-{{$index+1}}"></h2>
+                    <div class="row">
+                        <div class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 col-md-4 col-md-offset-1">
+                            <a id="action-upgrade-{{$index+1}}" class="btn btn-primary btn-xs center-block">Upgrade</a>
                         </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-1" class="progress-bar progress-bar-success">
-                                <span id="action-nb-1"></span>
-                            </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <h3 id="action-cost-{{$index+1}}"></h3>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-2"></h1>
-                        <h2 id="action-info-2"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-2" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-2"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-2" class="progress-bar progress-bar-success">
-                                <span id="action-nb-2"></span>
-                            </div>
+                    <div class="progress progress-striped active mid-bar middle">
+                        <div id="action-progress-{{$index+1}}" class="progress-bar progress-bar-success">
+                            <span id="action-progress-{{$index+1}}-info"></span>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-3"></h1>
-                        <h2 id="action-info-3"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-3" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-3"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-3" class="progress-bar progress-bar-success">
-                                <span id="action-nb-3"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-4"></h1>
-                        <h2 id="action-info-4"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-4" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-4"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-4" class="progress-bar progress-bar-success">
-                                <span id="action-nb-4"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-5"></h1>
-                        <h2 id="action-info-5"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-5" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-5"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-5" class="progress-bar progress-bar-success">
-                                <span id="action-nb-5"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-6"></h1>
-                        <h2 id="action-info-6"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-6" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-6"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-6" class="progress-bar progress-bar-success">
-                                <span id="action-nb-6"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-7"></h1>
-                        <h2 id="action-info-7"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-7" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-7"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-7" class="progress-bar progress-bar-success">
-                                <span id="action-nb-7"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="action-content">
-                        <h1 id="action-name-8"></h1>
-                        <h2 id="action-info-8"></h2>
-                        <div class="row">
-                            <div class="col-md-3 col-md-offset-2">
-                                <a id="action-upgrade-8" class="btn btn-primary btn-xs center-block">Upgrade</a>
-                            </div>
-                            <div class="col-md-5">
-                                <h3 id="action-cost-8"></h3>
-                            </div>
-                        </div>
-                        <div class="progress progress-striped active mid-bar middle">
-                            <div id="action-progress-8" class="progress-bar progress-bar-success">
-                                <span id="action-nb-8"></span>
-                            </div>
+                    <div class="progress progress-striped active mid-bar middle">
+                        <div id="action-progress-{{$index+1}}-rep" class="progress-bar progress-bar-info">
+                            <span id="action-progress-{{$index+1}}-rep-info"></span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-10 col-sm-2 col-sm-offset-10 col-md-2 col-md-offset-10">
+            <a id="action-buy-button" class="btn btn-info btn-xs center-block" onclick="game.actions.multiplier();"></a>
         </div>
     </div>
 </div>

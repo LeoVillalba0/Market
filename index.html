@@ -7,26 +7,21 @@
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <title>Blackmarket-Reloaded</title>
 
-    <link rel="stylesheet" href="lib/bootswatch-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="lib/bootswatch-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/components-font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="app/css/interface.css">
 
-    <script src="lib/angular/js/angular.js"></script>
-    <script src="lib/angular-route/js/angular-route.js"></script>
-    <script src="lib/jquery/js/jquery.min.js"></script>
-    <script src="lib/bootswatch-dist/js/bootstrap.js"></script>
-
-    <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
-    <script src="app/js/app.js"></script>
-    <script src='app/js/kongregate.js'></script>
+    <script async src="lib/jquery/js/jquery.min.js"></script>
+    <script async data-main="app/require-config" src="lib/requirejs/js/require.min.js"></script>
 </head>
 
-<body ng-app="app">
+<body>
     <div class="sidebar">
         <h1>
-            Blackmarket<br>
-            Reloaded<br>
+            Blackmarket
+            <br> Reloaded
+            <br>
             <small>v0.001</small>
         </h1>
 
@@ -35,23 +30,21 @@
         <ul>
             <li><a href="#/"><i class="fa fa-hand-rock-o"></i> Actions</a></li>
             <li><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>
-            <li><a href="#/upgrades"><i class="ion-arrow-graph-up-right"></i> Upgrades</a></li>
             <li><a href="#/gangs"><i class="ion-ios-people"></i> Gangs</a></li>
+            <li><a href="#/research-center"><i class="ion-arrow-graph-up-right"></i> Research center</a></li>
             <li><a href="#/prestige"><i class="ion-android-star-outline"></i> Prestige</a></li>
             <li><a href="#/achievements"><i class="ion-ribbon-b"></i> Achievements</a></li>
-            <li><a href="#/notes"><i class="fa fa-pencil-square-o"></i> Patch-notes</a></li>
             <li><a href="#/help"><i class="fa fa-question-circle"></i> Help</a></li>
             <li><a href="#/options"><i class="fa fa-cog"></i> Options</a></li>
-            <!--<li><a href="#/kongregate"><img src="app/img/kong-favicon.png"> Kongregate</a></li>-->
         </ul>
     </div>
 
     <div class="pushed">
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand">$0.00</a>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile-extend">
+                    <a class="navbar-brand"></a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile-extend" onclick="sidebar.show()">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -67,37 +60,36 @@
             </div>
         </nav>
 
-        <div class="game-content" ng-view></div>
-    </div>
+        <div id="game-content" class="game-content" ng-view>
+            <style>
+                .spinner{width:40px;height:40px;position:relative;margin:100px auto}
+                .double-bounce1,.double-bounce2{width:100%;height:100%;border-radius:50%;background-color:#333;opacity:.6;position:absolute;top:0;left:0;-webkit-animation:sk-bounce 2s infinite ease-in-out;animation:sk-bounce 2s infinite ease-in-out}
+                .double-bounce2{-webkit-animation-delay:-1s;animation-delay:-1s}
+                @-webkit-keyframes sk-bounce {
+                0%,100%{-webkit-transform:scale(0.0)}
+                50%{-webkit-transform:scale(1.0)}
+                }
+                @keyframes sk-bounce {
+                0%,100%{transform:scale(0.0);-webkit-transform:scale(0.0)}
+                50%{transform:scale(1.0);-webkit-transform:scale(1.0)}
+                }
+            </style>
 
-    <div class="modal fade" id="newbie-modal" tabindex="-1" role="dialog" aria-labelledby="newbie-modal" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Welcome to Blackmarket-Reloaded!</h4>
-                </div>
+            <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
 
-                <div class="modal-body">
-                    <p>Hello, we recommend you to read this before starting to play.</p>
+            <h3 class="text-center">Loading Blackmarket-Reloaded...<br>It takes only a few seconds...</h3>
+        </div>
 
-                    <p>The game may be hard to understand at certain points, if you need help take a look at the <b>help tab</b>.</p>
-
-                    <p>Note that the game is actually in beta stage, so you can expect some bugs.</p>
-
-                    <p>I hope you will like Blackmarket-Reloaded which is my second biggest project, have fun!</p>
-                <div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="game.options.togglePause()">It's good, let me play!</button>
-                <div>
+        <div id="notify-div" class="notify" style="display: none;">
+            <div id="notify-prop" class="alert alert-success" role="alert">
+                <button type="button" class="close" onclick="notify.close()"><span>&times;</span></button>
+                <span id="notify-message"></span>
             </div>
         </div>
     </div>
-
-    <div class="kongdiv" style="visible: none; display: none;"></div>
-
-    <script src="app/js/beautify.js"></script>
-    <script src="app/js/sidebar.js"></script>
-    <script src="app/js/game.js"></script>
 </body>
 
 </html>
