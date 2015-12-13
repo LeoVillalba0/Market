@@ -10,7 +10,7 @@ define([], function() {
             fps: 20,
             interval: (1000/20),
             firstTime: true,
-            pause: false,
+            pause: true,
             before: new Date().getTime(),
             now: new Date().getTime(),
             version: 0.001
@@ -83,6 +83,10 @@ define([], function() {
                         log("Save.js end init");
 
                         require(['angular'], function() {
+                            if (localStorage.getItem((game.save.name + game.save.salt)) === null)
+                                game.options.before = new Date().getTime();
+                            game.options.pause = false;
+
                             log("Angular init.");
                         });
                     });
