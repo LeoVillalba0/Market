@@ -5,7 +5,7 @@ define([], function() {
             bought: new Array()
         },
 
-        create: function(name, desc, price, str, who, effect, type, upType) {
+        create: function(name, desc, price, str, who, effect, type) {
             this.name = name;
         	this.desc = desc;
         	this.price = price;
@@ -63,15 +63,24 @@ define([], function() {
 
         varInit: function() {
             this.actions.list = [
-                new this.create("Shooting I", "Shooting reward x3",                 25000, "rewardMultiplier", "0", "*3", 0, 0),
-                new this.create("Street fight I", "Street fight reward x3",         75000, "rewardMultiplier", "1", "*3", 0, 1),
-                new this.create("Pickpocket I", "Pickpocket reward x3",             150000, "rewardMultiplier", "2", "*3", 0, 2),
-                new this.create("Scammer I", "Scam reward x3",                      500000, "rewardMultiplier", "3", "*3", 0, 3),
-                new this.create("Steal car I", "Steal car reward x3",               2500000, "rewardMultiplier", "4", "*3", 0, 4),
-                new this.create("Jewelry robbery I", "Jewelry robbery reward x3",   10000000, "rewardMultiplier", "5", "*3", 0, 5),
-                new this.create("Hacking I", "Hacking reward x3",                   50000000, "rewardMultiplier", "6", "*3", 0, 6),
-                new this.create("Arms dealer I", "Arms sales reward x3",            100000000, "rewardMultiplier", "7", "*3", 0, 7),
-                new this.create("All actions I", "All actions reward x3",           250000000, "totalRewardMultiplier", "n", "*3", 8),
+                new this.create("Shooting I", "Shooting reward x3", 250000, "rewardMultiplier", "0", "*3", 0),
+                new this.create("Street fight I", "Street fight reward x3", 750000, "rewardMultiplier", "1", "*3", 0),
+                new this.create("Pickpocket I", "Pickpocket reward x3", 2500000, "rewardMultiplier", "2", "*3", 0),
+                new this.create("Scammer I", "Scam reward x3", 5000000, "rewardMultiplier", "3", "*3", 0),
+                new this.create("Steal car I", "Steal car reward x3", 25000000, "rewardMultiplier", "4", "*3", 0),
+                new this.create("Jewelry robbery I", "Jewelry robbery reward x3", 500000000, "rewardMultiplier", "5", "*3", 0),
+                new this.create("Hacking I", "Hacking reward x3", 10000000000, "rewardMultiplier", "6", "*3", 0),
+                new this.create("Arms dealer I", "Arms sales reward x3", 50000000000, "rewardMultiplier", "7", "*3", 0),
+                new this.create("All actions I", "All actions reward x3", 250000000000, "totalRewardMultiplier", "n", "*3", 0),
+                new this.create("Shooting II", "Shooting reward x3", 1000000000000, "rewardMultiplier", "0", "*3", 0),
+                new this.create("Street fight II", "Street fight reward x3", 25000000000000, "rewardMultiplier", "1", "*3", 0),
+                new this.create("Pickpocket II", "Pickpocket reward x3", 50000000000000, "rewardMultiplier", "2", "*3", 0),
+                new this.create("Scammer II", "Scam reward x3", 100000000000000, "rewardMultiplier", "3", "*3", 0),
+                new this.create("Steal car II", "Steal car reward x3", 750000000000000, "rewardMultiplier", "4", "*3", 0),
+                new this.create("Jewelry robbery II", "Jewelry robbery reward x3", 2500000000000000, "rewardMultiplier", "5", "*3", 0),
+                new this.create("Hacking II", "Hacking reward x3", 10000000000000000, "rewardMultiplier", "6", "*3", 0),
+                new this.create("Arms dealer II", "Arms sales reward x3", 20000000000000000, "rewardMultiplier", "7", "*3", 0),
+                new this.create("All actions II", "All actions reward x3", 75000000000000000, "totalRewardMultiplier", "n", "*3", 0)
             ];
 
             for (var i = 0; i < this.actions.list.length; i++) {
@@ -81,8 +90,14 @@ define([], function() {
 
         domInit: function() {
             for (var i = 0; i < this.actions.list.length; i++) {
+                var height = $("body").height();
+
                 $("#research-actions").append('<li id="research-actions-upgrade-' + (i+1) + '" class="list-group-item"></li>');
-        		$("#research-actions-upgrade-" + (i+1)).attr('onclick', 'game.research.buy(0, ' + i + ');');
+                $("#research-actions-upgrade-" + (i+1)).attr('onclick', 'game.research.buy(0, ' + i + ');');
+                $("#research-actions").css({
+                    'max-height': height + 'px',
+                    'overflow-y': 'auto'
+                });
             };
 
             this.display();
