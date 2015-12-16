@@ -205,23 +205,6 @@ define([], function() {
                                 game.production.alert[i] = false;
                             };
                         };
-
-                        /*if (game.production.alert) {
-                            if (canSell < sold) {
-                                game.production.alert = false;
-                            };
-                        } else {
-                            if (sold > canSell) {
-                                if (!game.production.alert) {
-                                    notify.pop("alert", "<b>Production warning :</b> you sell more than you can produce, selling is disabled until you can sell as much as you produce.");
-                                    game.production.alert = true;
-                                };
-                            } else {
-                				gain = (sold * drugPrice);
-                                game.production.stock[i] -= sold;
-                                game.gainMoney(gain);
-                			};
-                        };*/
             		};
             	};
             },
