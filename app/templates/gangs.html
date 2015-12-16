@@ -1,8 +1,50 @@
 <div class="container well gangs">
-    <div class="row">
-        <div class="col-xs-12 col-md-offset-2 col-md-8">
-            <h1 class="text-center">Gangs area : WIP (work in progress).</h1>
-            <h2 class="text-center">You will be able to create your own gang, hire gangsters and fight against other gangs! Your ultimate achievement here is to take the full control of the country!</h2>
+    <div id="gang-locked">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-2 col-md-8">
+                <h1 class="text-center">Gangs area :</h1>
+                <h2 class="text-center">To unlock gangs, you need to invest $25.000q.</h2>
+                <h2 class="text-center">
+                    With gangs you can take the full control of your city, your country and also of the world!<br>
+                    Manage your gang members and destroy others gangs!
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <a id="production-invest" class="btn btn-success btn-block" onclick="game.gangs.invest();">Invest some $$$</a>
+            </div>
         </div>
     </div>
+
+    <div id="gang-creation" style="display: none;">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-2 col-md-8">
+                <h1 class="text-center">Gang creation :</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="gang-nameit" class="form-control" placeholder="Name your gang...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="">
+                                <i class="fa fa-random"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <p class="text-center">Gang name must be at least 3 letters.</p>
+            </div>
+
+            <div class="col-md-3">
+                <a class="btn btn-success btn-block" onclick="game.gangs.nameit();">Confirm gang creation</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="gang-content" style="display: none;"></div>
 </div>
