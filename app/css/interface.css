@@ -98,3 +98,5 @@ a { color: inherit; text-decoration: inherit !important }
 .progress.middle { margin: 0 auto 5px; }
 .progress-bar { -webkit-transition: none; transition: none; -o-transition: none; -moz-transition: none }
 .progress span { line-height: 14px; font-size: 12px }
+
+.really { cursor: default; }
