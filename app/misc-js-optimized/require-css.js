@@ -1,0 +1,1 @@
+define([],function(){var e={load:function(e){var t=document.createElement("link");t.type="text/css",t.rel="stylesheet",t.href=e,document.getElementsByTagName("head")[0].appendChild(t)},loadAll:function(){for(var e in this.toLoad){var t=this.toLoad[e];this.load(t)}},init:function(){this.loadAll(),window.requirecss=e},toLoad:{}};return e.init()});

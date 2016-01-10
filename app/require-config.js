@@ -6,11 +6,17 @@ requirejs.config({
         'angular-route': 'lib/angular-route/js/angular-route.min',
         'angularAMD': 'lib/angularAMD/js/angularAMD.min',
 
-        'require-css': 'app/misc-js/require-css',
-        'sidebar': 'app/misc-js/sidebar',
-        'beautify': 'app/misc-js/beautify',
-        'notify': 'app/misc-js/notify',
         'angularApp': 'app/angularApp',
+
+        // 'require-css': 'app/misc-js/require-css',
+        // 'sidebar': 'app/misc-js/sidebar',
+        // 'beautify': 'app/misc-js/beautify',
+        // 'notify': 'app/misc-js/notify',
+
+        'require-css': 'app/misc-js-optimized/require-css',
+        'sidebar': 'app/misc-js-optimized/sidebar',
+        'beautify': 'app/misc-js-optimized/beautify',
+        'notify': 'app/misc-js-optimized/notify',
 
         // 'core': 'app/game/core',
         // 'actions': 'app/game/actions',

@@ -1,3 +1,4 @@
+// r.js.cmd -o app/build-game.js
 ({
     appDir: "./game",
     baseUrl: ".",
