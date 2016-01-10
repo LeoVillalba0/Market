@@ -1,28 +1,38 @@
 define([], function() {
     var notify = {
+        activated: true,
+
         close: function() {
             $("#notify-div").fadeOut("slow");
         },
 
+        toggle: function() {
+            this.activated = !this.activated;
+        },
+
         pop: function(type, message) {
-            switch (type) {
-                case "alert":
-                $("#notify-prop").removeClass();
-                $("#notify-prop").addClass("alert alert-warning");
+            if (this.activated) {
+                switch (type) {
+                    case "alert":
+                    $("#notify-prop").removeClass();
+                    $("#notify-prop").addClass("alert alert-warning");
                     break;
 
-                case "success":
-                $("#notify-prop").removeClass();
-                $("#notify-prop").addClass("alert alert-success");
+                    case "success":
+                    $("#notify-prop").removeClass();
+                    $("#notify-prop").addClass("alert alert-success");
                     break;
+                };
+
+                $("#notify-message").html(message);
+                $("#notify-div").fadeIn("slow", function() {
+                    window.setTimeout(function() {
+                        $("#notify-div").fadeOut("slow");
+                    }, 15000);
+                });
+            } else {
+                return;
             };
-
-            $("#notify-message").html(message);
-            $("#notify-div").fadeIn("slow", function() {
-                window.setTimeout(function() {
-                    $("#notify-div").fadeOut("slow");
-                }, 15000);
-            });
         },
 
         init: function() {

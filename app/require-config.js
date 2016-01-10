@@ -12,14 +12,23 @@ requirejs.config({
         'notify': 'app/misc-js/notify',
         'angularApp': 'app/angularApp',
 
-        'core': 'app/game/core',
-        'actions': 'app/game/actions',
-        'research-center': 'app/game/research-center',
-        'achievements': 'app/game/achievements',
-        'production': 'app/game/production',
-        'prestige': 'app/game/prestige',
-        'gangs': 'app/game/gangs',
-        'save': 'app/game/save'
+        // 'core': 'app/game/core',
+        // 'actions': 'app/game/actions',
+        // 'research-center': 'app/game/research-center',
+        // 'achievements': 'app/game/achievements',
+        // 'production': 'app/game/production',
+        // 'prestige': 'app/game/prestige',
+        // 'gangs': 'app/game/gangs',
+        // 'save': 'app/game/save'
+
+        'core': 'app/game-optimized/core',
+        'actions': 'app/game-optimized/actions',
+        'research-center': 'app/game-optimized/research-center',
+        'achievements': 'app/game-optimized/achievements',
+        'production': 'app/game-optimized/production',
+        'prestige': 'app/game-optimized/prestige',
+        'gangs': 'app/game-optimized/gangs',
+        'save': 'app/game-optimized/save'
     },
 
     shim: {

@@ -1,12 +1,46 @@
 define([], function() {
     var gangs = {
         stats: {
-            name: undefined
+            name: 'Dead Man Inc.',
+            power: 0,
+            current: 'district'
+        },
+
+        maps: {
+            district: [
+                [10, 11, 13],
+                [14, 15, 17],
+                [19, 22, 25]
+            ]
+        },
+
+        mapPower: {
+            district: 10,
+            city: 30,
+            country: 80,
+            world: 180
         },
 
         members: {},
 
-        unlocked: false,
+        gangsNames: [
+            'Dead Man Inc.', 'Rasta Rocket', 'Illuminati Power',
+            'Head Hunters', 'Contract Killers', 'Hitmans',
+            '666', 'Gangster Disciples', 'People Nation',
+            'Born to Kill', 'Satanas', '116th Street Crew',
+            '18th Stree Crew', 'Gulf Cartel', 'El Cartel',
+            'Cali Cartel', '38th Street Gang', 'Tijuana Cartel',
+            '211 Crew', 'Russian Mafia', 'Nuestra Familia'
+        ],
+
+        mapNames: {
+            district: ['10th Street', '24th Street', '38th Street', '41th Street', '62th Street'],
+            city: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia'],
+            country: ['U.S.A.'],
+            world: ['Earth']
+        },
+
+        unlocked: true,
         need: 25e15,
 
         invest: function() {
@@ -30,12 +64,16 @@ define([], function() {
                     } else {
                         notify.pop('success', '<strong>Gang ' + name + ' successfully created.</strong>');
                         $("#gang-creation").fadeOut('slow', function() {
-                            $("#gang-content").fadeIn('slow');
+                            $("#gang-content").fadeIn('slow', function() {
+                                game.gangs.drawMap();
+                            });
                         });
                     };
                 };
-
             };
+        },
+
+        drawMap: function() {
         },
 
         display: function() {
@@ -45,10 +83,12 @@ define([], function() {
             if (this.unlocked) {
                 $("#gang-locked").css('display', 'none');
 
-                if (this.name == undefined) {
+                if (this.stats.name === undefined) {
                     $("#gang-creation").css('display', 'block');
                 } else {
                     $("#gang-content").css('display', 'block');
+
+                    this.drawMap();
                 };
             };
 

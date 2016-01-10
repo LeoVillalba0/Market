@@ -99,4 +99,9 @@ a { color: inherit; text-decoration: inherit !important }
 .progress-bar { -webkit-transition: none; transition: none; -o-transition: none; -moz-transition: none }
 .progress span { line-height: 14px; font-size: 12px }
 
+.gang-stats { float: left; }
+
 .really { cursor: default; }
+.really:hover,
+.really:active,
+.really:focus { border-color: #e74c3c; background-color: #e74c3c; }
