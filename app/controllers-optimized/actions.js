@@ -1,0 +1,1 @@
+define(["angularApp"],function(e){e.controller("ActionsCtrl",["$scope","$interval","$timeout",function(e,t,n){e.actions={action:game.actions.list},e.setInt=function(){t(game.coreLoop,game.options.interval),log("Core loop interval set.")},e.init=function(){game.options.angularInit||(game.options.angularInit=!0,e.setInt()),game.actions.angularInit()},n(e.init)}])});

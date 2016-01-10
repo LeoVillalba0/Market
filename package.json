@@ -10,6 +10,7 @@
   "devDependencies": {
     "bower-installer": "^1.2.0",
     "http-server": "^0.8.5",
-    "requirejs": "^2.1.22"
+    "requirejs": "^2.1.22",
+    "uglify-js": "^2.6.1"
   }
 }

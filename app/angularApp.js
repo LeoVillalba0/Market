@@ -6,42 +6,42 @@ define(['angularAMD', 'angular-route'], function(angularAMD) {
             .when("/", angularAMD.route({
                 templateUrl: 'app/templates/actions.html',
                 controller: 'ActionsCtrl',
-                controllerUrl: 'app/controllers/actions'
+                controllerUrl: 'app/controllers-optimized/actions'
             }))
             .when('/production', angularAMD.route({
                 templateUrl: 'app/templates/production.html',
                 controller: 'ProductionCtrl',
-                controllerUrl: 'app/controllers/production'
+                controllerUrl: 'app/controllers-optimized/production'
             }))
             .when('/gangs', angularAMD.route({
                 templateUrl: 'app/templates/gangs.html',
                 controller: 'GangsCtrl',
-                controllerUrl: 'app/controllers/gangs'
+                controllerUrl: 'app/controllers-optimized/gangs'
             }))
             .when('/research-center', angularAMD.route({
                 templateUrl: 'app/templates/research-center.html',
                 controller: 'ResearchCenterCtrl',
-                controllerUrl: 'app/controllers/research-center'
+                controllerUrl: 'app/controllers-optimized/research-center'
             }))
             .when('/prestige', angularAMD.route({
                 templateUrl: 'app/templates/prestige.html',
                 controller: 'PrestigeCtrl',
-                controllerUrl: 'app/controllers/prestige'
+                controllerUrl: 'app/controllers-optimized/prestige'
             }))
             .when('/achievements', angularAMD.route({
                 templateUrl: 'app/templates/achievements.html',
                 controller: 'AchievementsCtrl',
-                controllerUrl: 'app/controllers/achievements'
+                controllerUrl: 'app/controllers-optimized/achievements'
             }))
             .when('/options', angularAMD.route({
                 templateUrl: 'app/templates/options.html',
                 controller: 'OptionsCtrl',
-                controllerUrl: 'app/controllers/options'
+                controllerUrl: 'app/controllers-optimized/options'
             }))
             .when('/help', angularAMD.route({
                 templateUrl: 'app/templates/help.html',
                 controller: 'HelpCtrl',
-                controllerUrl: 'app/controllers/help'
+                controllerUrl: 'app/controllers-optimized/help'
             }))
             .otherwise({
                 redirectTo: "/404",
