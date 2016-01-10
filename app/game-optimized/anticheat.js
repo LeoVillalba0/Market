@@ -1,0 +1,1 @@
+define([],function(){var e={varInit:function(){},init:function(){this.varInit(),window.game.anticheat=this}};return e.init()});

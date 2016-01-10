@@ -75,7 +75,7 @@ define([], function() {
             require(['beautify', 'sidebar', 'notify'], function() {
                 log("App core libs end init.");
 
-                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs'], function() {
+                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs', 'anticheat'], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {
@@ -83,8 +83,10 @@ define([], function() {
                         log("Save.js end init");
 
                         require(['angular'], function() {
-                            if (localStorage.getItem((game.save.name + game.save.salt)) === null)
+                            if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
                                 game.options.before = new Date().getTime();
+                            };
+
                             game.options.pause = false;
 
                             log("Angular init.");

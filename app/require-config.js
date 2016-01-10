@@ -34,7 +34,8 @@ requirejs.config({
         'production': 'app/game-optimized/production',
         'prestige': 'app/game-optimized/prestige',
         'gangs': 'app/game-optimized/gangs',
-        'save': 'app/game-optimized/save'
+        'save': 'app/game-optimized/save',
+        'anticheat': 'app/game-optimized/anticheat'
     },
 
     shim: {
