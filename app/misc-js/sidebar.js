@@ -25,7 +25,7 @@ define([], function() {
         },
 
         init: function() {
-            $("#navbar-sidebar, #sidebar-close").on('click', function() {
+            $("#navbar-sidebarmenu, #sidebar-close").on('click', function() {
                 sidebar.show();
             });
             window["sidebar"] = sidebar;

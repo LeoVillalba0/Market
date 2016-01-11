@@ -44,6 +44,7 @@ define([], function() {
                 game.actions.timeMultiplier = savegame.actions.timeMultiplier;
                 game.actions.totalTimeMultiplier = savegame.actions.totalTimeMultiplier;
                 game.actions.currentRep = savegame.actions.currentRep;
+                game.actions.reputationDivider = savegame.actions.reputationDivider;
 
                 game.options.before = savegame.options.before;
 
@@ -74,7 +75,7 @@ define([], function() {
         setInt: function() {
             window.setInterval(function() {
                 game.save.save();
-            }, 60000); // 5 min
+            }, 300000); // 5 min
         },
 
         init: function() {

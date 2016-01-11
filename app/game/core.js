@@ -11,6 +11,7 @@ define([], function() {
             interval: (1000/20),
             firstTime: true,
             pause: true,
+            menu: 'sidebar',
             before: new Date().getTime(),
             now: new Date().getTime(),
             version: 0.001
@@ -41,6 +42,25 @@ define([], function() {
                     this.reputation -= this.reputationNeed;
                     this.reputationNeed = Math.floor(100 * Math.pow(1.30, this.level));
                 };
+            };
+        },
+
+        menuSwitch: function(type) {
+            this.options.menu = type;
+            this.menuType();
+        },
+
+        menuType: function() {
+            var type = this.options.menu;
+
+            if (type == "sidebar") {
+                $('li[id^="navbar-menu"]').fadeOut('fast', function() {
+                    $("#navbar-sidebarmenu").fadeIn('fast');
+                });
+            } else {
+                $("#navbar-sidebarmenu").fadeOut('fast', function() {
+                    $('li[id^="navbar-menu"]').fadeIn('fast');
+                });
             };
         },
 
@@ -82,14 +102,14 @@ define([], function() {
                         game.save.load();
                         log("Save.js end init");
 
-                        require(['angular'], function() {
+                        require(['angular', 'bootstrap'], function() {
                             if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
                                 game.options.before = new Date().getTime();
                             };
 
                             game.options.pause = false;
 
-                            log("Angular init.");
+                            log("Angular & Bootstrap init.");
                         });
                     });
                 });

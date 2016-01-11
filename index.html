@@ -20,7 +20,8 @@
     <div class="sidebar">
         <h1>
             Blackmarket
-            <br> Reloaded
+            <br>Reloaded
+            <br>BETA
             <br>
             <small>v0.001</small>
         </h1>
@@ -30,7 +31,7 @@
         <ul>
             <li><a href="#/"><i class="fa fa-hand-rock-o"></i> Actions</a></li>
             <li><a href="#/gangs"><i class="ion-ios-people"></i> Gangs</a></li>
-            <li><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>
+            <!--<li><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>-->
             <li><a href="#/research-center"><i class="ion-arrow-graph-up-right"></i> Research center</a></li>
             <li><a href="#/prestige"><i class="ion-android-star-outline"></i> Prestige</a></li>
             <li><a href="#/achievements"><i class="ion-ribbon-b"></i> Achievements</a></li>
@@ -54,7 +55,22 @@
 
                 <div class="collapse navbar-collapse" id="navbar-mobile-extend">
                     <ul class="nav navbar-nav navbar-right">
-                        <li id="navbar-sidebar"><a class="navbar-sidebar"><i class="fa fa-bars"></i> Open menu</a></li>
+                        <li id="navbar-menu" style="display: none;"><a href="#/"><i class="fa fa-hand-rock-o"></i> Actions</a></li>
+                        <!--<li id="navbar-sidebar"><a href="#/production"><i class="ion-paintbucket"></i> Production</a></li>-->
+                        <li id="navbar-menu" style="display: none;"><a href="#/gangs"><i class="ion-ios-people"></i> Gangs</a></li>
+                        <li id="navbar-menu" class="dropdown" style="display: none;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#/research-center"><i class="ion-arrow-graph-up-right"></i> Research Center</a></li>
+                                <li><a href="#/prestige"><i class="ion-android-star-outline"></i> Prestige</a></li>
+                                <li><a href="#/achievements"><i class="ion-ribbon-b"></i> Achievements</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#/help"><i class="fa fa-question-circle"></i> Help</a></li>
+                                <li><a href="#/options"><i class="fa fa-cog"></i> Options</a></li>
+                            </ul>
+                        </li>
+
+                        <li id="navbar-sidebarmenu"><a class="navbar-sidebar"><i class="fa fa-bars"></i> Open menu</a></li>
                     </ul>
                 </div>
             </div>
@@ -99,7 +115,6 @@
 
       ga('create', 'UA-54540685-15', 'auto');
       ga('send', 'pageview');
-
     </script>
 </body>
 

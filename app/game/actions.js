@@ -12,12 +12,13 @@ define([], function() {
 		timeMultiplier: new Array(),
 		totalTimeMultiplier: 1,
         reputation: [1, 3, 9, 27, 81, 243, 729, 2187, 6561],
+        reputationMultiplier: new Array(),
         reputationDivider: 6,
         currentRep: new Array(),
         buy: 1,
 
         getRep: function(index) {
-            return (this.reputation[index] / this.reputationDivider) * Math.pow(1.01, this.owned[index]);
+            return ((this.reputation[index] / this.reputationDivider) * Math.pow(1.01, this.owned[index])) * this.reputationMultiplier[index];
         },
 
         getTime: function(index) {
@@ -51,6 +52,9 @@ define([], function() {
                 this.buy = 250;
                     break;
                 case 250:
+                this.buy = 500;
+                    break;
+                case 500:
                 this.buy = 1;
                     break;
             };
@@ -140,9 +144,14 @@ define([], function() {
                 var totalPrice = this.displayPrice(i);
                 var currep = this.currentRep[i];
                 var maxrep = this.reputation[i];
+                var repEarn = this.getRep(i);
 
                 $("#action-name-" + (i+1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
-                $("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>Rep. " + fix(currep, 0) + "/" + fix(maxrep, 0) +"<br>" + fix(time) + " sec.");
+                $("#action-info-" + (i+1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>"+
+                    fix(time) + " sec.<br>" +
+                    "+" + fix(repEarn, 0) + " rep.<br>" +
+                    "Rep. " + fix(currep, 0) + "/" + fix(maxrep, 0)
+                );
                 $("#action-cost-" + (i+1)).html("Cost $" + fix(price));
         	};
 
@@ -172,6 +181,7 @@ define([], function() {
         		this.owned.push(0);
         		this.owned[0] = 1;
                 this.currentRep.push(0);
+                this.reputationMultiplier.push(1);
             };
         },
 

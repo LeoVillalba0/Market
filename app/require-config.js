@@ -5,6 +5,7 @@ requirejs.config({
         'angular': 'lib/angular/js/angular.min',
         'angular-route': 'lib/angular-route/js/angular-route.min',
         'angularAMD': 'lib/angularAMD/js/angularAMD.min',
+        'bootstrap': 'lib/bootswatch-dist/js/bootstrap.min',
 
         'angularApp': 'app/angularApp',
 
@@ -25,7 +26,8 @@ requirejs.config({
         // 'production': 'app/game/production',
         // 'prestige': 'app/game/prestige',
         // 'gangs': 'app/game/gangs',
-        // 'save': 'app/game/save'
+        // 'save': 'app/game/save',
+        // 'anticheat': 'app/game/anticheat'
 
         'core': 'app/game-optimized/core',
         'actions': 'app/game-optimized/actions',
