@@ -11,7 +11,7 @@ define([], function() {
             interval: (1000/20),
             firstTime: true,
             pause: true,
-            menu: 'sidebar',
+            menu: 'navbar',
             before: new Date().getTime(),
             now: new Date().getTime(),
             version: 0.001
@@ -33,6 +33,10 @@ define([], function() {
         gainMoney: function(amount) {
             this.money += amount;
             this.totalMoney += amount;
+        },
+
+        gainRep: function(amount) {
+            this.reputation += amount;
         },
 
         repLevelUp: function() {
