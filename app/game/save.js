@@ -13,6 +13,7 @@ define([], function() {
                 reputation: game.reputation,
                 reputationNeed: game.reputationNeed,
                 actions: game.actions,
+                research: game.research,
                 options: game.options
             };
 
@@ -46,7 +47,11 @@ define([], function() {
                 game.actions.currentRep = savegame.actions.currentRep;
                 game.actions.reputationDivider = savegame.actions.reputationDivider;
 
+                game.research.actions.bought = savegame.research.actions.bought;
+
                 game.options.before = savegame.options.before;
+
+                game.research.display();
 
                 notify.pop("success", "<strong>Save-game successfully loaded!</strong>");
 

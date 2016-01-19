@@ -89,7 +89,7 @@ define([], function() {
             this.display();
 
         	game.actions.run(times);
-            game.production.run(times);
+            //game.production.run(times);
         },
 
         init: function() {
