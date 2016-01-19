@@ -23,6 +23,23 @@ define(['angular'], function() {
             return index;
         },
 
+        countBought: function(type) {
+            var bought = 0;
+
+            switch (type) {
+                case 0:
+                    for (var i = 0; i < this.actions.bought.length; i++) {
+                        if (this.actions.bought[i])
+                            bought++;
+                    };
+                    break;
+                case 1:
+                    break;
+            };
+
+            return bought;
+        },
+
         create: function(name, desc, price, str, who, effect, otherStr, otherWho, otherEffect, type, upType) {
             this.name = name;
             this.desc = desc;
@@ -83,15 +100,17 @@ define(['angular'], function() {
         display: function() {
             for (var i = 0; i < this.actions.upTypes; i++) {
                 var index = game.research.getCurrent(0, i);
-                var bought = this.actions.bought[i];
+                var bought = this.countBought(0);
+                var total = this.actions.bought.length;
                 var html = {
                     name: this.actions.list[index].name,
                     desc: this.actions.list[index].desc,
                     price: this.actions.list[index].price
                 };
 
+                $("#research-actions-total").html("(" + bought + "/" + total + ")");
                 $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
-                $("#research-actions-upgrade-" + (i+1)).attr('onclick', 'game.research.buy(0, ' + index + ');')
+                $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');')
             };
         },
 
@@ -135,11 +154,15 @@ define(['angular'], function() {
 
         domInit: function() {
             for (var i = 0; i < this.actions.upTypes; i++) {
-                var height = $("body").height();
-
                 $("#research-actions").append('<li id="research-actions-upgrade-' + (i + 1) + '" class="list-group-item"></li>');
                 $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + i + ');');
             };
+
+            var height = $("body").height();
+            $("#research-actions").css({
+                'max-height': (height + 200) + 'px',
+                'overflow-y': 'auto'
+            })
 
             this.display();
         },

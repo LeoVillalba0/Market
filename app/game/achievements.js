@@ -60,6 +60,23 @@ define(['angular'], function() {
             notify.pop("success", "<strong>Achievement earned :</strong> " + name + "<br><strong>" + effect + "</strong>");
         },
 
+        countCompleted: function(type) {
+            var completed = 0;
+
+            switch (type) {
+                case 0:
+                    for (var i = 0; i < this.actions.complete.length; i++) {
+                        if (this.actions.complete[i])
+                            completed++;
+                    };
+                    break;
+                case 1:
+                    break;
+            };
+
+            return completed;
+        },
+
         loop: function() {
             for (var i = 0; i < this.actions.list.length; i++) {
                 if (game.achievements.isComplete(i, 'actions') && !this.actions.complete[i]) {
@@ -74,6 +91,8 @@ define(['angular'], function() {
         display: function() {
             for (var i = 0; i < game.actions.list.length; i++) {
                 var index = this.getCurrent(0, i);
+                var owned = this.countCompleted(0);
+                var total = this.actions.list.length;
                 var html = {
                     name: this.actions.list[index].name,
                     desc: this.actions.list[index].desc,
@@ -81,6 +100,7 @@ define(['angular'], function() {
                     rep: this.actions.list[index].rep
                 };
 
+                $("#achievements-actions-total").html("(" + owned + "/" + total + ")");
                 $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
             };
         },
@@ -167,7 +187,7 @@ define(['angular'], function() {
 
         domInit: function() {
             for (var i = 0; i < game.actions.list.length; i++) {
-                $("#achievements-actions").append('<li id="achievements-actions-' + (i+1) + '" class="list-group-item achievement"></li>');
+                $("#achievements-actions").append('<li id="achievements-actions-' + (i + 1) + '" class="list-group-item achievement"></li>');
             };
 
             this.display();
