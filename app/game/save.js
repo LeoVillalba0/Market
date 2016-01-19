@@ -62,7 +62,7 @@ define([], function() {
             if (yes) {
                 localStorage.removeItem((this.name + this.salt));
                 window.history.pushState('', '', '/#/');
-                location.reload();
+                window.location.reload();
             };
 
             if (no) {
