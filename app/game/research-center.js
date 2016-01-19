@@ -1,4 +1,4 @@
-define([], function() {
+define(['angular'], function() {
     var research = {
         actions: {
             list: new Array(),

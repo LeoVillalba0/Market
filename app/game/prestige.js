@@ -1,4 +1,4 @@
-define([], function() {
+define(['angular'], function() {
     var prestige = {
         init: function() {
             window["game"]["prestige"] = this;

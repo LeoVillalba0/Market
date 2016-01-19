@@ -1,4 +1,4 @@
-define([], function() {
+define(['angular'], function() {
 
     // TODO: better saving system (var toSave) and find a way to prevent cheating
     var save = {
@@ -50,6 +50,7 @@ define([], function() {
                 game.research.actions.bought = savegame.research.actions.bought;
 
                 game.options.before = savegame.options.before;
+                game.options.firstTime = savegame.options.firstTime;
 
                 game.research.display();
 

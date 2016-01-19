@@ -1,4 +1,4 @@
-define([], function() {
+define(['angular'], function() {
     var production = {
         list: ["Weed", "Meth", "Cocaine"],
         prices: [1e5, 15e7, 75e8],

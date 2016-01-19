@@ -1,16 +1,17 @@
 define([], function() {
     var game = {
         money: 0,
-    	totalMoney: 0,
+        totalMoney: 0,
         level: 1,
         reputation: 0,
         reputationNeed: 100,
 
         options: {
             fps: 20,
-            interval: (1000/20),
+            interval: (1000 / 20),
             firstTime: true,
             pause: true,
+            firstTime: true,
             menu: 'navbar',
             before: new Date().getTime(),
             now: new Date().getTime(),
@@ -68,6 +69,22 @@ define([], function() {
             };
         },
 
+        toggleModal: function() {
+            if (this.options.firstTime) {
+                $("#modal-newPlayer").modal({
+                    keyboard: false,
+                    backdrop: 'static'
+                });
+            };
+        },
+
+        closeModal: function() {
+            if (this.options.firstTime) {
+                this.options.firstTime = false;
+                game.options.pause = false;
+            };
+        },
+
         display: function() {
             this.production.displayDrugs();
 
@@ -76,44 +93,47 @@ define([], function() {
 
         coreLoop: function() {
             var that = this.game;
-        	that.options.now = new Date().getTime();
-        	var elapsed = that.options.now - that.options.before;
-        	if (elapsed > that.options.interval)
-        		that.updateGame(Math.floor(elapsed/that.options.interval));
-        	else
-        		that.updateGame(1);
-        	that.options.before = new Date().getTime();
+            that.options.now = new Date().getTime();
+            var elapsed = that.options.now - that.options.before;
+            if (elapsed > that.options.interval)
+                that.updateGame(Math.floor(elapsed / that.options.interval));
+            else
+                that.updateGame(1);
+            that.options.before = new Date().getTime();
         },
 
         updateGame: function(times) {
             this.display();
 
-        	game.actions.run(times);
+            game.actions.run(times);
             //game.production.run(times);
         },
 
         init: function() {
             window["game"] = this;
-            window["log"] = console.info.bind(console, "BR :");
+            window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
 
             require(['beautify', 'sidebar', 'notify'], function() {
-                log("App core libs end init.");
+                log("Core libs end init.");
 
                 require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs', 'anticheat'], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {
                         game.save.load();
-                        log("Save.js end init");
+                        log("Save end init");
 
                         require(['angular', 'bootstrap'], function() {
                             if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
                                 game.options.before = new Date().getTime();
                             };
 
-                            game.options.pause = false;
+                            if (!game.options.firstTime)
+                                game.options.pause = false;
+                            else
+                                game.toggleModal();
 
-                            log("Angular & Bootstrap init.");
+                            log("Angular & Bootstrap end init.");
                         });
                     });
                 });

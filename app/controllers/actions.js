@@ -1,7 +1,7 @@
 define(['angularApp'], function(app) {
     app.controller('ActionsCtrl', ['$scope', '$interval', '$timeout', function($scope, $interval, $timeout) {
         $scope.actions = {
-            action: game.actions.list,
+            action: ["Shooting", "Fight Club", "Pickpocket", "Scam", "Car Theft", "Theft of Jewels", "Hacking", "Arms Sales", "Drugs Sales"]
         };
 
         $scope.setInt = function() {

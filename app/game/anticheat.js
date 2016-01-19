@@ -1,4 +1,4 @@
-define([], function() {
+define(['angular'], function() {
     var anticheat = {
         init: function() {
             window["game"]["anticheat"] = this;
