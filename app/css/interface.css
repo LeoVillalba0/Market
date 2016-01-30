@@ -68,6 +68,9 @@ a { color: inherit; text-decoration: inherit !important }
 .gangs.container h1 { font-size: 22px; }
 .gangs.container h2 { font-size: 18px; }
 
+.notes h1 { font-size: 28px; margin: 15px 0; }
+.notes h2 { font-size: 18px; margin: 8px 0; }
+
 .help h1 { font-size: 28px; margin: 15px 0; }
 .help h2 { font-size: 18px; margin: 8px 0; }
 .help h2 ul li { font-size: 16px; margin: 8px 0; }

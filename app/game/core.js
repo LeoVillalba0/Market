@@ -95,7 +95,7 @@ define([], function() {
 
         display: function() {
             //this.production.displayDrugs();
-
+            $("#sidebar-version").html("v" + this.options.version);
             $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
         },
 
@@ -133,7 +133,7 @@ define([], function() {
                         if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
                             game.options.before = new Date().getTime();
                         };
-                        
+
                         log("Save end init");
 
                         require(['angular', 'bootstrap'], function() {
