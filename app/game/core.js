@@ -62,10 +62,14 @@ define([], function() {
                 $('li[id^="navbar-menu"]').fadeOut('fast', function() {
                     $("#navbar-sidebarmenu").fadeIn('fast');
                 });
+
+                sidebar.activated = true;
             } else {
                 $("#navbar-sidebarmenu").fadeOut('fast', function() {
                     $('li[id^="navbar-menu"]').fadeIn('fast');
                 });
+
+                sidebar.activated = false;
             };
         },
 
@@ -82,11 +86,15 @@ define([], function() {
             if (this.options.firstTime) {
                 this.options.firstTime = false;
                 game.options.pause = false;
+                // wait for the modal to fadeOut
+                window.setTimeout(function() {
+                    $("#modal-newPlayer").remove();
+                }, 2000);
             };
         },
 
         display: function() {
-            this.production.displayDrugs();
+            //this.production.displayDrugs();
 
             $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
         },
@@ -116,18 +124,19 @@ define([], function() {
             require(['beautify', 'sidebar', 'notify'], function() {
                 log("Core libs end init.");
 
-                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs', 'anticheat'], function() {
+                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs'], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {
                         game.save.load();
+
+                        if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
+                            game.options.before = new Date().getTime();
+                        };
+                        
                         log("Save end init");
 
                         require(['angular', 'bootstrap'], function() {
-                            if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
-                                game.options.before = new Date().getTime();
-                            };
-
                             if (!game.options.firstTime)
                                 game.options.pause = false;
                             else

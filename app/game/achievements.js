@@ -57,7 +57,7 @@ define(['angular'], function() {
 
             var name = window["game"]["achievements"][part]["list"][index]["name"];
             var effect = window["game"]["achievements"][part]["list"][index]["desc2"];
-            notify.pop("success", "<strong>Achievement earned :</strong> " + name + "<br><strong>" + effect + "</strong>");
+            notify.pop("success", "Achievement earned : " + name + "<br>" + effect);
         },
 
         countCompleted: function(type) {

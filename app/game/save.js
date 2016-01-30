@@ -1,6 +1,5 @@
 define(['angular'], function() {
 
-    // TODO: better saving system (var toSave) and find a way to prevent cheating
     var save = {
         name: 'BR-S',
         salt: 'BRKey',
@@ -20,7 +19,7 @@ define(['angular'], function() {
             localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
 
             if (from == 'user') {
-                notify.pop("success", "<strong>Game successfully saved!</strong>");
+                notify.pop("success", "Game successfully saved!");
             };
 
             log("Game saved.");
@@ -28,7 +27,7 @@ define(['angular'], function() {
 
         load: function() {
             if (localStorage.getItem((this.name + this.salt)) === null) {
-                notify.pop("alert", "<strong>No save found!</strong>");
+                notify.pop("alert", "No save found!");
             } else {
                 var savegame = JSON.parse(localStorage.getItem((this.name + this.salt)));
 
@@ -54,14 +53,14 @@ define(['angular'], function() {
 
                 game.research.display();
 
-                notify.pop("success", "<strong>Save-game successfully loaded!</strong>");
+                notify.pop("success", "Save-game successfully loaded!");
 
                 log("Game loaded.");
             };
         },
 
         reset: function(yes, no) {
-            $("#options-reset").html("Really want to hard-reset?");
+            $("#options-reset").html("Really?");
             $("#options-yes, #options-no").show();
             $("#options-reset").addClass('really');
 

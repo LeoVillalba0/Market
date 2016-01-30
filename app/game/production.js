@@ -190,7 +190,7 @@ define(['angular'], function() {
                             if (sold > canSell) {
                                 game.production.alert[i] = "notify";
                                 if (game.production.alert[i] == "notify") {
-                                    notify.pop("alert", "<b>Production warning :</b> you sell more " + drug + " than you can produce, selling for " + drug + " is disabled until you can sell as much as you produce.");
+                                    notify.pop("alert", "Production warning: you sell more " + drug + " than you can produce, selling for " + drug + " is disabled until you can sell as much as you produce.");
                                     game.production.alert[i] = true;
                                 };
                             };
@@ -201,7 +201,7 @@ define(['angular'], function() {
                             };
                         } else {
                             if (sold <= canSell) {
-                                notify.pop("success", "<b>Production news:</b> you now produce enough " + drug + " to sell it.");
+                                notify.pop("success", "Production news: you now produce enough " + drug + " to sell it.");
                                 game.production.alert[i] = false;
                             };
                         };

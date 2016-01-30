@@ -28,7 +28,7 @@ define([], function() {
                 $("#notify-div").fadeIn("slow", function() {
                     window.setTimeout(function() {
                         $("#notify-div").fadeOut("slow");
-                    }, 15000);
+                    }, 3000);
                 });
             } else {
                 return;

@@ -2,8 +2,8 @@
 ::-webkit-scrollbar-track { border-radius: 0; }
 ::-webkit-scrollbar-thumb { border-radius: 6px; background-color: #ccc; }
 
-html { -webkit-font-smoothing: antialiased; text-shadow: none; text-rendering: optimizeLegibility }
-body { background-color: #CFDAE6 }
+html { -webkit-font-smoothing: antialiased; text-shadow: none; text-rendering: optimizeLegibility; height: 100%; }
+body { height: 100%; background-color: #CFDAE6; }
 a { color: inherit; text-decoration: inherit !important }
 
 @media (min-width:1200px) {
@@ -19,7 +19,7 @@ a { color: inherit; text-decoration: inherit !important }
 .well { padding: 16px; margin-bottom: 0; border-radius: 2px; background-color: #EFEFEF }
 .panel { margin-bottom: 0px; }
 
-.notify { position: absolute; top: 70px; right: 30px; width: 350px; border-radius: 4px; opacity: 0.9; color: white; }
+.notify { position: absolute; bottom: 0; right: 30px; width: 350px; border-radius: 4px; opacity: 0.9; color: white; }
 
 .row .panel .panel-heading { text-align: center; background-color: #375a7f; color: #fff; font-size: 18px }
 .row .panel .panel-heading a:hover,
