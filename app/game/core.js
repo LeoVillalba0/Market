@@ -9,7 +9,7 @@ define([], function() {
         options: {
             fps: 20,
             interval: (1000 / 20),
-            firstTime: true,
+            angularInit: false,
             pause: true,
             firstTime: true,
             menu: 'navbar',
@@ -122,28 +122,21 @@ define([], function() {
             window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
 
             require(['beautify', 'sidebar', 'notify'], function() {
-                log("Core libs end init.");
+                log("----------");
+                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save'], function() {
+                    game.save.load();
 
-                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs', 'collections'], function() {
-                    log("Game scripts end init.");
+                    if (localStorage.getItem((game.save.name + game.save.salt)) === null)
+                        game.options.before = new Date().getTime();
 
-                    require(['save'], function() {
-                        game.save.load();
+                    log("----------");
+                    require(['angular', 'bootstrap'], function() {
+                        if (!game.options.firstTime)
+                            game.options.pause = false;
+                        else
+                            game.toggleModal();
 
-                        if (localStorage.getItem((game.save.name + game.save.salt)) === null) {
-                            game.options.before = new Date().getTime();
-                        };
-
-                        log("Save end init");
-
-                        require(['angular', 'bootstrap'], function() {
-                            if (!game.options.firstTime)
-                                game.options.pause = false;
-                            else
-                                game.toggleModal();
-
-                            log("Angular & Bootstrap end init.");
-                        });
+                        log("Angular & Bootstrap init. Ready to play.");
                     });
                 });
             });

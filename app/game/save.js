@@ -55,7 +55,7 @@ define(['angular'], function() {
 
                 notify.pop("success", "Save-game successfully loaded!");
 
-                log("Game loaded.");
+                log("Savegame loaded.");
             };
         },
 
