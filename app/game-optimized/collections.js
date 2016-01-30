@@ -1,0 +1,1 @@
+define(["angular"],function(){var e={init:function(){window.game.collections=this,log("Collections init.")}};return e.init()});

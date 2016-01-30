@@ -26,6 +26,7 @@ requirejs.config({
         // 'production': 'app/game/production',
         // 'prestige': 'app/game/prestige',
         // 'gangs': 'app/game/gangs',
+        // 'collections': 'app/game/collections',
         // 'save': 'app/game/save'
 
         'core': 'app/game-optimized/core',
@@ -35,6 +36,7 @@ requirejs.config({
         'production': 'app/game-optimized/production',
         'prestige': 'app/game-optimized/prestige',
         'gangs': 'app/game-optimized/gangs',
+        'collections': 'app/game-optimized/collections',
         'save': 'app/game-optimized/save'
     },
 

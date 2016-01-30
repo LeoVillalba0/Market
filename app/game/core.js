@@ -124,7 +124,7 @@ define([], function() {
             require(['beautify', 'sidebar', 'notify'], function() {
                 log("Core libs end init.");
 
-                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs'], function() {
+                require(['actions', 'production', 'research-center', 'achievements', 'prestige', 'gangs', 'collections'], function() {
                     log("Game scripts end init.");
 
                     require(['save'], function() {
