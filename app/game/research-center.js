@@ -8,6 +8,7 @@ define(['angular'], function() {
 
         getCurrent: function(type, Index) {
             var index;
+
             switch (type) {
                 case 0:
                     for (var i = 0; i < this.actions.list.length; i++) {
@@ -20,6 +21,28 @@ define(['angular'], function() {
                 case 1:
                     break;
             };
+
+            return index;
+        },
+
+        getCheapest: function(type) {
+            var index;
+            var cheapest;
+
+            switch (type) {
+                case 0:
+                    cheapest = 1e308; // max value in JS by default
+                    for (var i = 0; i < this.actions.list.length; i++) {
+                        if (!this.actions.bought[i] && this.actions.list[i].price < cheapest) {
+                            cheapest = this.actions.list[i].price;
+                            index = i;
+                        };
+                    };
+                    break;
+                case 1:
+                    break;
+            };
+
             return index;
         },
 
@@ -89,12 +112,19 @@ define(['angular'], function() {
                             };
                         };
                     };
+
+                    game.actions.display();
                     break;
                 case 1: // for production research upgrades
                     break;
             };
 
             this.display();
+        },
+
+        quickbuy: function(type, upgradeIndex) {
+            var indexOfCheapest = this.getCheapest(type);
+            return this.buy(type, indexOfCheapest);
         },
 
         display: function() {
@@ -110,8 +140,17 @@ define(['angular'], function() {
 
                 $("#research-actions-total").html("(" + bought + "/" + total + ")");
                 $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
-                $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');')
+                $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');
             };
+
+            var indexOfCheapest = game.research.getCheapest(0);
+            var htmlOfCheapest = {
+                name: this.actions.list[indexOfCheapest].name,
+                desc: this.actions.list[indexOfCheapest].desc,
+                price: this.actions.list[indexOfCheapest].price
+            };
+
+            $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
         },
 
         varInit: function() {

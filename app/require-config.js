@@ -1,4 +1,4 @@
-var isDev = true;
+var isDev = false;
 
 if (isDev) {
     requirejs.config({
