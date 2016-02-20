@@ -132,15 +132,18 @@ define(['angular'], function() {
                 var index = game.research.getCurrent(0, i);
                 var bought = this.countBought(0);
                 var total = this.actions.bought.length;
-                var html = {
-                    name: this.actions.list[index].name,
-                    desc: this.actions.list[index].desc,
-                    price: this.actions.list[index].price
-                };
-
-                $("#research-actions-total").html("(" + bought + "/" + total + ")");
-                $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
-                $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');
+                if (typeof this.actions.list[index] !== "undefined") {
+                    var html = {
+                            name: this.actions.list[index].name,
+                            desc: this.actions.list[index].desc,
+                            price: this.actions.list[index].price
+                        };
+                    $("#research-actions-total").html("(" + bought + "/" + total + ")");
+                    $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
+                    $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');
+                } else {
+                    $("#research-actions-upgrade-" + (i + 1)).html('<b>All available Upgrades baught!</b>');
+                }
             };
 
             var indexOfCheapest = game.research.getCheapest(0);
