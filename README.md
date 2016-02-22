@@ -17,6 +17,8 @@ Do you have ideas, code suggestion or other?
 
 You can create an issue or fork (it's better!) the repo to suggest code changes.
 
+When editing game files, run `grunt` command to optimize files changed.
+
 ## Links
 
 [Blackmarket-reloaded](http://totominc.github.io/blackmarket-reloaded) and here the [original Blackmarket](http://totominc.github.io/blackmarket).
