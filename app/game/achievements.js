@@ -77,12 +77,18 @@ define(['angular'], function() {
             return completed;
         },
 
-        loop: function() {
+        loop: function(initial) {
             for (var i = 0; i < this.actions.list.length; i++) {
-                if (game.achievements.isComplete(i, 'actions') && !this.actions.complete[i]) {
-                    game.achievements.achieve(i, 'actions');
-                    this.actions.complete[i] = true;
-                };
+            	if(initial == true) {
+            		if(game.achievements.isComplete(i, 'actions')) {
+            			this.actions.complete[i] = true;
+            		}
+            	} else {
+	                if (game.achievements.isComplete(i, 'actions') && !this.actions.complete[i]) {
+                		game.achievements.achieve(i, 'actions');
+	                    this.actions.complete[i] = true;
+                	}
+            	}
             };
 
             this.display();
@@ -190,6 +196,7 @@ define(['angular'], function() {
                 $("#achievements-actions").append('<li id="achievements-actions-' + (i + 1) + '" class="list-group-item achievement"></li>');
             };
 
+            this.loop(true);
             this.display();
         },
 
