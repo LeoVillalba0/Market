@@ -146,14 +146,6 @@ define(['angular'], function() {
                 }
             };
 
-            var indexOfCheapest = game.research.getCheapest(0);
-            var htmlOfCheapest = {
-                name: this.actions.list[indexOfCheapest].name,
-                desc: this.actions.list[indexOfCheapest].desc,
-                price: this.actions.list[indexOfCheapest].price
-            };
-
-            $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
         },
 
         varInit: function() {
