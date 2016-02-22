@@ -82,8 +82,8 @@ define(['angular'], function() {
                 game.money -= price;
                 this.owned[index]++;
             };
-            this.display();
             game.achievements.loop();
+            this.display();
             $("#action-upgrade-" + (index + 1)).html("Upgrade");
         },
 
@@ -188,6 +188,7 @@ define(['angular'], function() {
                 else
                     $("#action-upgrade-" + (i + 1)).html("Upgrade");
 
+                game.achievements.loop(true);
                 this.display();
             };
         },
