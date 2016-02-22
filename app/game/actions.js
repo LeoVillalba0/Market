@@ -137,14 +137,20 @@ define(['angular'], function() {
             };
 
             var indexOfCheapest = game.research.getCheapest(0);
-            var htmlOfCheapest = {
-                name: game.research.actions.list[indexOfCheapest].name,
-                desc: game.research.actions.list[indexOfCheapest].desc,
-                price: game.research.actions.list[indexOfCheapest].price
-            };
+
+            if (typeof game.research.actions.list[indexOfCheapest] !== "undefined") {
+	            var htmlOfCheapest = {
+                    name: game.research.actions.list[indexOfCheapest].name,
+                    desc: game.research.actions.list[indexOfCheapest].desc,
+                    price: game.research.actions.list[indexOfCheapest].price
+	            };
+	            $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
+            } else {
+            	$("#action-quickbuy-button").removeAttr('onclick').prop('disabled', true).attr('disabled', 'disabled').addClass('btn-disabled').html("All Upgrades bought!");
+            }
 
             $("#action-buy-button").html("Buy x" + this.buy);
-            $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
+
         },
 
         displayPrice: function(i) {
