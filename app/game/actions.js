@@ -156,16 +156,12 @@ define(['angular'], function() {
         displayPrice: function(i) {
             var amount = this.buy;
             var owned = this.owned[i];
-            var totalPrice = 0;
             var totalOwned = amount + this.owned[i];
 
-            while (totalOwned > owned) {
-                amount--;
-                totalOwned = amount + owned;
-                totalPrice += (this.price[i] * Math.pow(this.inflation[i], totalOwned));;
-            };
+            var costAll = this.price[i] * (1 - Math.pow(this.inflation[i], totalOwned)) / (1 - this.inflation[i]);
+            var costBought = this.price[i] * (1 - Math.pow(this.inflation[i], owned)) / (1 - this.inflation[i]);
 
-            return totalPrice;
+            return (costAll - costBought);
         },
 
         varInit: function() {
