@@ -42,25 +42,31 @@ define(['angular'], function() {
             return (reward / time);
         },
 
+        multiplierN: function(val) {
+        	val = parseFloat(val);
+        	if(val >= 1 && val <= 500)
+        		this.buy = val;
+        	else
+        		this.buy = 1;
+        	$("#action-buy-button").html("Buy x" + this.buy);
+        	
+        	this.display();
+        },
+        
         multiplier: function() {
-            switch (this.buy) {
-                case 1:
-                    this.buy = 10;
-                    break;
-                case 10:
-                    this.buy = 100;
-                    break;
-                case 100:
-                    this.buy = 250;
-                    break;
-                case 250:
-                    this.buy = 500;
-                    break;
-                case 500:
-                    this.buy = 1;
-                    break;
-            };
-
+        	
+        	if(this.buy >= 1 && this.buy <10)
+        		this.buy = 10;
+        	else if(this.buy >= 10 && this.buy <100)
+        		this.buy = 100;
+        	else if(this.buy >= 100 && this.buy <250)
+        		this.buy = 250;
+        	else if(this.buy >= 250 && this.buy <500)
+        		this.buy = 500;
+        	else
+        		this.buy = 1;
+        	
+            $("#buySlider").val(this.buy);
             this.display();
         },
 
@@ -195,6 +201,7 @@ define(['angular'], function() {
                 else
                     $("#action-upgrade-" + (i + 1)).html("Upgrade");
 
+                $("#buySlider").val(this.buy);
                 game.achievements.loop(true);
                 this.display();
             };
