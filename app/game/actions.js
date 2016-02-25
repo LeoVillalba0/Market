@@ -15,6 +15,8 @@ define(['angular'], function() {
         reputationMultiplier: new Array(),
         reputationDivider: 6,
         totalReputationMultiplier: 1,
+        gainedMoneyThisRun: 0,
+        gainedRepThisRun: 0,
         buy: 1,
 
         getRep: function(index) {
@@ -87,7 +89,7 @@ define(['angular'], function() {
             $("#action-upgrade-" + (index + 1)).html("Upgrade");
         },
 
-        run: function(times) {
+        run: function(times,offline) {
             if (!game.options.pause) {
                 for (var i = 0; i < this.list.length; i++) {
                     if (this.owned[i] > 0) {
@@ -97,8 +99,17 @@ define(['angular'], function() {
                         var rep = this.getRep(i);
 
                         this.progress[i] += times / fps;
-                        game.gainMoney(Math.floor(this.progress[i] / time) * reward);
-                        game.gainRep(Math.floor(this.progress[i] / time) * rep);
+                        moneyAction = Math.floor(this.progress[i] / time) * reward;
+                        game.gainMoney(moneyAction);
+                        
+                        repAction = Math.floor(this.progress[i] / time) * rep;
+                        game.gainRep(repAction);
+                        
+                        if(offline == true) {
+	                        this.gainedMoneyThisRun += moneyAction;
+	                        this.gainedRepThisRun += repAction;
+                        }
+
                         game.repLevelUp();
 
                         this.progress[i] %= time;

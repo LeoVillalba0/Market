@@ -5,6 +5,7 @@ define(['angular'], function() {
         salt: 'BRKey',
 
         save: function(from) {
+        	
             var toSave = {
                 money: game.money,
                 totalMoney: game.totalMoney,
@@ -86,6 +87,10 @@ define(['angular'], function() {
         init: function() {
             this.setInt();
             window["game"]["save"] = this;
+
+            window.addEventListener("beforeunload", function (e) {
+        		game.save.save();
+        	});
 
             log("Save init.");
         }
