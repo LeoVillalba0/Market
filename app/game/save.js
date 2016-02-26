@@ -60,12 +60,17 @@ define(['angular'], function() {
             };
         },
 
+        eventListenerSave: function() { game.save.save()},
+        
         reset: function(yes, no) {
             $("#options-reset").html("Really?");
             $("#options-yes, #options-no").show();
             $("#options-reset").addClass('really');
 
             if (yes) {
+
+                window.removeEventListener("beforeunload", game.save.eventListenerSave, false);
+
                 localStorage.removeItem((this.name + this.salt));
                 window.history.pushState('', '', '/#/');
                 window.location.reload();
@@ -88,9 +93,7 @@ define(['angular'], function() {
             this.setInt();
             window["game"]["save"] = this;
 
-            window.addEventListener("beforeunload", function (e) {
-        		game.save.save();
-        	});
+            window.addEventListener("beforeunload", game.save.eventListenerSave, false);
 
             log("Save init.");
         }
