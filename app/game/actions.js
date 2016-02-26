@@ -175,7 +175,7 @@ define(['angular'], function() {
             var owned = this.owned[i];
             var totalOwned = amount + this.owned[i];
 
-            var cost =  this.price[i] * (1 - (Math.pow(this.inflation[i], totalOwned) - Math.pow(this.inflation[i], owned))) / (1 - this.inflation[i]);
+          	var cost =  (this.price[i] * ((Math.pow(this.inflation[i], totalOwned) - Math.pow(this.inflation[i], owned))) / (this.inflation[i]-1));
 
             return cost;
         },
