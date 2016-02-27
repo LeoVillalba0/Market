@@ -1,13 +1,17 @@
 define(['angular'], function() {
     var collections = {
         tiers: ['common', 'uncommon', 'rare', 'unique'],
-        chances: [0.8, 0.9, 0.97, 1.00],
+        chances: [0.75, 0.9, 0.95, 1.00],
         categories: ['actions', 'production'],
         names: {
             actions: {
-                common: ['Desolation', 'Lightning', 'Moonsight', 'Dragonstrike', 'Peacekeeper', 'Betty', 'Ole Betsy', 'Limbo', 'Interrogator', 'Harmony', 'Apocalypse'],
-                uncommon: ['Warrior Rifle', 'Defender Carbine', 'Corroded Blaster', "Knight's Fall", 'Corroded Blaster', 'Massive Repeater', 'Wrathful Carbine', 'Savage Longrifle'],
-                rare: ['Silent Silver Shooter', 'Roaring Golden Blaster', 'Vile Ebon Shooter', 'Trooper Ivory Fusil', 'Frenzied Iron Repeater', 'Lightning Stainless Rifle', 'Dire Steel Launcher'],
+                common: ['Desolation', 'Lightning', 'Moonsight', 'Dragonstrike', 'Peacekeeper', 'Betty', 'Ole Betsy', 'Limbo', 'Interrogator', 'Harmony', 'Apocalypse',
+                        'Stormbringer', 'Shadowfury', 'Retirement', 'Deathbringer', 'Legionaire', 'Deadeye', 'Birthmark', 'Despair', 'Hatred', 'Echo', "Hope's End",
+                        'Sunshine', 'Piety', 'Endbringer', 'Damnation', 'Requiem', 'Fury', 'Crash', 'The Light', 'Injection', 'Rigormortis', 'Eveningstar', 'Destruction'],
+                uncommon: ['Warrior Rifle', 'Defender Carbine', 'Corroded Blaster', "Knight's Fall", 'Corroded Blaster', 'Massive Repeater', 'Wrathful Carbine', 'Savage Longrifle',
+                            'Phantom Rifle', 'Reincarnated Repeater', 'Hero Sniper', 'Yearning Rifle', 'Warped Sniper', "Warrior's Carbine", 'Bloodied Shooter'],
+                rare: ['Silent Silver Shooter', 'Roaring Golden Blaster', 'Vile Ebon Shooter', 'Trooper Ivory Fusil', 'Frenzied Iron Repeater', 'Lightning Stainless Rifle',
+                        'Dire Steel Launcher', 'Ghostly Bronze Sniper', 'Phantom Fiberglass Rifle', 'Refined Silver Longrifle'],
                 unique: ['Remorse, Memory Of Infinite Trials', 'Widow Maker, Scepter Of Vengeance', 'Limbo, Sculptor Of Twisted Visions', 'King Of Nines, Butcher Of The Immortal',
                         'Dreamhunter, Soul Of Summoning', 'Deadeye, Voice Of Conquered Worlds', 'Termination, Call Of Shadow Strikes', 'Brutality, Bringer Of Shifting Sands',
                         'Salvation, Boon Of The Summoner', 'Burn, Repeater Of The Insane', 'Justifier, Protector Of Traitors', 'Shadowmoon, Disposer Of The Basilisk']
@@ -109,14 +113,6 @@ define(['angular'], function() {
             };
             this.display();
         },
-
-        // generateAndDisplay: function() {
-        //     for (var i = 0; i < 10; i++) {
-        //         var item = this.getRandItem(this.getRandTier());
-        //         this.addRandomItem(item);
-        //     };
-        //     this.display();
-        // },
 
         display: function() {
             this.categories.forEach(function(cat) {

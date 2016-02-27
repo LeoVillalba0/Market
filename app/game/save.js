@@ -26,7 +26,7 @@ define(['angular'], function() {
             log("Game saved.");
         },
 
-        load: function() {
+        load: function(from) {
             if (localStorage.getItem((this.name + this.salt)) === null) {
                 notify.pop("alert", "No save found!");
             } else {
@@ -56,7 +56,8 @@ define(['angular'], function() {
 
                 game.research.display();
 
-                notify.pop("success", "Save-game successfully loaded!");
+                if (from == 'user')
+                    notify.pop("success", "Save-game successfully loaded!");
 
                 log("Savegame loaded.");
             };
