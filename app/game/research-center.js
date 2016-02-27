@@ -98,17 +98,17 @@ define(['angular'], function() {
                             var value = window["game"]["actions"][what][whoInWhat];
                             window["game"]["actions"][what][whoInWhat] = eval(value + effect);
                         } else {
-                            var value = window["game"]["actions"][what];
-                            window["game"]["actions"][what] = eval(value + effect);
+                            var value2 = window["game"]["actions"][what];
+                            window["game"]["actions"][what] = eval(value2 + effect);
                         };
 
                         if (otherWhat && otherWhoInWhat && otherEffect !== 'undefined') {
                             if (otherWhoInWhat !== 'n') {
-                                var value = window["game"]["actions"][what][otherWhoInWhat];
-                                window["game"]["actions"][otherWhat][otherWhoInWhat] = eval(value + otherEffect);
+                                var value3 = window["game"]["actions"][what][otherWhoInWhat];
+                                window["game"]["actions"][otherWhat][otherWhoInWhat] = eval(value3 + otherEffect);
                             } else {
-                                var value = window["game"]["actions"][otherWhat];
-                                window["game"]["actions"][otherWhat] = eval(value + otherEffect);
+                                var value4 = window["game"]["actions"][otherWhat];
+                                window["game"]["actions"][otherWhat] = eval(value4 + otherEffect);
                             };
                         };
                     };
@@ -134,10 +134,10 @@ define(['angular'], function() {
                 var total = this.actions.bought.length;
                 if (typeof this.actions.list[index] !== "undefined") {
                     var html = {
-                            name: this.actions.list[index].name,
-                            desc: this.actions.list[index].desc,
-                            price: this.actions.list[index].price
-                        };
+                        name: this.actions.list[index].name,
+                        desc: this.actions.list[index].desc,
+                        price: this.actions.list[index].price
+                    };
                     $("#research-actions-total").html("(" + bought + "/" + total + ")");
                     $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
                     $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');

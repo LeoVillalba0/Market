@@ -86,7 +86,7 @@ define([], function() {
             if (this.options.firstTime) {
                 this.options.firstTime = false;
                 game.options.pause = false;
-                // wait for the modal to fadeOut
+
                 window.setTimeout(function() {
                     $("#modal-newPlayer").remove();
                 }, 2000);
@@ -103,17 +103,25 @@ define([], function() {
             var that = this.game;
             that.options.now = new Date().getTime();
             var elapsed = that.options.now - that.options.before;
-            if (elapsed > that.options.interval)
-                that.updateGame(Math.floor(elapsed / that.options.interval));
-            else
-                that.updateGame(1);
+            if (elapsed > that.options.interval) {
+                if (elapsed > 1000) {
+                    that.updateGame(Math.floor(elapsed / that.options.interval), true);
+                    notify.pop("success", "While you were offline, you gained:<br>" +
+                        "$" + fix(game.actions.gainedMoneyThisRun, 3) + "<br>" +
+                        fix(game.actions.gainedRepThisRun, 3) + " rep.");
+                } else {
+                    that.updateGame(Math.floor(elapsed / that.options.interval), false);
+                }
+            } else {
+                that.updateGame(1, false);
+            }
             that.options.before = new Date().getTime();
         },
 
-        updateGame: function(times) {
+        updateGame: function(times, offline) {
             this.display();
 
-            game.actions.run(times);
+            game.actions.run(times, offline);
             //game.production.run(times);
         },
 
@@ -137,7 +145,7 @@ define([], function() {
                             game.toggleModal();
 
                         $(function() {
-                            $('[data-toggle="tooltip"]').tooltip()
+                            $('[data-toggle="tooltip"]').tooltip();
                         });
 
                         log("Angular & Bootstrap init. Ready to play.");
