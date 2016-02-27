@@ -5,7 +5,7 @@ define(['angular'], function() {
         salt: 'BRKey',
 
         save: function(from) {
-        	
+
             var toSave = {
                 money: game.money,
                 totalMoney: game.totalMoney,
@@ -60,8 +60,10 @@ define(['angular'], function() {
             };
         },
 
-        eventListenerSave: function() { game.save.save()},
-        
+        eventListenerSave: function() {
+            game.save.save()
+        },
+
         reset: function(yes, no) {
             $("#options-reset").html("Really?");
             $("#options-yes, #options-no").show();

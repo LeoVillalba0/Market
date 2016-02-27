@@ -14,14 +14,14 @@ define([], function() {
             if (this.activated) {
                 switch (type) {
                     case "alert":
-                    $("#notify-prop").removeClass();
-                    $("#notify-prop").addClass("alert alert-warning");
-                    break;
+                        $("#notify-prop").removeClass();
+                        $("#notify-prop").addClass("alert alert-warning");
+                        break;
 
                     case "success":
-                    $("#notify-prop").removeClass();
-                    $("#notify-prop").addClass("alert alert-success");
-                    break;
+                        $("#notify-prop").removeClass();
+                        $("#notify-prop").addClass("alert alert-success");
+                        break;
                 };
 
                 $("#notify-message").html(message);

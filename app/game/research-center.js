@@ -134,10 +134,10 @@ define(['angular'], function() {
                 var total = this.actions.bought.length;
                 if (typeof this.actions.list[index] !== "undefined") {
                     var html = {
-                            name: this.actions.list[index].name,
-                            desc: this.actions.list[index].desc,
-                            price: this.actions.list[index].price
-                        };
+                        name: this.actions.list[index].name,
+                        desc: this.actions.list[index].desc,
+                        price: this.actions.list[index].price
+                    };
                     $("#research-actions-total").html("(" + bought + "/" + total + ")");
                     $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
                     $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');

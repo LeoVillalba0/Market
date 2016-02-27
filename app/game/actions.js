@@ -43,29 +43,29 @@ define(['angular'], function() {
         },
 
         multiplierN: function(val) {
-        	val = parseFloat(val);
-        	if(val >= 1 && val <= 500)
-        		this.buy = val;
-        	else
-        		this.buy = 1;
-        	$("#action-buy-button").html("Buy x" + this.buy);
-        	
-        	this.display();
+            val = parseFloat(val);
+            if (val >= 1 && val <= 500)
+                this.buy = val;
+            else
+                this.buy = 1;
+            $("#action-buy-button").html("Buy x" + this.buy);
+
+            this.display();
         },
-        
+
         multiplier: function() {
-        	
-        	if(this.buy >= 1 && this.buy <10)
-        		this.buy = 10;
-        	else if(this.buy >= 10 && this.buy <100)
-        		this.buy = 100;
-        	else if(this.buy >= 100 && this.buy <250)
-        		this.buy = 250;
-        	else if(this.buy >= 250 && this.buy <500)
-        		this.buy = 500;
-        	else
-        		this.buy = 1;
-        	
+
+            if (this.buy >= 1 && this.buy < 10)
+                this.buy = 10;
+            else if (this.buy >= 10 && this.buy < 100)
+                this.buy = 100;
+            else if (this.buy >= 100 && this.buy < 250)
+                this.buy = 250;
+            else if (this.buy >= 250 && this.buy < 500)
+                this.buy = 500;
+            else
+                this.buy = 1;
+
             $("#buySlider").val(this.buy);
             this.display();
         },
@@ -95,7 +95,7 @@ define(['angular'], function() {
             $("#action-upgrade-" + (index + 1)).html("Upgrade");
         },
 
-        run: function(times,offline) {
+        run: function(times, offline) {
             if (!game.options.pause) {
                 for (var i = 0; i < this.list.length; i++) {
                     if (this.owned[i] > 0) {
@@ -107,13 +107,13 @@ define(['angular'], function() {
                         this.progress[i] += times / fps;
                         moneyAction = Math.floor(this.progress[i] / time) * reward;
                         game.gainMoney(moneyAction);
-                        
+
                         repAction = Math.floor(this.progress[i] / time) * rep;
                         game.gainRep(repAction);
-                        
-                        if(offline == true) {
-	                        this.gainedMoneyThisRun += moneyAction;
-	                        this.gainedRepThisRun += repAction;
+
+                        if (offline == true) {
+                            this.gainedMoneyThisRun += moneyAction;
+                            this.gainedRepThisRun += repAction;
                         }
 
                         game.repLevelUp();
@@ -156,14 +156,14 @@ define(['angular'], function() {
             var indexOfCheapest = game.research.getCheapest(0);
 
             if (typeof game.research.actions.list[indexOfCheapest] !== "undefined") {
-	            var htmlOfCheapest = {
+                var htmlOfCheapest = {
                     name: game.research.actions.list[indexOfCheapest].name,
                     desc: game.research.actions.list[indexOfCheapest].desc,
                     price: game.research.actions.list[indexOfCheapest].price
-	            };
-	            $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
+                };
+                $("#action-quickbuy-button").html(htmlOfCheapest.name + " ($" + fix(htmlOfCheapest.price, 0) + ")");
             } else {
-            	$("#action-quickbuy-button").removeAttr('onclick').prop('disabled', true).attr('disabled', 'disabled').addClass('btn-disabled').html("All Upgrades bought!");
+                $("#action-quickbuy-button").removeAttr('onclick').prop('disabled', true).attr('disabled', 'disabled').addClass('btn-disabled').html("All Upgrades bought!");
             }
 
             $("#action-buy-button").html("Buy x" + this.buy);
@@ -175,7 +175,7 @@ define(['angular'], function() {
             var owned = this.owned[i];
             var totalOwned = amount + this.owned[i];
 
-          	var cost =  (this.price[i] * ((Math.pow(this.inflation[i], totalOwned) - Math.pow(this.inflation[i], owned))) / (this.inflation[i]-1));
+            var cost = (this.price[i] * ((Math.pow(this.inflation[i], totalOwned) - Math.pow(this.inflation[i], owned))) / (this.inflation[i] - 1));
 
             return cost;
         },
@@ -205,7 +205,7 @@ define(['angular'], function() {
                 this.display();
             };
             $("#buySlider").on("input change", function() {
-            	game.actions.multiplierN(this.value);
+                game.actions.multiplierN(this.value);
             });
         },
 

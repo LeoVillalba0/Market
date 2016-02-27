@@ -79,16 +79,16 @@ define(['angular'], function() {
 
         loop: function(initial) {
             for (var i = 0; i < this.actions.list.length; i++) {
-            	if(initial == true) {
-            		if(game.achievements.isComplete(i, 'actions')) {
-            			this.actions.complete[i] = true;
-            		}
-            	} else {
-	                if (game.achievements.isComplete(i, 'actions') && !this.actions.complete[i]) {
-                		game.achievements.achieve(i, 'actions');
-	                    this.actions.complete[i] = true;
-                	}
-            	}
+                if (initial == true) {
+                    if (game.achievements.isComplete(i, 'actions')) {
+                        this.actions.complete[i] = true;
+                    }
+                } else {
+                    if (game.achievements.isComplete(i, 'actions') && !this.actions.complete[i]) {
+                        game.achievements.achieve(i, 'actions');
+                        this.actions.complete[i] = true;
+                    }
+                }
             };
 
             this.display();
@@ -100,14 +100,14 @@ define(['angular'], function() {
                 var owned = this.countCompleted(0);
                 var total = this.actions.list.length;
                 if (typeof this.actions.list[index] !== "undefined") {
-	                var html = {
-	                    name: this.actions.list[index].name,
-	                    desc: this.actions.list[index].desc,
-	                    desc2: this.actions.list[index].desc2,
-	                    rep: this.actions.list[index].rep
-	                };
-	                $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
-	            } else {
+                    var html = {
+                        name: this.actions.list[index].name,
+                        desc: this.actions.list[index].desc,
+                        desc2: this.actions.list[index].desc2,
+                        rep: this.actions.list[index].rep
+                    };
+                    $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
+                } else {
                     $("#achievements-actions-" + (i + 1)).html('<b>All available Achivements earned!</b>');
                 }
 

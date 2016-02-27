@@ -21,12 +21,14 @@ define([], function() {
             window["requirecss"] = requirecss;
         },
 
-        toLoad: {/*
-            'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
-            'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
-            'ionicons': 'lib/Ionicons/css/ionicons.min.css',
-            'interface': 'app/css/interface.css'
-        */}
+        toLoad: {
+            /*
+                        'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
+                        'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
+                        'ionicons': 'lib/Ionicons/css/ionicons.min.css',
+                        'interface': 'app/css/interface.css'
+                    */
+        }
     };
 
     return requirecss.init();

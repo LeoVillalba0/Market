@@ -104,25 +104,25 @@ define([], function() {
             that.options.now = new Date().getTime();
             var elapsed = that.options.now - that.options.before;
             if (elapsed > that.options.interval) {
-            	if(elapsed > 1000) {
-            		that.updateGame(Math.floor(elapsed / that.options.interval), true);
-            		//log('Offline: Money ' + game.actions.gainedMoneyThisRun + ' - Rep: ' + game.actions.gainedRepThisRun);
-            		notify.pop("success", "While you were Offline, you gained<br />" + 
-            									fix(game.actions.gainedMoneyThisRun,3) + " Money<br />" +
-            									fix(game.actions.gainedRepThisRun,3) + " Reputation<br />");
-            	} else {
-            		that.updateGame(Math.floor(elapsed / that.options.interval), false);
-            	}
+                if (elapsed > 1000) {
+                    that.updateGame(Math.floor(elapsed / that.options.interval), true);
+                    //log('Offline: Money ' + game.actions.gainedMoneyThisRun + ' - Rep: ' + game.actions.gainedRepThisRun);
+                    notify.pop("success", "While you were Offline, you gained<br />" +
+                        fix(game.actions.gainedMoneyThisRun, 3) + " Money<br />" +
+                        fix(game.actions.gainedRepThisRun, 3) + " Reputation<br />");
+                } else {
+                    that.updateGame(Math.floor(elapsed / that.options.interval), false);
+                }
             } else {
                 that.updateGame(1, false);
             }
             that.options.before = new Date().getTime();
         },
 
-        updateGame: function(times,offline) {
+        updateGame: function(times, offline) {
             this.display();
 
-            game.actions.run(times,offline);
+            game.actions.run(times, offline);
             //game.production.run(times);
         },
 

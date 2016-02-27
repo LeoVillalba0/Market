@@ -11,14 +11,14 @@ define(['angular'], function() {
     //
     //     prod: {
     //         weed: new Array(),
-	// 		weedOwned: new Array(),
-	// 		weedPerSec: new Array(),
-	// 		meth: new Array(),
-	// 		methOwned: new Array(),
-	// 		methPerSec: new Array(),
-	// 		cocaine: new Array(),
-	// 		cocaineOwned: new Array(),
-	// 		cocainePerSec: new Array(),
+    // 		weedOwned: new Array(),
+    // 		weedPerSec: new Array(),
+    // 		meth: new Array(),
+    // 		methOwned: new Array(),
+    // 		methPerSec: new Array(),
+    // 		cocaine: new Array(),
+    // 		cocaineOwned: new Array(),
+    // 		cocainePerSec: new Array(),
     //
     //         getWhat: function(drugIndex, buildIndex, type) {
     //             var drug = (game.production.list[drugIndex]).toLowerCase();
@@ -97,15 +97,15 @@ define(['angular'], function() {
     //     },
     //
     //     sell: {
-	// 		weed: new Array(),
-	// 		weedOwned: new Array(),
-	// 		weedPerSec: new Array(),
-	// 		meth: new Array(),
-	// 		methOwned: new Array(),
-	// 		methPerSec: new Array(),
-	// 		cocaine: new Array(),
-	// 		cocaineOwned: new Array(),
-	// 		cocainePerSec: new Array(),
+    // 		weed: new Array(),
+    // 		weedOwned: new Array(),
+    // 		weedPerSec: new Array(),
+    // 		meth: new Array(),
+    // 		methOwned: new Array(),
+    // 		methPerSec: new Array(),
+    // 		cocaine: new Array(),
+    // 		cocaineOwned: new Array(),
+    // 		cocainePerSec: new Array(),
     //
     //         getWhat: function(drugIndex, buildIndex, type) {
     //             var drug = (game.production.list[drugIndex]).toLowerCase();
@@ -219,7 +219,7 @@ define(['angular'], function() {
     //         		this.display();
     //         	};
     //         }
-	// 	},
+    // 	},
     //
     //     getDrugReward: function(drugIndex) {
     //         return ((this.prices[drugIndex] * this.multipliers[drugIndex]) * this.totalMultiplier);
