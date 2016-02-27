@@ -44,8 +44,5 @@
                 "bower_components/Ionicons/fonts/*.*"
             ]
         }
-    },
-    "resolutions": {
-        "angular": "1.4.8"
     }
 }

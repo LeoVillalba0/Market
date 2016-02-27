@@ -210,7 +210,3 @@ a {
     border-color: #e74c3c;
     background-color: #e74c3c;
 }
-
-.no-click {
-    cursor: default !important;
-}
