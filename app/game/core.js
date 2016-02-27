@@ -144,6 +144,10 @@ define([], function() {
                         else
                             game.toggleModal();
 
+                        $(function() {
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
+
                         log("Angular & Bootstrap init. Ready to play.");
                     });
                 });

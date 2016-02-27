@@ -208,10 +208,6 @@ define(['angular'], function() {
             $("#buySlider").on("input change", function() {
                 game.actions.multiplierN(this.value);
             });
-
-            $(function() {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
         },
 
         angularInit: function() {
