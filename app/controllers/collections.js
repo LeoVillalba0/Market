@@ -11,8 +11,10 @@ define(['angularApp'], function(app) {
                 game.options.angularInit = true;
                 $scope.setInt();
             };
+            game.collections.angularInit();
         };
 
         $timeout($scope.init);
+
     }]);
 });
