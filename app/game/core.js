@@ -86,7 +86,7 @@ define([], function() {
             if (this.options.firstTime) {
                 this.options.firstTime = false;
                 game.options.pause = false;
-                // wait for the modal to fadeOut
+
                 window.setTimeout(function() {
                     $("#modal-newPlayer").remove();
                 }, 2000);
@@ -106,10 +106,9 @@ define([], function() {
             if (elapsed > that.options.interval) {
                 if (elapsed > 1000) {
                     that.updateGame(Math.floor(elapsed / that.options.interval), true);
-                    //log('Offline: Money ' + game.actions.gainedMoneyThisRun + ' - Rep: ' + game.actions.gainedRepThisRun);
-                    notify.pop("success", "While you were Offline, you gained<br />" +
-                        fix(game.actions.gainedMoneyThisRun, 3) + " Money<br />" +
-                        fix(game.actions.gainedRepThisRun, 3) + " Reputation<br />");
+                    notify.pop("success", "While you were offline, you gained:<br>" +
+                        "$" + fix(game.actions.gainedMoneyThisRun, 3) + "<br>" +
+                        fix(game.actions.gainedRepThisRun, 3) + " rep.");
                 } else {
                     that.updateGame(Math.floor(elapsed / that.options.interval), false);
                 }

@@ -1,0 +1,33 @@
+.navbar-default {
+    border-radius: 0;
+    background-color: #375a7f
+}
+.navbar-default .navbar-nav > li > a {
+    transition: background 0.2s;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    transition: background 0.2s;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #fff
+}
+.navbar-default .navbar-nav > li.active > a:hover, .navbar-default .navbar-nav > li.active > a:focus {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.navbar-default .navbar-nav > .active > a {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.navbar-brand {
+    font-size: 18px;
+    cursor: default
+}
+.navbar-sidebar {
+    cursor: pointer
+}
+.dropdown-menu>li>a {
+    transition: all 0.2s;
+    color: #333;
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    transition: all 0.2s;
+    background-color: #375a7f;
+}
