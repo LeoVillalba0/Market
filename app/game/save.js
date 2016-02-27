@@ -14,7 +14,8 @@ define(['angular'], function() {
                 reputationNeed: game.reputationNeed,
                 actions: game.actions,
                 research: game.research,
-                options: game.options
+                options: game.options,
+                collectionsOwned: game.collections.owned
             };
 
             localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
@@ -50,6 +51,8 @@ define(['angular'], function() {
 
                 game.options.before = savegame.options.before;
                 game.options.firstTime = savegame.options.firstTime;
+
+                game.collections.owned = savegame.collectionsOwned;
 
                 game.research.display();
 
