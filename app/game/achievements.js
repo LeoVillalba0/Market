@@ -99,15 +99,20 @@ define(['angular'], function() {
                 var index = this.getCurrent(0, i);
                 var owned = this.countCompleted(0);
                 var total = this.actions.list.length;
-                var html = {
-                    name: this.actions.list[index].name,
-                    desc: this.actions.list[index].desc,
-                    desc2: this.actions.list[index].desc2,
-                    rep: this.actions.list[index].rep
-                };
+                if (typeof this.actions.list[index] !== "undefined") {
+	                var html = {
+	                    name: this.actions.list[index].name,
+	                    desc: this.actions.list[index].desc,
+	                    desc2: this.actions.list[index].desc2,
+	                    rep: this.actions.list[index].rep
+	                };
+	                $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
+	            } else {
+                    $("#achievements-actions-" + (i + 1)).html('<b>All available Achivements earned!</b>');
+                }
 
                 $("#achievements-actions-total").html("(" + owned + "/" + total + ")");
-                $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
+
             };
         },
 
