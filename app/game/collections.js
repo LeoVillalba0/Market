@@ -27,7 +27,8 @@ define(['angular'], function() {
         list: new Array(),
         startPrice: 1e17,
         startRep: 1e5,
-        increase: 1.55,
+        increasePrice: 1.55,
+        increaseRep: 1.55,
 
         getRandTier: function() {
             var randNum = Math.random().toFixed(3);
@@ -102,10 +103,24 @@ define(['angular'], function() {
         earnItem: function(pay) {
             switch (pay) {
                 case 'money':
-                    this.addRandomItem();
+                    var price = (this.startPrice * Math.pow(this.increasePrice, this.owned.length));
+                    if (game.money >= price) {
+                        game.money -= price;
+                        this.addRandomItem();
+                        this.display();
+                        return true;
+                    }
+                    return false;
                     break;
                 case 'rep':
-                    this.addRandomItem();
+                    var rep = (this.startRep * Math.pow(this.increaseRep, this.owned.length));
+                    if (game.reputation >= rep) {
+                        game.reputation -= rep;
+                        this.addRandomItem();
+                        this.display();
+                        return true;
+                    }
+                    return false;
                     break;
                 default:
                     this.addRandomItem();
