@@ -1,2 +1,1 @@
-define(['angular'], function() {
-});
+define(['angular'], function() {});
