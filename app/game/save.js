@@ -19,9 +19,8 @@ define(['angular'], function() {
 
             localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
 
-            if (from == 'user') {
+            if (from == 'user')
                 notify.pop("success", "Game successfully saved!");
-            };
 
             log("Game saved.");
         },
@@ -61,7 +60,7 @@ define(['angular'], function() {
         },
 
         eventListenerSave: function() {
-            game.save.save()
+            game.save.save();
         },
 
         reset: function(yes, no) {
@@ -70,9 +69,7 @@ define(['angular'], function() {
             $("#options-reset").addClass('really');
 
             if (yes) {
-
                 window.removeEventListener("beforeunload", game.save.eventListenerSave, false);
-
                 localStorage.removeItem((this.name + this.salt));
                 window.history.pushState('', '', '/#/');
                 window.location.reload();
@@ -94,7 +91,6 @@ define(['angular'], function() {
         init: function() {
             this.setInt();
             window["game"]["save"] = this;
-
             window.addEventListener("beforeunload", game.save.eventListenerSave, false);
 
             log("Save init.");

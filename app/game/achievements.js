@@ -50,7 +50,7 @@ define(['angular'], function() {
             var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
             var rep = window["game"]["achievements"][part]["list"][index]["rep"];
             var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
-            var repActual = window["game"]["reputation"]
+            var repActual = window["game"]["reputation"];
             window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue); // eval is evil!
             window["game"]["reputation"] += rep;
             this.display();
@@ -79,7 +79,7 @@ define(['angular'], function() {
 
         loop: function(initial) {
             for (var i = 0; i < this.actions.list.length; i++) {
-                if (initial == true) {
+                if (initial === true) {
                     if (game.achievements.isComplete(i, 'actions')) {
                         this.actions.complete[i] = true;
                     }

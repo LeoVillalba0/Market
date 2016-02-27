@@ -1,0 +1,72 @@
+.sidebar {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: #2c3e50;
+    border-right: 1px solid #171A1D;
+    transition: transform .5s;
+    -webkit-transition: -webkit-transform .5s;
+    transform: translate3d(-100%, 0, 0);
+    color: #fff;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+.sidebar h1 {
+    margin: 25px 0 15px 0;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px
+}
+.sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+.sidebar ul li a {
+    display: block;
+    padding: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1)
+}
+.sidebar ul li {
+    transition: background .3s;
+    border-bottom: 1px solid #171A1D
+}
+.sidebar ul li:first-child {
+    border-top: 1px solid #171A1D
+}
+.sidebar ul li:hover, .sidebar ul li:active {
+    background-color: #171A1D
+}
+.sidebar ul li img {
+    margin: -2px 0 0 0;
+}
+.sidebar-close {
+    font-size: 24px;
+    margin: 0 139.5px 15px;
+    cursor: pointer
+}
+
+.pushed {
+    padding-top: 70px;
+    min-height: 100%;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    transform: translate3d(0%, 0, 0);
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+    -webkit-transition-timing-function: cubic-bezier(0.4, 0, 1, 1)
+}
+.pushed.active {
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none
+}
+.pushed.active .game-content {
+    cursor: default;
+}
