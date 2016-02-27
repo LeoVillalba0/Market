@@ -111,7 +111,7 @@ define(['angular'], function() {
                         repAction = Math.floor(this.progress[i] / time) * rep;
                         game.gainRep(repAction);
 
-                        if (offline == true) {
+                        if (offline === true) {
                             this.gainedMoneyThisRun += moneyAction;
                             this.gainedRepThisRun += repAction;
                         }

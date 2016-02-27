@@ -98,17 +98,17 @@ define(['angular'], function() {
                             var value = window["game"]["actions"][what][whoInWhat];
                             window["game"]["actions"][what][whoInWhat] = eval(value + effect);
                         } else {
-                            var value = window["game"]["actions"][what];
-                            window["game"]["actions"][what] = eval(value + effect);
+                            var value2 = window["game"]["actions"][what];
+                            window["game"]["actions"][what] = eval(value2 + effect);
                         };
 
                         if (otherWhat && otherWhoInWhat && otherEffect !== 'undefined') {
                             if (otherWhoInWhat !== 'n') {
-                                var value = window["game"]["actions"][what][otherWhoInWhat];
-                                window["game"]["actions"][otherWhat][otherWhoInWhat] = eval(value + otherEffect);
+                                var value3 = window["game"]["actions"][what][otherWhoInWhat];
+                                window["game"]["actions"][otherWhat][otherWhoInWhat] = eval(value3 + otherEffect);
                             } else {
-                                var value = window["game"]["actions"][otherWhat];
-                                window["game"]["actions"][otherWhat] = eval(value + otherEffect);
+                                var value4 = window["game"]["actions"][otherWhat];
+                                window["game"]["actions"][otherWhat] = eval(value4 + otherEffect);
                             };
                         };
                     };

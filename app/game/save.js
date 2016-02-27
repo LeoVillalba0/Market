@@ -60,7 +60,7 @@ define(['angular'], function() {
         },
 
         eventListenerSave: function() {
-            game.save.save()
+            game.save.save();
         },
 
         reset: function(yes, no) {
