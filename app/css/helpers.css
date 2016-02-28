@@ -1,0 +1,7 @@
+.no-click {
+    cursor: default !important;
+}
+
+.pointer {
+    cursor: pointer !important;
+}

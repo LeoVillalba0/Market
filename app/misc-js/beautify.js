@@ -3,6 +3,10 @@ define([], function() {
         return beautify.fix(x, n);
     };
 
+    function capF(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
     var beautify = {
         prefixes: ["m ", "b ", "t ", "q ", "Q ", "s ", "S ", "o ", "n ",
             "D ", "UD ", "DD ", "TD ", "qD ", "QD ", "sD ", "SD ", "OD ", "ND ",
@@ -45,6 +49,7 @@ define([], function() {
         init: function() {
             window["beautify"] = this;
             window["fix"] = fix;
+            window["capF"] = capF;
             log("Beautify init.");
         }
     };

@@ -204,6 +204,7 @@ define(['angular'], function() {
                 game.achievements.loop(true);
                 this.display();
             };
+
             $("#buySlider").on("input change", function() {
                 game.actions.multiplierN(this.value);
             });

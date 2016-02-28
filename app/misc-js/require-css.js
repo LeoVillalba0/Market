@@ -19,15 +19,15 @@ define([], function() {
         init: function() {
             this.loadAll();
             window["requirecss"] = requirecss;
+
+            log("Require-CSS init.");
         },
 
         toLoad: {
-            /*
-                        'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
-                        'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
-                        'ionicons': 'lib/Ionicons/css/ionicons.min.css',
-                        'interface': 'app/css/interface.css'
-                    */
+            /*'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
+            'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
+            'ionicons': 'lib/Ionicons/css/ionicons.min.css',
+            'interface': 'app/css/interface.css'*/
         }
     };
 

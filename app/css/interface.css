@@ -39,15 +39,6 @@ a {
 .panel {
     margin-bottom: 0px;
 }
-.notify {
-    position: absolute;
-    bottom: 0;
-    right: 30px;
-    width: 350px;
-    border-radius: 4px;
-    opacity: 0.9;
-    color: white;
-}
 .row .panel .panel-heading {
     text-align: center;
     background-color: #375a7f;
@@ -209,8 +200,4 @@ a {
 .really:hover, .really:active, .really:focus {
     border-color: #e74c3c;
     background-color: #e74c3c;
-}
-
-.no-click {
-    cursor: default !important;
 }
