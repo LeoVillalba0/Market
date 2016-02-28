@@ -47,12 +47,19 @@ define(['angular'], function() {
         achieve: function(index, part) {
             var changeValue = window["game"]["achievements"][part]["list"][index]["changeValue"];
             var changeName = window["game"]["achievements"][part]["list"][index]["changeName"];
-            var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
+
+            if (changeName !== "") {
+                var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
+                var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
+                window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue); // eval is evil!
+            }
+
             var rep = window["game"]["achievements"][part]["list"][index]["rep"];
-            var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
-            var repActual = window["game"]["reputation"];
-            window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue); // eval is evil!
-            window["game"]["reputation"] += rep;
+            if (rep !== 0) {
+                var repActual = window["game"]["reputation"];
+                window["game"]["reputation"] += rep;
+            }
+
             this.display();
             game.collections.getItemDroppedByChance();
             game.animateMenu('achievements');
@@ -101,6 +108,7 @@ define(['angular'], function() {
                 var index = this.getCurrent(0, i);
                 var owned = this.countCompleted(0);
                 var total = this.actions.list.length;
+                var repHtmlText = "";
                 if (typeof this.actions.list[index] !== "undefined") {
                     var html = {
                         name: this.actions.list[index].name,
@@ -108,7 +116,14 @@ define(['angular'], function() {
                         desc2: this.actions.list[index].desc2,
                         rep: this.actions.list[index].rep
                     };
-                    $("#achievements-actions-" + (i + 1)).html("<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" + html.desc2 + "<span>+" + fix(html.rep, 0) + " rep.</span>");
+
+                    if (html.rep !== 0) repHtmlText = "<span>+" + fix(html.rep, 0) + " rep.</span>";
+
+                    $("#achievements-actions-" + (i + 1)).html(
+                        "<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" +
+                        html.desc2 +
+                        repHtmlText
+                    );
                 } else {
                     $("#achievements-actions-" + (i + 1)).html('<b>All available Achivements earned!</b>');
                 }
@@ -122,11 +137,15 @@ define(['angular'], function() {
             this.actions.list = [
                 new this.create("Shooter I", 0, "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 25, "timeMultiplier[0]", "*2", 10),
                 new this.create("Shooter II", 0, "Shooting at level 50", "Shooting speed x2", "actions", "owned[0]", 50, "timeMultiplier[0]", "*2", 20),
-                new this.create("Shooter III", 0, "Shooting at level 100", "Shooting speed x2", "actions", "owned[0]", 100, "timeMultiplier[0]", "*2", 30),
-                new this.create("Shooter IV", 0, "Shooting at level 200", "Shooting speed x2", "actions", "owned[0]", 200, "timeMultiplier[0]", "*2", 40),
-                new this.create("Shooter V", 0, "Shooting at level 300", "Shooting speed x2", "actions", "owned[0]", 300, "timeMultiplier[0]", "*2", 50),
-                new this.create("Shooter VI", 0, "Shooting at level 400", "Shooting speed x2", "actions", "owned[0]", 400, "timeMultiplier[0]", "*2", 60),
-                new this.create("Shooter VII", 0, "Shooting at level 500", "Shooting reward x3", "actions", "owned[0]", 500, "rewardMultiplier[0]", "*3", 70),
+                new this.create("Shooter III", 0, "Shooting at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
+                new this.create("Shooter IV", 0, "Shooting at level 100", "Shooting speed x2", "actions", "owned[0]", 100, "timeMultiplier[0]", "*2", 30),
+                new this.create("Shooter V", 0, "Shooting at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
+                new this.create("Shooter VI", 0, "Shooting at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
+                new this.create("Shooter VII", 0, "Shooting at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
+                new this.create("Shooter VIII", 0, "Shooting at level 200", "Shooting speed x2", "actions", "owned[0]", 200, "timeMultiplier[0]", "*2", 40),
+                new this.create("Shooter IX", 0, "Shooting at level 300", "Shooting speed x2", "actions", "owned[0]", 300, "timeMultiplier[0]", "*2", 50),
+                new this.create("Shooter X", 0, "Shooting at level 400", "Shooting speed x2", "actions", "owned[0]", 400, "timeMultiplier[0]", "*2", 60),
+                new this.create("Shooter XI", 0, "Shooting at level 500", "Shooting reward x3", "actions", "owned[0]", 500, "rewardMultiplier[0]", "*3", 70),
 
                 new this.create("Fighter I", 1, "Street fight at level 25", "Street fight speed x2", "actions", "owned[1]", 25, "timeMultiplier[1]", "*2", 15),
                 new this.create("Fighter II", 1, "Street fight at level 50", "Street fight speed x2", "actions", "owned[1]", 50, "timeMultiplier[1]", "*2", 25),
