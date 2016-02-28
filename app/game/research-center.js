@@ -194,9 +194,9 @@ define(['angular'], function() {
 
             var height = $("body").height();
             $("#research-actions").css({
-                'max-height': (height + 200) + 'px',
+                'max-height': (height - 200) + 'px',
                 'overflow-y': 'auto'
-            })
+            });
 
             this.display();
         },
