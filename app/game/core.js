@@ -74,6 +74,13 @@ define([], function() {
             };
         },
 
+        animateMenu: function(menuitem) {
+            var classMenuItem = '.navbar-menu-' + menuitem;
+            $(classMenuItem).addClass("glow").delay(1000).queue(function() {
+                $(this).removeClass("glow").dequeue();
+            });
+        },
+
         toggleModal: function() {
             if (this.options.firstTime) {
                 $("#modal-newPlayer").modal({

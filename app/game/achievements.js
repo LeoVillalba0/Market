@@ -54,6 +54,8 @@ define(['angular'], function() {
             window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue); // eval is evil!
             window["game"]["reputation"] += rep;
             this.display();
+            game.collections.getItemDroppedByChance();
+            game.animateMenu('achievements');
 
             var name = window["game"]["achievements"][part]["list"][index]["name"];
             var effect = window["game"]["achievements"][part]["list"][index]["desc2"];

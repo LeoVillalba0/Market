@@ -29,6 +29,8 @@ define(['angular'], function() {
         startRep: 1e5,
         increasePrice: 1.55,
         increaseRep: 1.55,
+        chanceEarningItem: 0.10,
+        chanceEarningItemMultiplier: 1.00,
 
         getRandTier: function() {
             var randNum = Math.random().toFixed(3);
@@ -132,6 +134,17 @@ define(['angular'], function() {
             };
 
             this.display();
+        },
+
+        getItemDroppedByChance: function() {
+            var randNum = Math.random().toFixed(3);
+            var chance = this.chanceEarningItemMultiplier * this.chanceEarningItem;
+            if (randNum <= chance) {
+                this.earnItem();
+                game.animateMenu('collections');
+                return true;
+            }
+            return false;
         },
 
         display: function() {

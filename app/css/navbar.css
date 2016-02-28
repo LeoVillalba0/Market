@@ -36,3 +36,6 @@
     transition: all 0.2s;
     background-color: #375a7f;
 }
+.glow {
+	text-shadow: 0 0 15px #88FF77, 0 0 15px #88FF77, 0 0 15px #88FF77, 0 0 15px #88FF77;
+}
