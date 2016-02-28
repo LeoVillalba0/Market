@@ -111,6 +111,8 @@ define(['angular'], function() {
                                 window["game"]["actions"][otherWhat] = eval(value4 + otherEffect);
                             };
                         };
+                        game.collections.getItemDroppedByChance();
+                        game.animateMenu('research');
                     };
 
                     game.actions.display();
