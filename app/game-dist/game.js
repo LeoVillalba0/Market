@@ -73,7 +73,11 @@ define(["angular"], function() {
         },
         domInit: function() {
             for (var e = 0; e < game.actions.list.length; e++) $("#achievements-actions").append('<li id="achievements-actions-' + (e + 1) + '" class="list-group-item achievement"></li>');
-            this.loop(!0), this.display()
+            var t = $("body").height();
+            $("#achievements-actions").css({
+                "max-height": t - 200 + "px",
+                "overflow-y": "auto"
+            }), this.loop(!0), this.display()
         },
         angularInit: function() {
             this.domInit()
@@ -219,13 +223,12 @@ define(["angular"], function() {
                 unique: []
             }
         },
-        owned: {
-            actions: new Array,
-            production: new Array
-        },
+        owned: new Array,
         list: new Array,
         startPrice: 1e17,
-        increase: 1.55,
+        startRep: 1e5,
+        increasePrice: 1.55,
+        increaseRep: 1.55,
         getRandTier: function() {
             var e = Math.random().toFixed(3);
             return e <= this.chances[0] ? tier = 0 : e <= this.chances[1] ? tier = 1 : e <= this.chances[2] ? tier = 2 : tier = 3, tier
@@ -253,33 +256,46 @@ define(["angular"], function() {
         create: function(e, t, n, r, i, s, o, u) {
             this.name = e, this.tier = t, this.category = n, this.desc = r, this.who = i, this.effect = s, this.otherWho = o, this.otherEffect = u
         },
-        generateTestTenItems: function() {
-            $("#generated-items").html("");
-            for (i = 0; i < 10; i++) {
-                var e = this.getRandItem(this.getRandTier());
-                $("#generated-items").append('<li id="collection-item-' + (i + 1) + '" class="list-group-item">' + this.categories[e.category] + ":<b> " + e.name + "</b><span>Tier <b>" + this.tiers[e.tier] + "</b></span><br>" + e.desc + "<br>" + e.who + " " + e.effect + "<span>" + e.otherWho + " " + e.otherEffect + "</li>"), log("Tier: " + e.tier + " Category: " + this.categories[e.category] + " Item: " + e.name)
+        addRandomItem: function() {
+            var e = this.getRandItem(this.getRandTier()),
+                t = window.game.collections.names[this.categories[e.category]][game.collections.tiers[e.tier]].length;
+            e.name = window.game.collections.names[this.categories[e.category]][game.collections.tiers[e.tier]][Math.floor(Math.random() * t)];
+            switch (e.category) {
+                case 0:
+                    var n = game.actions.totalReputationMultiplier,
+                        r = game.actions.totalRewardMultiplier;
+                    window.game.actions[e.who] = window.game.actions[e.who] * e.effect, window.game.actions[e.otherWho] = window.game.actions[e.otherWho] * e.otherEffect;
+                    break;
+                case 1:
             }
+            this.owned.reverse(), this.owned[this.owned.length] = e, this.owned.reverse()
         },
-        generateAndDisplay: function() {
-            for (var e = 0; e < 10; e++) {
-                var t = this.getRandItem(this.getRandTier()),
-                    n = this.categories[t.category],
-                    r = window.game.collections.names[n][this.tiers[t.tier]].length,
-                    i = this.getTableColor(this.tiers[t.tier]);
-                t.name = window.game.collections.names[n][this.tiers[t.tier]][Math.floor(Math.random() * r)];
-                switch (n) {
-                    case "actions":
-                        this.owned.actions.push(t);
-                        break;
-                    case "production":
-                        this.owned.production.push(t)
-                }
-                $("#collection-" + n + "-tbody").append('<tr class="' + i + '">' + "<th>" + capF(this.tiers[t.tier]) + "</th>" + "<td>" + t.name + "</td>" + "<td>" + t.desc + "</td>" + "</tr>")
+        earnItem: function(e) {
+            switch (e) {
+                case "money":
+                    var t = this.startPrice * Math.pow(this.increasePrice, this.owned.length);
+                    if (game.money >= t) return game.money -= t, this.addRandomItem(), this.display(), !0;
+                    return !1;
+                case "rep":
+                    var n = this.startRep * Math.pow(this.increaseRep, this.owned.length);
+                    if (game.reputation >= n) return game.reputation -= n, this.addRandomItem(), this.display(), !0;
+                    return !1;
+                default:
+                    this.addRandomItem()
             }
+            this.display()
         },
-        display: function() {},
+        display: function() {
+            this.categories.forEach(function(e) {
+                $("#collection-" + e + "-tbody").html("")
+            }), typeof this.owned == "object" && this.owned.length > 0 && this.owned.forEach(function(e) {
+                var t = game.collections.categories[e.category],
+                    n = game.collections.getTableColor(game.collections.tiers[e.tier]);
+                $("#collection-" + t + "-tbody").append('<tr class="' + n + '">' + "<th>" + capF(game.collections.tiers[e.tier]) + "</th>" + "<td>" + e.name + "</td>" + "<td>" + e.desc + "</td>" + "</tr>")
+            })
+        },
         varInit: function() {
-            this.list[0] = new Array(new this.create("COMMON 1", 0, 0, "+2% money reward +2% rep. reward</span>", "totalRewardMultiplier", "*1.02", "totalReputationMultiplier", "*1.02"), new this.create("COMMON 2", 0, 0, "+3% money reward +3% rep. reward</span>", "totalRewardMultiplier", "*1.03", "totalReputationMultiplier", "*1.03"), new this.create("COMMON 3", 0, 0, "+4% money reward +4% rep. reward</span>", "totalRewardMultiplier", "*1.04", "totalReputationMultiplier", "*1.04"), new this.create("COMMON 4", 0, 0, "+5% money reward +5% rep. reward</span>", "totalRewardMultiplier", "*1.05", "totalReputationMultiplier", "*1.05"), new this.create("COMMON 5", 0, 0, "+6% money reward +6% rep. reward</span>", "totalRewardMultiplier", "*1.06", "totalReputationMultiplier", "*1.06"), new this.create("COMMON 6", 0, 0, "+7% money reward +7% rep. reward</span>", "totalRewardMultiplier", "*1.07", "totalReputationMultiplier", "*1.07"), new this.create("COMMON 7", 0, 0, "+8% money reward +8% rep. reward</span>", "totalRewardMultiplier", "*1.08", "totalReputationMultiplier", "*1.08"), new this.create("COMMON 8", 0, 0, "+9% money reward +9% rep. reward</span>", "totalRewardMultiplier", "*1.09", "totalReputationMultiplier", "*1.09"), new this.create("Dealer Stuff I-I", 0, 1, "+2% money reward", "totalRewardMultiplier", "*1.02", "", ""), new this.create("Dealer Stuff I-II", 0, 1, "+3% money reward", "totalRewardMultiplier", "*1.03", "", ""), new this.create("Dealer Stuff I-III", 0, 1, "+5% money reward", "totalRewardMultiplier", "*1.05", "", "")), this.list[1] = new Array(new this.create("UNCOMMON 1", 1, 0, "+10% money reward +10% rep. reward", "totalRewardMultiplier", "*1.10", "totalReputationMultiplier", "*1.10"), new this.create("UNCOMMON 2", 1, 0, "+12% money reward +12% rep. reward", "totalRewardMultiplier", "*1.12", "totalReputationMultiplier", "*1.12"), new this.create("UNCOMMON 3", 1, 0, "+14% money reward +14% rep. reward", "totalRewardMultiplier", "*1.14", "totalReputationMultiplier", "*1.14"), new this.create("Dealer Stuff II-I", 1, 1, "+6% money reward", "totalRewardMultiplier", "*1.06", "", ""), new this.create("Dealer Stuff II-II", 1, 1, "+7% money reward", "totalRewardMultiplier", "*1.07", "", ""), new this.create("Dealer Stuff II-III", 1, 1, "+8% money reward", "totalRewardMultiplier", "*1.08", "", "")), this.list[2] = new Array(new this.create("RARE 1", 2, 0, "+16% money reward +16% rep. reward", "totalRewardMultiplier", "*1.16", "totalReputationMultiplier", "*1.16"), new this.create("RARE 2", 2, 0, "+18% money reward +18% rep. reward", "totalRewardMultiplier", "*1.18", "totalReputationMultiplier", "*1.18"), new this.create("RARE 3", 2, 0, "+20% money reward +20% rep. reward", "totalRewardMultiplier", "*1.20", "totalReputationMultiplier", "*1.20"), new this.create("Dealer Stuff III-I", 2, 1, "9% money reward", "totalRewardMultiplier", "*1.09", "", ""), new this.create("Dealer Stuff III-II", 2, 1, "10% money reward", "totalRewardMultiplier", "*1.10", "", ""), new this.create("Dealer Stuff III-III", 2, 1, "11% money reward", "totalRewardMultiplier", "*1.11", "", "")), this.list[3] = new Array(new this.create("UNIQUE 1", 3, 0, "+22% money reward +22% rep. reward", "totalRewardMultiplier", "*1.22", "totalReputationMultiplier", "*1.22"), new this.create("UNIQUE 2", 3, 0, "+24% money reward +24% rep. reward", "totalRewardMultiplier", "*1.24", "totalReputationMultiplier", "*1.24"), new this.create("UNIQUE 3", 3, 0, "+26% money reward +26% rep. reward", "totalRewardMultiplier", "*1.26", "totalReputationMultiplier", "*1.26"), new this.create("Dealer Stuff IV-I", 3, 1, "+12% money reward", "totalRewardMultiplier", "*1.12", "", ""), new this.create("Dealer Stuff IV-II", 3, 1, "+13% money reward", "totalRewardMultiplier", "*1.13", "", ""), new this.create("Dealer Stuff IV-III", 3, 1, "+14% money reward", "totalRewardMultiplier", "*1.14", "", ""))
+            this.list[0] = new Array(new this.create("COMMON 1", 0, 0, "+2% money reward +2% rep. reward</span>", "totalRewardMultiplier", "1.02", "totalReputationMultiplier", "1.02"), new this.create("COMMON 2", 0, 0, "+3% money reward +3% rep. reward</span>", "totalRewardMultiplier", "1.03", "totalReputationMultiplier", "1.03"), new this.create("COMMON 3", 0, 0, "+4% money reward +4% rep. reward</span>", "totalRewardMultiplier", "1.04", "totalReputationMultiplier", "1.04"), new this.create("COMMON 4", 0, 0, "+5% money reward +5% rep. reward</span>", "totalRewardMultiplier", "1.05", "totalReputationMultiplier", "1.05"), new this.create("COMMON 5", 0, 0, "+6% money reward +6% rep. reward</span>", "totalRewardMultiplier", "1.06", "totalReputationMultiplier", "1.06"), new this.create("COMMON 6", 0, 0, "+7% money reward +7% rep. reward</span>", "totalRewardMultiplier", "1.07", "totalReputationMultiplier", "1.07"), new this.create("COMMON 7", 0, 0, "+8% money reward +8% rep. reward</span>", "totalRewardMultiplier", "1.08", "totalReputationMultiplier", "1.08"), new this.create("COMMON 8", 0, 0, "+9% money reward +9% rep. reward</span>", "totalRewardMultiplier", "1.09", "totalReputationMultiplier", "1.09"), new this.create("Dealer Stuff I-I", 0, 1, "+2% money reward", "totalRewardMultiplier", "1.02", "", ""), new this.create("Dealer Stuff I-II", 0, 1, "+3% money reward", "totalRewardMultiplier", "1.03", "", ""), new this.create("Dealer Stuff I-III", 0, 1, "+5% money reward", "totalRewardMultiplier", "1.05", "", "")), this.list[1] = new Array(new this.create("UNCOMMON 1", 1, 0, "+10% money reward +10% rep. reward", "totalRewardMultiplier", "1.10", "totalReputationMultiplier", "1.10"), new this.create("UNCOMMON 2", 1, 0, "+12% money reward +12% rep. reward", "totalRewardMultiplier", "1.12", "totalReputationMultiplier", "1.12"), new this.create("UNCOMMON 3", 1, 0, "+14% money reward +14% rep. reward", "totalRewardMultiplier", "1.14", "totalReputationMultiplier", "1.14"), new this.create("Dealer Stuff II-I", 1, 1, "+6% money reward", "totalRewardMultiplier", "1.06", "", ""), new this.create("Dealer Stuff II-II", 1, 1, "+7% money reward", "totalRewardMultiplier", "1.07", "", ""), new this.create("Dealer Stuff II-III", 1, 1, "+8% money reward", "totalRewardMultiplier", "1.08", "", "")), this.list[2] = new Array(new this.create("RARE 1", 2, 0, "+16% money reward +16% rep. reward", "totalRewardMultiplier", "1.16", "totalReputationMultiplier", "1.16"), new this.create("RARE 2", 2, 0, "+18% money reward +18% rep. reward", "totalRewardMultiplier", "1.18", "totalReputationMultiplier", "1.18"), new this.create("RARE 3", 2, 0, "+20% money reward +20% rep. reward", "totalRewardMultiplier", "1.20", "totalReputationMultiplier", "1.20"), new this.create("Dealer Stuff III-I", 2, 1, "9% money reward", "totalRewardMultiplier", "1.09", "", ""), new this.create("Dealer Stuff III-II", 2, 1, "10% money reward", "totalRewardMultiplier", "1.10", "", ""), new this.create("Dealer Stuff III-III", 2, 1, "11% money reward", "totalRewardMultiplier", "1.11", "", "")), this.list[3] = new Array(new this.create("UNIQUE 1", 3, 0, "+22% money reward +22% rep. reward", "totalRewardMultiplier", "1.22", "totalReputationMultiplier", "1.22"), new this.create("UNIQUE 2", 3, 0, "+24% money reward +24% rep. reward", "totalRewardMultiplier", "1.24", "totalReputationMultiplier", "1.24"), new this.create("UNIQUE 3", 3, 0, "+26% money reward +26% rep. reward", "totalRewardMultiplier", "1.26", "totalReputationMultiplier", "1.26"), new this.create("Dealer Stuff IV-I", 3, 1, "+12% money reward", "totalRewardMultiplier", "*1.12", "", ""), new this.create("Dealer Stuff IV-II", 3, 1, "+13% money reward", "totalRewardMultiplier", "*1.13", "", ""), new this.create("Dealer Stuff IV-III", 3, 1, "+14% money reward", "totalRewardMultiplier", "*1.14", "", ""))
         },
         domInit: function() {
             this.display()
@@ -304,6 +320,7 @@ define([], function() {
             fps: 20,
             interval: 50,
             angularInit: !1,
+            init: !1,
             pause: !0,
             firstTime: !0,
             menu: "navbar",
@@ -339,10 +356,10 @@ define([], function() {
             }), sidebar.activated = !1)
         },
         toggleModal: function() {
-            this.options.firstTime && $("#modal-newPlayer").modal({
+            this.options.firstTime && ($("#modal-newPlayer").modal({
                 keyboard: !1,
                 backdrop: "static"
-            })
+            }), $("#modal-newPlayer").fadeIn("slow"))
         },
         closeModal: function() {
             this.options.firstTime && (this.options.firstTime = !1, e.options.pause = !1, window.setTimeout(function() {
@@ -361,13 +378,16 @@ define([], function() {
         updateGame: function(t, n) {
             this.display(), e.actions.run(t, n)
         },
+        domInit: function() {
+            $("#navbar-save").attr("onclick", 'game.save.save("user");')
+        },
         init: function() {
             window.game = this, window.log = console.info.bind(console, "BR-" + this.options.version + " :"), require(["beautify", "sidebar", "notify"], function() {
                 log("----------"), require(["actions", "research-center", "achievements", "prestige", "collections", "save"], function() {
                     e.save.load(), localStorage.getItem(e.save.name + e.save.salt) === null && (e.options.before = (new Date).getTime()), log("----------"), require(["angular", "bootstrap"], function() {
-                        e.options.firstTime ? e.toggleModal() : e.options.pause = !1, $(function() {
-                            $('[data-toggle="tooltip"]').tooltip()
-                        }), log("Angular & Bootstrap init. Ready to play.")
+                        e.options.firstTime ? window.setTimeout(function() {
+                            e.toggleModal()
+                        }, 2e3) : e.options.pause = !1, this.init = !0, log("Angular & Bootstrap init. Ready to play.")
                     })
                 })
             })
@@ -480,7 +500,7 @@ define(["angular"], function() {
             for (var e = 0; e < this.actions.upTypes; e++) $("#research-actions").append('<li id="research-actions-upgrade-' + (e + 1) + '" class="list-group-item"></li>'), $("#research-actions-upgrade-" + (e + 1)).attr("onclick", "game.research.buy(0, " + e + ");");
             var t = $("body").height();
             $("#research-actions").css({
-                "max-height": t + 200 + "px",
+                "max-height": t - 200 + "px",
                 "overflow-y": "auto"
             }), this.display()
         },
@@ -497,6 +517,7 @@ define(["angular"], function() {
     var e = {
         name: "BR-S",
         salt: "BRKey",
+        saveInterval: undefined,
         save: function(e) {
             var t = {
                 money: game.money,
@@ -504,9 +525,17 @@ define(["angular"], function() {
                 level: game.level,
                 reputation: game.reputation,
                 reputationNeed: game.reputationNeed,
-                actions: game.actions,
-                research: game.research,
-                options: game.options
+                actionsProgress: game.actions.progress,
+                actionsOwned: game.actions.owned,
+                actionsRewardMultiplier: game.actions.rewardMultiplier,
+                actionsTotalRewardMultiplier: game.actions.totalRewardMultiplier,
+                actionsTimeMultiplier: game.actions.timeMultiplier,
+                actionsTotalTimeMultiplier: game.actions.totalTimeMultiplier,
+                actionsCurrentRep: game.actions.currentRep,
+                researchActionsBought: game.research.actions.bought,
+                collectionsOwned: game.collections.owned,
+                optionsBefore: game.options.before,
+                optionsFirstTime: game.options.firstTime
             };
             localStorage.setItem(this.name + this.salt, JSON.stringify(t)), e == "user" && notify.pop("success", "Game successfully saved!"), log("Game saved.")
         },
@@ -514,19 +543,19 @@ define(["angular"], function() {
             if (localStorage.getItem(this.name + this.salt) === null) notify.pop("alert", "No save found!");
             else {
                 var t = JSON.parse(localStorage.getItem(this.name + this.salt));
-                game.money = t.money, game.totalMoney = t.totalMoney, game.level = t.level, game.reputation = t.reputation, game.reputationNeed = t.reputationNeed, game.actions.progress = t.actions.progress, game.actions.owned = t.actions.owned, game.actions.rewardMultiplier = t.actions.rewardMultiplier, game.actions.totalRewardMultiplier = t.actions.totalRewardMultiplier, game.actions.timeMultiplier = t.actions.timeMultiplier, game.actions.totalTimeMultiplier = t.actions.totalTimeMultiplier, game.actions.currentRep = t.actions.currentRep, game.actions.reputationDivider = t.actions.reputationDivider, game.research.actions.bought = t.research.actions.bought, game.options.before = t.options.before, game.options.firstTime = t.options.firstTime, game.research.display(), e == "user" && notify.pop("success", "Save-game successfully loaded!"), log("Savegame loaded.")
+                game.money = t.money, game.totalMoney = t.totalMoney, game.level = t.level, game.reputation = t.reputation, game.reputationNeed = t.reputationNeed, game.actions.progress = t.actionsProgress, game.actions.owned = t.actionsOwned, game.actions.rewardMultiplier = t.actionsRewardMultiplier, game.actions.totalRewardMultiplier = t.actionsTotalRewardMultiplier, game.actions.timeMultiplier = t.actionsTimeMultiplier, game.actions.totalTimeMultiplier = t.actionsTotalTimeMultiplier, game.actions.currentRep = t.actionsCurrentRep, game.research.actions.bought = t.researchActionsBought, game.options.before = t.optionsBefore, game.options.firstTime = t.optionsFirstTime, game.collections.owned = t.collectionsOwned, game.research.display(), e == "user" && notify.pop("success", "Save-game successfully loaded!"), log("Savegame loaded.")
             }
         },
         eventListenerSave: function() {
             game.save.save()
         },
         reset: function(e, t) {
-            $("#options-reset").html("Really?"), $("#options-yes, #options-no").show(), $("#options-reset").addClass("really"), e && (window.removeEventListener("beforeunload", game.save.eventListenerSave, !1), localStorage.removeItem(this.name + this.salt), window.history.pushState("", "", "/#/"), window.location.reload()), t && ($("#options-reset").html("Hard-reset"), $("#options-yes, #options-no").hide(), $("#options-reset").removeClass("really"))
+            $("#options-reset").html("Really?"), $("#options-yes, #options-no").show(), $("#options-reset").addClass("really"), e && (this.saveInterval = undefined, window.removeEventListener("beforeunload", game.save.eventListenerSave, !1), localStorage.removeItem(this.name + this.salt), window.history.pushState("", "", "/#/"), window.location.reload()), t && ($("#options-reset").html("Hard-reset"), $("#options-yes, #options-no").hide(), $("#options-reset").removeClass("really"))
         },
         setInt: function() {
-            window.setInterval(function() {
+            this.saveInterval = window.setInterval(function() {
                 game.save.save()
-            }, 3e5)
+            }, 1e3)
         },
         init: function() {
             this.setInt(), window.game.save = this, window.addEventListener("beforeunload", game.save.eventListenerSave, !1), log("Save init.")

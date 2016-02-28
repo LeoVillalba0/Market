@@ -4,6 +4,8 @@ define(['angular'], function() {
         name: 'BR-S',
         salt: 'BRKey',
 
+        saveInterval: undefined,
+
         save: function(from) {
 
             var toSave = {
@@ -12,10 +14,21 @@ define(['angular'], function() {
                 level: game.level,
                 reputation: game.reputation,
                 reputationNeed: game.reputationNeed,
-                actions: game.actions,
-                research: game.research,
-                options: game.options,
-                collectionsOwned: game.collections.owned
+
+                actionsProgress: game.actions.progress,
+                actionsOwned: game.actions.owned,
+                actionsRewardMultiplier: game.actions.rewardMultiplier,
+                actionsTotalRewardMultiplier: game.actions.totalRewardMultiplier,
+                actionsTimeMultiplier: game.actions.timeMultiplier,
+                actionsTotalTimeMultiplier: game.actions.totalTimeMultiplier,
+                actionsCurrentRep: game.actions.currentRep,
+
+                researchActionsBought: game.research.actions.bought,
+
+                collectionsOwned: game.collections.owned,
+
+                optionsBefore: game.options.before,
+                optionsFirstTime: game.options.firstTime
             };
 
             localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
@@ -38,19 +51,18 @@ define(['angular'], function() {
                 game.reputation = savegame.reputation;
                 game.reputationNeed = savegame.reputationNeed;
 
-                game.actions.progress = savegame.actions.progress;
-                game.actions.owned = savegame.actions.owned;
-                game.actions.rewardMultiplier = savegame.actions.rewardMultiplier;
-                game.actions.totalRewardMultiplier = savegame.actions.totalRewardMultiplier;
-                game.actions.timeMultiplier = savegame.actions.timeMultiplier;
-                game.actions.totalTimeMultiplier = savegame.actions.totalTimeMultiplier;
-                game.actions.currentRep = savegame.actions.currentRep;
-                game.actions.reputationDivider = savegame.actions.reputationDivider;
+                game.actions.progress = savegame.actionsProgress;
+                game.actions.owned = savegame.actionsOwned;
+                game.actions.rewardMultiplier = savegame.actionsRewardMultiplier;
+                game.actions.totalRewardMultiplier = savegame.actionsTotalRewardMultiplier;
+                game.actions.timeMultiplier = savegame.actionsTimeMultiplier;
+                game.actions.totalTimeMultiplier = savegame.actionsTotalTimeMultiplier;
+                game.actions.currentRep = savegame.actionsCurrentRep;
 
-                game.research.actions.bought = savegame.research.actions.bought;
+                game.research.actions.bought = savegame.researchActionsBought;
 
-                game.options.before = savegame.options.before;
-                game.options.firstTime = savegame.options.firstTime;
+                game.options.before = savegame.optionsBefore;
+                game.options.firstTime = savegame.optionsFirstTime;
 
                 game.collections.owned = savegame.collectionsOwned;
 
@@ -73,6 +85,7 @@ define(['angular'], function() {
             $("#options-reset").addClass('really');
 
             if (yes) {
+                this.saveInterval = undefined;
                 window.removeEventListener("beforeunload", game.save.eventListenerSave, false);
                 localStorage.removeItem((this.name + this.salt));
                 window.history.pushState('', '', '/#/');
@@ -87,9 +100,9 @@ define(['angular'], function() {
         },
 
         setInt: function() {
-            window.setInterval(function() {
+            this.saveInterval = window.setInterval(function() {
                 game.save.save();
-            }, 300000); // 5 min
+            }, 1000);
         },
 
         init: function() {

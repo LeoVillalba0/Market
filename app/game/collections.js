@@ -113,7 +113,7 @@ define(['angular'], function() {
                         this.addRandomItem();
                         this.display();
                         return true;
-                    }
+                    };
                     return false;
                     break;
                 case 'rep':
@@ -123,13 +123,14 @@ define(['angular'], function() {
                         this.addRandomItem();
                         this.display();
                         return true;
-                    }
+                    };
                     return false;
                     break;
                 default:
                     this.addRandomItem();
                     break;
             };
+
             this.display();
         },
 
@@ -138,20 +139,22 @@ define(['angular'], function() {
                 $("#collection-" + cat + "-tbody").html("");
             });
 
-            if (this.owned.length > 0) {
-                this.owned.forEach(function(item) {
-                    var category = game.collections.categories[item.category];
-                    var color = game.collections.getTableColor(game.collections.tiers[item.tier]);
+            if (typeof this.owned == "object") { // an array is considered as an object
+                if (this.owned.length > 0) {
+                    this.owned.forEach(function(item) {
+                        var category = game.collections.categories[item.category];
+                        var color = game.collections.getTableColor(game.collections.tiers[item.tier]);
 
-                    $("#collection-" + category + "-tbody").append(
-                        '<tr class="' + color + '">' +
-                        '<th>' + capF(game.collections.tiers[item.tier]) + '</th>' +
-                        '<td>' + item.name + '</td>' +
-                        '<td>' + item.desc + '</td>' +
-                        '</tr>'
-                    );
-                });
-            }
+                        $("#collection-" + category + "-tbody").append(
+                            '<tr class="' + color + '">' +
+                            '<th>' + capF(game.collections.tiers[item.tier]) + '</th>' +
+                            '<td>' + item.name + '</td>' +
+                            '<td>' + item.desc + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                };
+            };
         },
 
         varInit: function() {
