@@ -201,6 +201,12 @@ define(['angular'], function() {
                 $("#achievements-actions").append('<li id="achievements-actions-' + (i + 1) + '" class="list-group-item achievement"></li>');
             };
 
+            var height = $("body").height();
+            $("#achievements-actions").css({
+                'max-height': (height - 200) + 'px',
+                'overflow-y': 'auto'
+            });
+
             this.loop(true);
             this.display();
         },

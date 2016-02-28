@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
         concat: {
             options: {
-                separator: '\r\n ;'
+                separator: ';\r\n'
             },
             dist: {
                 src: ['app/game-optimized/*.js'],

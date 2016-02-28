@@ -10,6 +10,7 @@ define([], function() {
             fps: 20,
             interval: (1000 / 20),
             angularInit: false,
+            init: false,
             pause: true,
             firstTime: true,
             menu: 'navbar',
@@ -79,6 +80,8 @@ define([], function() {
                     keyboard: false,
                     backdrop: 'static'
                 });
+
+                $("#modal-newPlayer").fadeIn('slow');
             };
         },
 
@@ -125,6 +128,10 @@ define([], function() {
             //game.production.run(times);
         },
 
+        domInit: function() {
+            $("#navbar-save").attr('onclick', 'game.save.save("user");');
+        },
+
         init: function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
@@ -139,14 +146,21 @@ define([], function() {
 
                     log("----------");
                     require(['angular', 'bootstrap'], function() {
-                        if (!game.options.firstTime)
+                        if (!game.options.firstTime) {
                             game.options.pause = false;
-                        else
-                            game.toggleModal();
+                        } else {
+                            window.setTimeout(function() {
+                                game.toggleModal();
+                            }, 1000);
+                        };
 
-                        $(function() {
+                        game.domInit();
+
+                        game.init = true;
+
+                        /*$(function() { // don't activate when changing page
                             $('[data-toggle="tooltip"]').tooltip();
-                        });
+                        });*/
 
                         log("Angular & Bootstrap init. Ready to play.");
                     });
