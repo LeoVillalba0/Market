@@ -52,13 +52,7 @@ define(['angular'], function() {
                 var changeNameIndex = changeName.substring(changeName.indexOf('[') + 1, changeName.indexOf(']'));
                 var actual = window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex];
                 window["game"][part][changeName.substring(0, changeName.indexOf('['))][changeNameIndex] = eval(actual + changeValue); // eval is evil!
-            }
-
-            var rep = window["game"]["achievements"][part]["list"][index]["rep"];
-            if (rep !== 0) {
-                var repActual = window["game"]["reputation"];
-                window["game"]["reputation"] += rep;
-            }
+            };
 
             this.display();
             game.collections.getItemDroppedByChance();
@@ -97,7 +91,7 @@ define(['angular'], function() {
                         game.achievements.achieve(i, 'actions');
                         this.actions.complete[i] = true;
                     }
-                }
+                };
             };
 
             this.display();
@@ -108,28 +102,23 @@ define(['angular'], function() {
                 var index = this.getCurrent(0, i);
                 var owned = this.countCompleted(0);
                 var total = this.actions.list.length;
-                var repHtmlText = "";
+
                 if (typeof this.actions.list[index] !== "undefined") {
                     var html = {
                         name: this.actions.list[index].name,
                         desc: this.actions.list[index].desc,
-                        desc2: this.actions.list[index].desc2,
-                        rep: this.actions.list[index].rep
+                        desc2: this.actions.list[index].desc2
                     };
-
-                    if (html.rep !== 0) repHtmlText = "<span>+" + fix(html.rep, 0) + " rep.</span>";
 
                     $("#achievements-actions-" + (i + 1)).html(
                         "<b>" + html.name + ":</b><span>" + html.desc + "</span><br>" +
-                        html.desc2 +
-                        repHtmlText
+                        html.desc2
                     );
                 } else {
-                    $("#achievements-actions-" + (i + 1)).html('<b>All available Achivements earned!</b>');
-                }
+                    $("#achievements-actions-" + (i + 1)).html('<b>All available achievements earned!</b>');
+                };
 
                 $("#achievements-actions-total").html("(" + owned + "/" + total + ")");
-
             };
         },
 
@@ -171,17 +160,17 @@ define(['angular'], function() {
                 new this.create("Pickpocket X", 2, "Pickpocket at level 400", "Pickpocket speed x2", "actions", "owned[2]", 400, "timeMultiplier[2]", "*2", 70),
                 new this.create("Pickpocket XI", 2, "Pickpocket at level 500", "Pickpocket reward x3", "actions", "owned[2]", 500, "rewardMultiplier[2]", "*3", 80),
 
-                new this.create("Scammer I", 3, "Scamm at level 25", "Scamm speed x2", "actions", "owned[3]", 25, "timeMultiplier[3]", "*2", 25),
-                new this.create("Scammer II", 3, "Scamm at level 50", "Scamm speed x2", "actions", "owned[3]", 50, "timeMultiplier[3]", "*2", 35),
-                new this.create("Scammer III", 3, "Scammer at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Scammer IV", 3, "Scamm at level 100", "Scamm speed x2", "actions", "owned[3]", 100, "timeMultiplier[3]", "*2", 45),
-                new this.create("Scammer V", 3, "Scammer at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Scammer VI", 3, "Scammer at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Scammer VII", 3, "Scammer at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Scammer VIII", 3, "Scamm at level 200", "Scamm speed x2", "actions", "owned[3]", 200, "timeMultiplier[3]", "*2", 55),
-                new this.create("Scammer IX", 3, "Scamm at level 300", "Scamm speed x2", "actions", "owned[3]", 300, "timeMultiplier[3]", "*2", 65),
-                new this.create("Scammer X", 3, "Scamm at level 400", "Scamm speed x2", "actions", "owned[3]", 400, "timeMultiplier[3]", "*2", 75),
-                new this.create("Scammer XI", 3, "Scamm at level 500", "Scamm reward x3", "actions", "owned[3]", 500, "rewardMultiplier[3]", "*3", 85),
+                new this.create("Scammer I", 3, "Scam at level 25", "Scam speed x2", "actions", "owned[3]", 25, "timeMultiplier[3]", "*2", 25),
+                new this.create("Scammer II", 3, "Scam at level 50", "Scam speed x2", "actions", "owned[3]", 50, "timeMultiplier[3]", "*2", 35),
+                new this.create("Scammer III", 3, "Scam at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
+                new this.create("Scammer IV", 3, "Scam at level 100", "Scam speed x2", "actions", "owned[3]", 100, "timeMultiplier[3]", "*2", 45),
+                new this.create("Scammer V", 3, "Scam at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
+                new this.create("Scammer VI", 3, "Scam at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
+                new this.create("Scammer VII", 3, "Scam at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
+                new this.create("Scammer VIII", 3, "Scam at level 200", "Scam speed x2", "actions", "owned[3]", 200, "timeMultiplier[3]", "*2", 55),
+                new this.create("Scammer IX", 3, "Scam at level 300", "Scam speed x2", "actions", "owned[3]", 300, "timeMultiplier[3]", "*2", 65),
+                new this.create("Scammer X", 3, "Scam at level 400", "Scam speed x2", "actions", "owned[3]", 400, "timeMultiplier[3]", "*2", 75),
+                new this.create("Scammer XI", 3, "Scam at level 500", "Scam reward x3", "actions", "owned[3]", 500, "rewardMultiplier[3]", "*3", 85),
 
                 new this.create("Car dealer I", 4, "Steal car at level 25", "Steal car speed x2", "actions", "owned[4]", 25, "timeMultiplier[4]", "*2", 30),
                 new this.create("Car dealer II", 4, "Steal car at level 50", "Steal car speed x2", "actions", "owned[4]", 50, "timeMultiplier[4]", "*2", 40),

@@ -3,10 +3,10 @@
     background-color: #375a7f
 }
 .navbar-default .navbar-nav > li > a {
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    transition: background 0.2s;
+    transition: all 0.2s;
     background-color: rgba(0, 0, 0, 0.1);
     color: #fff
 }
@@ -37,5 +37,6 @@
     background-color: #375a7f;
 }
 .glow {
-	text-shadow: 0 0 15px #88FF77, 0 0 15px #88FF77, 0 0 15px #88FF77, 0 0 15px #88FF77;
+    transition: all 0.2s;
+	text-shadow: 0 0 15px #8EC3E6, 0 0 15px #8EC3E6, 0 0 15px #8EC3E6, 0 0 15px #8EC3E6;
 }

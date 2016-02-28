@@ -99,7 +99,7 @@ define([], function() {
 
                 window.setTimeout(function() {
                     $("#modal-newPlayer").remove();
-                }, 2000);
+                }, 3000);
             };
         },
 
@@ -163,7 +163,7 @@ define([], function() {
 
                         game.domInit();
 
-                        game.init = true;
+                        game.options.init = true;
 
                         /*$(function() { // don't activate when changing page
                             $('[data-toggle="tooltip"]').tooltip();
