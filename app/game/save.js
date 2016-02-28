@@ -7,7 +7,6 @@ define(['angular'], function() {
         saveInterval: undefined,
 
         save: function(from) {
-
             var toSave = {
                 money: game.money,
                 totalMoney: game.totalMoney,
