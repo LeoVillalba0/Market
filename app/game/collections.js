@@ -84,6 +84,9 @@ define(['angular'], function() {
         addRandomItem: function() {
             var item = this.getRandItem(this.getRandTier());
 
+            var tierNamesLength = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]].length;
+            item.name = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]][Math.floor(Math.random() * tierNamesLength)];
+
             switch (item.category) {
                 // actions
                 case 0:
@@ -96,8 +99,9 @@ define(['angular'], function() {
                 case 1:
                     break;
             }
-
+            this.owned.reverse();
             this.owned[(this.owned.length)] = item;
+            this.owned.reverse();
         },
 
         earnItem: function(pay) {
@@ -137,10 +141,7 @@ define(['angular'], function() {
             if (this.owned.length > 0) {
                 this.owned.forEach(function(item) {
                     var category = game.collections.categories[item.category];
-                    var tierNamesLength = window["game"]["collections"]["names"][category][game.collections.tiers[item.tier]].length;
                     var color = game.collections.getTableColor(game.collections.tiers[item.tier]);
-
-                    item.name = window["game"]["collections"]["names"][category][game.collections.tiers[item.tier]][Math.floor(Math.random() * tierNamesLength)];
 
                     $("#collection-" + category + "-tbody").append(
                         '<tr class="' + color + '">' +
