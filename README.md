@@ -17,7 +17,7 @@ Do you have ideas, code suggestion or other?
 
 You can create an issue or fork (it's better!) the repo to suggest code changes.
 
-When editing game files, run `grunt` command to optimize files changed.
+Please run `grunt` command before pull request : beautify and minify files.
 
 ## Links
 
