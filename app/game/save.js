@@ -31,7 +31,8 @@ define(['angular'], function() {
                 optionsFirstTime: game.options.firstTime
             };
 
-            localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
+            if (game.options.init)
+                localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
 
             if (from == 'user')
                 notify.pop("success", "Game successfully saved!");
