@@ -12,7 +12,7 @@ define([], function() {
         loadAll: function() {
             for (var key in this.toLoad) {
                 var obj = this.toLoad[key];
-                this.load(obj)
+                this.load(obj);
             };
         },
 
@@ -27,7 +27,14 @@ define([], function() {
             /*'bootswatch': 'lib/bootswatch-dist/css/bootstrap.css',
             'font-awesome': 'lib/components-font-awesome/css/font-awesome.min.css',
             'ionicons': 'lib/Ionicons/css/ionicons.min.css',
-            'interface': 'app/css/interface.css'*/
+            'interface': 'app/css/interface.css',
+            'animations': 'app/css/animations.css',
+            'helpers': 'app/css/helpers.css',
+            'navbar': 'app/css/navbar.css',
+            'notify': 'app/css/notify.css',
+            'progress-bar': 'app/css/progress-bar.css',
+            'sidebar': 'app/css/sidebar.css',
+            'sliders': 'app/css/sliders.css'*/
         }
     };
 

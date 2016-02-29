@@ -17,6 +17,7 @@ if (isDev) {
             'sidebar': 'app/misc-js/sidebar',
             'beautify': 'app/misc-js/beautify',
             'notify': 'app/misc-js/notify',
+            'helper': 'app/misc-js/helper',
 
             'core': 'app/game/core',
             'actions': 'app/game/actions',
@@ -53,6 +54,7 @@ if (isDev) {
             'sidebar': 'app/misc-js-optimized/sidebar',
             'beautify': 'app/misc-js-optimized/beautify',
             'notify': 'app/misc-js-optimized/notify',
+            'helper': 'app/misc-js-optimized/helper',
 
             'core': 'app/game-optimized/core',
             'actions': 'app/game-optimized/actions',

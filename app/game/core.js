@@ -74,6 +74,13 @@ define([], function() {
             };
         },
 
+        animateMenu: function(menuitem) {
+            var classMenuItem = '.navbar-menu-' + menuitem;
+            $(classMenuItem).addClass("glow").delay(1000).queue(function() {
+                $(this).removeClass("glow").dequeue();
+            });
+        },
+
         toggleModal: function() {
             if (this.options.firstTime) {
                 $("#modal-newPlayer").modal({
@@ -92,7 +99,7 @@ define([], function() {
 
                 window.setTimeout(function() {
                     $("#modal-newPlayer").remove();
-                }, 2000);
+                }, 3000);
             };
         },
 
@@ -136,7 +143,7 @@ define([], function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
 
-            require(['beautify', 'sidebar', 'notify'], function() {
+            require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
                 require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save'], function() {
                     game.save.load();
@@ -156,7 +163,7 @@ define([], function() {
 
                         game.domInit();
 
-                        game.init = true;
+                        game.options.init = true;
 
                         /*$(function() { // don't activate when changing page
                             $('[data-toggle="tooltip"]').tooltip();
