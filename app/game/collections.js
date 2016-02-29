@@ -29,7 +29,7 @@ define(['angular'], function() {
         startRep: 1e5,
         increasePrice: 1.55,
         increaseRep: 1.55,
-        chanceEarningItem: 0.10,
+        chanceEarningItem: 0.02,
         chanceEarningItemMultiplier: 1.00,
 
         getRandTier: function() {
@@ -70,6 +70,17 @@ define(['angular'], function() {
             };
 
             return color;
+        },
+
+        getItemDroppedByChance: function() {
+            var randNum = Math.random().toFixed(3);
+            var chance = this.chanceEarningItemMultiplier * this.chanceEarningItem;
+            if (randNum <= chance) {
+                this.earnItem();
+                game.animateMenu('collections');
+                return true;
+            }
+            return false;
         },
 
         create: function(name, tier, category, desc, who, effect, otherWho, otherEffect) {
@@ -134,17 +145,6 @@ define(['angular'], function() {
             };
 
             this.display();
-        },
-
-        getItemDroppedByChance: function() {
-            var randNum = Math.random().toFixed(3);
-            var chance = this.chanceEarningItemMultiplier * this.chanceEarningItem;
-            if (randNum <= chance) {
-                this.earnItem();
-                game.animateMenu('collections');
-                return true;
-            }
-            return false;
         },
 
         display: function() {
@@ -224,6 +224,13 @@ define(['angular'], function() {
         },
 
         domInit: function() {
+            var height = $("body").height();
+
+            $("#collection-actions, #collection-production").css({
+                'max-height': (height - 200) + 'px',
+                'overflow-y': 'auto'
+            });
+
             this.display();
         },
 
