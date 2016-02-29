@@ -162,13 +162,13 @@ define(['angular'], function() {
 
             this.actions.list.push(new this.create("Fighter I", 1, "Street fight at level 25", "Street fight speed x2", "actions", "owned[1]", 25, "timeMultiplier[1]", "*2", 15));
             this.actions.list.push(new this.create("Fighter II", 1, "Street fight at level 50", "Street fight speed x2", "actions", "owned[1]", 50, "timeMultiplier[1]", "*2", 25));
-            this.actions.list.push(new this.create("Fighter III", 1, "Street at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Fighter III", 1, "Street at level 75", "Chance of getting item", "actions", "owned[1]", 75, "", "", 0));
             this.actions.list.push(new this.create("Fighter IV", 1, "Street fight at level 100", "Street fight speed x2", "actions", "owned[1]", 100, "timeMultiplier[1]", "*2", 35));
             this.actions.list.push(new this.create("Fighter V", 1, "Street fight at level 125", "Chance of getting item", "actions", "owned[1]", 125, "", "", 0));
             this.actions.list.push(new this.create("Fighter VI", 1, "Street fight at level 150", "Chance of getting item", "actions", "owned[1]", 150, "", "", 0));
             this.actions.list.push(new this.create("Fighter VII", 1, "Street fight at level 175", "Chance of getting item", "actions", "owned[1]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Fighter", "actions", "Street fight", 0, i));
+                this.actions.list.push(this.createAchievements("Fighter", "actions", "Street fight", 1, i));
             }
 
             this.actions.list.push(new this.create("Pickpocket I", 2, "Pickpocket at level 25", "Pickpocket speed x2", "actions", "owned[2]", 25, "timeMultiplier[2]", "*2", 20));
@@ -179,7 +179,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Pickpocket VI", 2, "Pickpocket at level 150", "Chance of getting item", "actions", "owned[2]", 150, "", "", 0));
             this.actions.list.push(new this.create("Pickpocket VII", 2, "Pickpocket at level 175", "Chance of getting item", "actions", "owned[2]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Pickpocket", "actions", "Pickpocket", 0, i));
+                this.actions.list.push(this.createAchievements("Pickpocket", "actions", "Pickpocket", 2, i));
             }
 
             this.actions.list.push(new this.create("Scammer I", 3, "Scam at level 25", "Scam speed x2", "actions", "owned[3]", 25, "timeMultiplier[3]", "*2", 25));
@@ -190,7 +190,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Scammer VI", 3, "Scam at level 150", "Chance of getting item", "actions", "owned[3]", 150, "", "", 0));
             this.actions.list.push(new this.create("Scammer VII", 3, "Scam at level 175", "Chance of getting item", "actions", "owned[3]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Scammer", "actions", "Scam", 0, i));
+                this.actions.list.push(this.createAchievements("Scammer", "actions", "Scam", 3, i));
             }
 
             this.actions.list.push(new this.create("Car dealer I", 4, "Steal car at level 25", "Steal car speed x2", "actions", "owned[4]", 25, "timeMultiplier[4]", "*2", 30));
@@ -201,7 +201,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Car dealer VI", 4, "Steal car at level 150", "Chance of getting item", "actions", "owned[4]", 150, "", "", 0));
             this.actions.list.push(new this.create("Car dealer VII", 4, "Steal car at level 175", "Chance of getting item", "actions", "owned[4]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Car dealer", "actions", "Steal car", 0, i));
+                this.actions.list.push(this.createAchievements("Car dealer", "actions", "Steal car", 4, i));
             }
 
             this.actions.list.push(new this.create("Robber I", 5, "Jewelry robbery at level 25", "Jewelry robbery speed x2", "actions", "owned[5]", 25, "timeMultiplier[5]", "*2", 35));
@@ -212,7 +212,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Robber VI", 5, "Jewelry robbery at level 150", "Chance of getting item", "actions", "owned[5]", 150, "", "", 0));
             this.actions.list.push(new this.create("Robber VII", 5, "Jewelry robbery at level 175", "Chance of getting item", "actions", "owned[5]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Robber", "actions", "Jewelry robbery", 0, i));
+                this.actions.list.push(this.createAchievements("Robber", "actions", "Jewelry robbery", 5, i));
             }
 
             this.actions.list.push(new this.create("Hacker I", 6, "Hacking at level 25", "Hacking speed x2", "actions", "owned[6]", 25, "timeMultiplier[6]", "*2", 40));
@@ -223,7 +223,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Hacker VI", 6, "Hacking at level 150", "Chance of getting item", "actions", "owned[6]", 150, "", "", 0));
             this.actions.list.push(new this.create("Hacker VII", 6, "Hacking at level 175", "Chance of getting item", "actions", "owned[6]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Hacker", "actions", "Hacking", 0, i));
+                this.actions.list.push(this.createAchievements("Hacker", "actions", "Hacking", 6, i));
             }
 
             this.actions.list.push(new this.create("Arms dealers I", 7, "Arms sales at level 25", "Arms sales speed x2", "actions", "owned[7]", 25, "timeMultiplier[7]", "*2", 45));
@@ -234,7 +234,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Arms dealers VI", 7, "Arms sales at level 150", "Chance of getting item", "actions", "owned[7]", 150, "", "", 0));
             this.actions.list.push(new this.create("Arms dealers VII", 7, "Arms sales at level 175", "Chance of getting item", "actions", "owned[7]", 175, "", "", 0));
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Arms dealers", "actions", "Arms sales", 0, i));
+                this.actions.list.push(this.createAchievements("Arms dealers", "actions", "Arms sales", 7, i));
             }
 
             this.actions.list.push(new this.create("Drugs sales I", 8, "Drugs sales at level 25", "Drugs sales speed x2", "actions", "owned[8]", 25, "timeMultiplier[8]", "*2", 50));
@@ -246,7 +246,7 @@ define(['angular'], function() {
             this.actions.list.push(new this.create("Drugs sales VII", 8, "Drugs sales at level 175", "Chance of getting item", "actions", "owned[8]", 175, "", "", 0));
 
             for (i = 1; i < 20; i++) {
-                this.actions.list.push(this.createAchievements("Drugs sales", "actions", "Drugs sales", 0, i));
+                this.actions.list.push(this.createAchievements("Drugs sales", "actions", "Drugs sales", 8, i));
             };
 
             for (var i = 0; i < this.actions.list.length; i++) {
