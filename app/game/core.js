@@ -143,7 +143,7 @@ define([], function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
 
-            require(['beautify', 'sidebar', 'notify'], function() {
+            require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
                 require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save'], function() {
                     game.save.load();

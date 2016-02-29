@@ -122,6 +122,30 @@ define(['angular'], function() {
             };
         },
 
+        createAchievements: function(label, actionLabel, action, index, lvl) {
+            lvl = lvl + (200 - lvl) + (lvl * 50);
+            label = label + ' ' + helper.getRomanNumerals((lvl / 50 + 4));
+            desc = action + ' at level ' + lvl;
+            reqName = 'owned[' + index + ']';
+
+            if (lvl === 200 || lvl === 300 || lvl === 400) {
+                desc2 = action + ' speed x2';
+                multiType = 'timeMultiplier[' + index + ']';
+                multi = '*2';
+
+            } else if (lvl / 100 % 0) {
+                desc2 = action + ' reward x2';
+                multiType = 'rewardMultiplier[' + index + ']';
+                multi = '*3';
+            } else {
+                desc2 = 'Chance of getting item';
+                multiType = '';
+                multi = '';
+            }
+
+            return new this.create(label, index, desc, desc2, actionLabel, reqName, lvl, multiType, multi, 0);
+        },
+
         varInit: function() {
             this.actions.list = [
                 new this.create("Shooter I", 0, "Shooting at level 25", "Shooting speed x2", "actions", "owned[0]", 25, "timeMultiplier[0]", "*2", 10),
@@ -131,107 +155,99 @@ define(['angular'], function() {
                 new this.create("Shooter V", 0, "Shooting at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
                 new this.create("Shooter VI", 0, "Shooting at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
                 new this.create("Shooter VII", 0, "Shooting at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Shooter VIII", 0, "Shooting at level 200", "Shooting speed x2", "actions", "owned[0]", 200, "timeMultiplier[0]", "*2", 40),
-                new this.create("Shooter IX", 0, "Shooting at level 300", "Shooting speed x2", "actions", "owned[0]", 300, "timeMultiplier[0]", "*2", 50),
-                new this.create("Shooter X", 0, "Shooting at level 400", "Shooting speed x2", "actions", "owned[0]", 400, "timeMultiplier[0]", "*2", 60),
-                new this.create("Shooter XI", 0, "Shooting at level 500", "Shooting reward x3", "actions", "owned[0]", 500, "rewardMultiplier[0]", "*3", 70),
-
-                new this.create("Fighter I", 1, "Street fight at level 25", "Street fight speed x2", "actions", "owned[1]", 25, "timeMultiplier[1]", "*2", 15),
-                new this.create("Fighter II", 1, "Street fight at level 50", "Street fight speed x2", "actions", "owned[1]", 50, "timeMultiplier[1]", "*2", 25),
-                new this.create("Fighter III", 1, "Street at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Fighter IV", 1, "Street fight at level 100", "Street fight speed x2", "actions", "owned[1]", 100, "timeMultiplier[1]", "*2", 35),
-                new this.create("Fighter V", 1, "Street at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Fighter VI", 1, "Street at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Fighter VII", 1, "Street at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Fighter VIII", 1, "Street fight at level 200", "Street fight speed x2", "actions", "owned[1]", 200, "timeMultiplier[1]", "*2", 45),
-                new this.create("Fighter IX", 1, "Street fight at level 300", "Street fight speed x2", "actions", "owned[1]", 300, "timeMultiplier[1]", "*2", 55),
-                new this.create("Fighter X", 1, "Street fight at level 400", "Street fight speed x2", "actions", "owned[1]", 400, "timeMultiplier[1]", "*2", 65),
-                new this.create("Fighter XI", 1, "Street fight at level 500", "Street fight reward x3", "actions", "owned[1]", 500, "rewardMultiplier[1]", "*3", 75),
-
-                new this.create("Pickpocket I", 2, "Pickpocket at level 25", "Pickpocket speed x2", "actions", "owned[2]", 25, "timeMultiplier[2]", "*2", 20),
-                new this.create("Pickpocket II", 2, "Pickpocket at level 50", "Pickpocket speed x2", "actions", "owned[2]", 50, "timeMultiplier[2]", "*2", 30),
-                new this.create("Pickpocket III", 2, "Pickpocket at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Pickpocket IV", 2, "Pickpocket at level 100", "Pickpocket speed x2", "actions", "owned[2]", 100, "timeMultiplier[2]", "*2", 40),
-                new this.create("Pickpocket V", 2, "Pickpocket at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Pickpocket VI", 2, "Pickpocket at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Pickpocket VII", 2, "Pickpocket at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Pickpocket VIII", 2, "Pickpocket at level 200", "Pickpocket speed x2", "actions", "owned[2]", 200, "timeMultiplier[2]", "*2", 50),
-                new this.create("Pickpocket IX", 2, "Pickpocket at level 300", "Pickpocket speed x2", "actions", "owned[2]", 300, "timeMultiplier[2]", "*2", 60),
-                new this.create("Pickpocket X", 2, "Pickpocket at level 400", "Pickpocket speed x2", "actions", "owned[2]", 400, "timeMultiplier[2]", "*2", 70),
-                new this.create("Pickpocket XI", 2, "Pickpocket at level 500", "Pickpocket reward x3", "actions", "owned[2]", 500, "rewardMultiplier[2]", "*3", 80),
-
-                new this.create("Scammer I", 3, "Scam at level 25", "Scam speed x2", "actions", "owned[3]", 25, "timeMultiplier[3]", "*2", 25),
-                new this.create("Scammer II", 3, "Scam at level 50", "Scam speed x2", "actions", "owned[3]", 50, "timeMultiplier[3]", "*2", 35),
-                new this.create("Scammer III", 3, "Scam at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Scammer IV", 3, "Scam at level 100", "Scam speed x2", "actions", "owned[3]", 100, "timeMultiplier[3]", "*2", 45),
-                new this.create("Scammer V", 3, "Scam at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Scammer VI", 3, "Scam at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Scammer VII", 3, "Scam at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Scammer VIII", 3, "Scam at level 200", "Scam speed x2", "actions", "owned[3]", 200, "timeMultiplier[3]", "*2", 55),
-                new this.create("Scammer IX", 3, "Scam at level 300", "Scam speed x2", "actions", "owned[3]", 300, "timeMultiplier[3]", "*2", 65),
-                new this.create("Scammer X", 3, "Scam at level 400", "Scam speed x2", "actions", "owned[3]", 400, "timeMultiplier[3]", "*2", 75),
-                new this.create("Scammer XI", 3, "Scam at level 500", "Scam reward x3", "actions", "owned[3]", 500, "rewardMultiplier[3]", "*3", 85),
-
-                new this.create("Car dealer I", 4, "Steal car at level 25", "Steal car speed x2", "actions", "owned[4]", 25, "timeMultiplier[4]", "*2", 30),
-                new this.create("Car dealer II", 4, "Steal car at level 50", "Steal car speed x2", "actions", "owned[4]", 50, "timeMultiplier[4]", "*2", 40),
-                new this.create("Car dealer III", 4, "Steal car at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Car dealer IV", 4, "Steal car at level 100", "Steal car speed x2", "actions", "owned[4]", 100, "timeMultiplier[4]", "*2", 50),
-                new this.create("Car dealer V", 4, "Steal car at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Car dealer VI", 4, "Steal car at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Car dealer VII", 4, "Steal car at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Car dealer VIII", 4, "Steal car at level 200", "Steal car speed x2", "actions", "owned[4]", 200, "timeMultiplier[4]", "*2", 60),
-                new this.create("Car dealer IX", 4, "Steal car at level 300", "Steal car speed x2", "actions", "owned[4]", 300, "timeMultiplier[4]", "*2", 70),
-                new this.create("Car dealer X", 4, "Steal car at level 400", "Steal car speed x2", "actions", "owned[4]", 400, "timeMultiplier[4]", "*2", 80),
-                new this.create("Car dealer XI", 4, "Steal car at level 500", "Steal car reward x3", "actions", "owned[4]", 500, "rewardMultiplier[4]", "*3", 90),
-
-                new this.create("Robber I", 5, "Jewelry robbery at level 25", "Jewelry robbery speed x2", "actions", "owned[5]", 25, "timeMultiplier[5]", "*2", 35),
-                new this.create("Robber II", 5, "Jewelry robbery at level 50", "Jewelry robbery speed x2", "actions", "owned[5]", 50, "timeMultiplier[5]", "*2", 45),
-                new this.create("Robber III", 5, "Jewelry robbery at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Robber IV", 5, "Jewelry robbery at level 100", "Jewelry robbery speed x2", "actions", "owned[5]", 100, "timeMultiplier[5]", "*2", 55),
-                new this.create("Robber V", 5, "Jewelry robbery at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Robber VI", 5, "Jewelry robbery at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Robber VII", 5, "Jewelry robbery at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Robber VIII", 5, "Jewelry robbery at level 200", "Jewelry robbery speed x2", "actions", "owned[5]", 200, "timeMultiplier[5]", "*2", 65),
-                new this.create("Robber IX", 5, "Jewelry robbery at level 300", "Jewelry robbery speed x2", "actions", "owned[5]", 300, "timeMultiplier[5]", "*2", 75),
-                new this.create("Robber X", 5, "Jewelry robbery at level 400", "Jewelry robbery speed x2", "actions", "owned[5]", 400, "timeMultiplier[5]", "*2", 85),
-                new this.create("Robber XI", 5, "Jewelry robbery at level 500", "Jewelry robbery reward x3", "actions", "owned[5]", 500, "rewardMultiplier[5]", "*3", 95),
-
-                new this.create("Hacker I", 6, "Hacking at level 25", "Hacking speed x2", "actions", "owned[6]", 25, "timeMultiplier[6]", "*2", 40),
-                new this.create("Hacker II", 6, "Hacking at level 50", "Hacking speed x2", "actions", "owned[6]", 50, "timeMultiplier[6]", "*2", 50),
-                new this.create("Hacker III", 6, "Hacking at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Hacker IV", 6, "Hacking at level 100", "Hacking speed x2", "actions", "owned[6]", 100, "timeMultiplier[6]", "*2", 60),
-                new this.create("Hacker V", 6, "Hacking at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Hacker VI", 6, "Hacking at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Hacker VII", 6, "Hacking at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Hacker VIII", 6, "Hacking at level 200", "Hacking speed x2", "actions", "owned[6]", 200, "timeMultiplier[6]", "*2", 70),
-                new this.create("Hacker IX", 6, "Hacking at level 300", "Hacking speed x2", "actions", "owned[6]", 300, "timeMultiplier[6]", "*2", 80),
-                new this.create("Hacker X", 6, "Hacking at level 400", "Hacking speed x2", "actions", "owned[6]", 400, "timeMultiplier[6]", "*2", 90),
-                new this.create("Hacker XI", 6, "Hacking at level 500", "Hacking reward x3", "actions", "owned[6]", 500, "rewardMultiplier[6]", "*3", 100),
-
-                new this.create("Arms dealers I", 7, "Arms sales at level 25", "Arms sales speed x2", "actions", "owned[7]", 25, "timeMultiplier[7]", "*2", 45),
-                new this.create("Arms dealers II", 7, "Arms sales at level 50", "Arms sales speed x2", "actions", "owned[7]", 50, "timeMultiplier[7]", "*2", 55),
-                new this.create("Arms dealers III", 7, "Arms sales at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Arms dealers IV", 7, "Arms sales at level 100", "Arms sales speed x2", "actions", "owned[7]", 100, "timeMultiplier[7]", "*2", 65),
-                new this.create("Arms dealers V", 7, "Arms sales at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Arms dealers VI", 7, "Arms sales at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Arms dealers VII", 7, "Arms sales at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Arms dealers VIII", 7, "Arms sales at level 200", "Arms sales speed x2", "actions", "owned[7]", 200, "timeMultiplier[7]", "*2", 75),
-                new this.create("Arms dealers IX", 7, "Arms sales at level 300", "Arms sales speed x2", "actions", "owned[7]", 300, "timeMultiplier[7]", "*2", 85),
-                new this.create("Arms dealers X", 7, "Arms sales at level 400", "Arms sales speed x2", "actions", "owned[7]", 400, "timeMultiplier[7]", "*2", 95),
-                new this.create("Arms dealers XI", 7, "Arms sales at level 500", "Arms sales reward x3", "actions", "owned[7]", 500, "rewardMultiplier[7]", "*3", 105),
-
-                new this.create("Drugs sales I", 8, "Drugs sales at level 25", "Drugs sales speed x2", "actions", "owned[8]", 25, "timeMultiplier[8]", "*2", 50),
-                new this.create("Drugs sales II", 8, "Drugs sales at level 50", "Drugs sales speed x2", "actions", "owned[8]", 50, "timeMultiplier[8]", "*2", 60),
-                new this.create("Drugs sales III", 8, "Drugs sales at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0),
-                new this.create("Drugs sales IV", 8, "Drugs sales at level 100", "Drugs sales speed x2", "actions", "owned[8]", 100, "timeMultiplier[8]", "*2", 70),
-                new this.create("Drugs sales V", 8, "Drugs sales at level 125", "Chance of getting item", "actions", "owned[0]", 125, "", "", 0),
-                new this.create("Drugs sales VI", 8, "Drugs sales at level 150", "Chance of getting item", "actions", "owned[0]", 150, "", "", 0),
-                new this.create("Drugs sales VII", 8, "Drugs sales at level 175", "Chance of getting item", "actions", "owned[0]", 175, "", "", 0),
-                new this.create("Drugs sales VIII", 8, "Drugs sales at level 200", "Drugs sales speed x2", "actions", "owned[8]", 200, "timeMultiplier[8]", "*2", 80),
-                new this.create("Drugs sales IX", 8, "Drugs sales at level 300", "Drugs sales speed x2", "actions", "owned[8]", 300, "timeMultiplier[8]", "*2", 90),
-                new this.create("Drugs sales X", 8, "Drugs sales at level 400", "Drugs sales speed x2", "actions", "owned[8]", 400, "timeMultiplier[8]", "*2", 100),
-                new this.create("Drugs sales XI", 8, "Drugs sales at level 500", "Drugs sales reward x3", "actions", "owned[8]", 500, "rewardMultiplier[8]", "*3", 110)
             ];
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Shooter", "actions", "Shooting", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Fighter I", 1, "Street fight at level 25", "Street fight speed x2", "actions", "owned[1]", 25, "timeMultiplier[1]", "*2", 15));
+            this.actions.list.push(new this.create("Fighter II", 1, "Street fight at level 50", "Street fight speed x2", "actions", "owned[1]", 50, "timeMultiplier[1]", "*2", 25));
+            this.actions.list.push(new this.create("Fighter III", 1, "Street at level 75", "Chance of getting item", "actions", "owned[0]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Fighter IV", 1, "Street fight at level 100", "Street fight speed x2", "actions", "owned[1]", 100, "timeMultiplier[1]", "*2", 35));
+            this.actions.list.push(new this.create("Fighter V", 1, "Street fight at level 125", "Chance of getting item", "actions", "owned[1]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Fighter VI", 1, "Street fight at level 150", "Chance of getting item", "actions", "owned[1]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Fighter VII", 1, "Street fight at level 175", "Chance of getting item", "actions", "owned[1]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Fighter", "actions", "Street fight", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Pickpocket I", 2, "Pickpocket at level 25", "Pickpocket speed x2", "actions", "owned[2]", 25, "timeMultiplier[2]", "*2", 20));
+            this.actions.list.push(new this.create("Pickpocket II", 2, "Pickpocket at level 50", "Pickpocket speed x2", "actions", "owned[2]", 50, "timeMultiplier[2]", "*2", 30));
+            this.actions.list.push(new this.create("Pickpocket III", 2, "Pickpocket at level 75", "Chance of getting item", "actions", "owned[2]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Pickpocket IV", 2, "Pickpocket at level 100", "Pickpocket speed x2", "actions", "owned[2]", 100, "timeMultiplier[2]", "*2", 40));
+            this.actions.list.push(new this.create("Pickpocket V", 2, "Pickpocket at level 125", "Chance of getting item", "actions", "owned[2]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Pickpocket VI", 2, "Pickpocket at level 150", "Chance of getting item", "actions", "owned[2]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Pickpocket VII", 2, "Pickpocket at level 175", "Chance of getting item", "actions", "owned[2]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Pickpocket", "actions", "Pickpocket", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Scammer I", 3, "Scam at level 25", "Scam speed x2", "actions", "owned[3]", 25, "timeMultiplier[3]", "*2", 25));
+            this.actions.list.push(new this.create("Scammer II", 3, "Scam at level 50", "Scam speed x2", "actions", "owned[3]", 50, "timeMultiplier[3]", "*2", 35));
+            this.actions.list.push(new this.create("Scammer III", 3, "Scam at level 75", "Chance of getting item", "actions", "owned[3]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Scammer IV", 3, "Scam at level 100", "Scam speed x2", "actions", "owned[3]", 100, "timeMultiplier[3]", "*2", 45));
+            this.actions.list.push(new this.create("Scammer V", 3, "Scam at level 125", "Chance of getting item", "actions", "owned[3]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Scammer VI", 3, "Scam at level 150", "Chance of getting item", "actions", "owned[3]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Scammer VII", 3, "Scam at level 175", "Chance of getting item", "actions", "owned[3]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Scammer", "actions", "Scam", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Car dealer I", 4, "Steal car at level 25", "Steal car speed x2", "actions", "owned[4]", 25, "timeMultiplier[4]", "*2", 30));
+            this.actions.list.push(new this.create("Car dealer II", 4, "Steal car at level 50", "Steal car speed x2", "actions", "owned[4]", 50, "timeMultiplier[4]", "*2", 40));
+            this.actions.list.push(new this.create("Car dealer III", 4, "Steal car at level 75", "Chance of getting item", "actions", "owned[4]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Car dealer IV", 4, "Steal car at level 100", "Steal car speed x2", "actions", "owned[4]", 100, "timeMultiplier[4]", "*2", 50));
+            this.actions.list.push(new this.create("Car dealer V", 4, "Steal car at level 125", "Chance of getting item", "actions", "owned[4]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Car dealer VI", 4, "Steal car at level 150", "Chance of getting item", "actions", "owned[4]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Car dealer VII", 4, "Steal car at level 175", "Chance of getting item", "actions", "owned[4]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Car dealer", "actions", "Steal car", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Robber I", 5, "Jewelry robbery at level 25", "Jewelry robbery speed x2", "actions", "owned[5]", 25, "timeMultiplier[5]", "*2", 35));
+            this.actions.list.push(new this.create("Robber II", 5, "Jewelry robbery at level 50", "Jewelry robbery speed x2", "actions", "owned[5]", 50, "timeMultiplier[5]", "*2", 45));
+            this.actions.list.push(new this.create("Robber III", 5, "Jewelry robbery at level 75", "Chance of getting item", "actions", "owned[5]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Robber IV", 5, "Jewelry robbery at level 100", "Jewelry robbery speed x2", "actions", "owned[5]", 100, "timeMultiplier[5]", "*2", 55));
+            this.actions.list.push(new this.create("Robber V", 5, "Jewelry robbery at level 125", "Chance of getting item", "actions", "owned[5]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Robber VI", 5, "Jewelry robbery at level 150", "Chance of getting item", "actions", "owned[5]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Robber VII", 5, "Jewelry robbery at level 175", "Chance of getting item", "actions", "owned[5]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Robber", "actions", "Jewelry robbery", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Hacker I", 6, "Hacking at level 25", "Hacking speed x2", "actions", "owned[6]", 25, "timeMultiplier[6]", "*2", 40));
+            this.actions.list.push(new this.create("Hacker II", 6, "Hacking at level 50", "Hacking speed x2", "actions", "owned[6]", 50, "timeMultiplier[6]", "*2", 50));
+            this.actions.list.push(new this.create("Hacker III", 6, "Hacking at level 75", "Chance of getting item", "actions", "owned[6]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Hacker IV", 6, "Hacking at level 100", "Hacking speed x2", "actions", "owned[6]", 100, "timeMultiplier[6]", "*2", 60));
+            this.actions.list.push(new this.create("Hacker V", 6, "Hacking at level 125", "Chance of getting item", "actions", "owned[6]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Hacker VI", 6, "Hacking at level 150", "Chance of getting item", "actions", "owned[6]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Hacker VII", 6, "Hacking at level 175", "Chance of getting item", "actions", "owned[6]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Hacker", "actions", "Hacking", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Arms dealers I", 7, "Arms sales at level 25", "Arms sales speed x2", "actions", "owned[7]", 25, "timeMultiplier[7]", "*2", 45));
+            this.actions.list.push(new this.create("Arms dealers II", 7, "Arms sales at level 50", "Arms sales speed x2", "actions", "owned[7]", 50, "timeMultiplier[7]", "*2", 55));
+            this.actions.list.push(new this.create("Arms dealers III", 7, "Arms sales at level 75", "Chance of getting item", "actions", "owned[7]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Arms dealers IV", 7, "Arms sales at level 100", "Arms sales speed x2", "actions", "owned[7]", 100, "timeMultiplier[7]", "*2", 65));
+            this.actions.list.push(new this.create("Arms dealers V", 7, "Arms sales at level 125", "Chance of getting item", "actions", "owned[7]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Arms dealers VI", 7, "Arms sales at level 150", "Chance of getting item", "actions", "owned[7]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Arms dealers VII", 7, "Arms sales at level 175", "Chance of getting item", "actions", "owned[7]", 175, "", "", 0));
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Arms dealers", "actions", "Arms sales", 0, i));
+            }
+
+            this.actions.list.push(new this.create("Drugs sales I", 8, "Drugs sales at level 25", "Drugs sales speed x2", "actions", "owned[8]", 25, "timeMultiplier[8]", "*2", 50));
+            this.actions.list.push(new this.create("Drugs sales II", 8, "Drugs sales at level 50", "Drugs sales speed x2", "actions", "owned[8]", 50, "timeMultiplier[8]", "*2", 60));
+            this.actions.list.push(new this.create("Drugs sales III", 8, "Drugs sales at level 75", "Chance of getting item", "actions", "owned[8]", 75, "", "", 0));
+            this.actions.list.push(new this.create("Drugs sales IV", 8, "Drugs sales at level 100", "Drugs sales speed x2", "actions", "owned[8]", 100, "timeMultiplier[8]", "*2", 70));
+            this.actions.list.push(new this.create("Drugs sales V", 8, "Drugs sales at level 125", "Chance of getting item", "actions", "owned[8]", 125, "", "", 0));
+            this.actions.list.push(new this.create("Drugs sales VI", 8, "Drugs sales at level 150", "Chance of getting item", "actions", "owned[8]", 150, "", "", 0));
+            this.actions.list.push(new this.create("Drugs sales VII", 8, "Drugs sales at level 175", "Chance of getting item", "actions", "owned[8]", 175, "", "", 0));
+
+            for (i = 1; i < 20; i++) {
+                this.actions.list.push(this.createAchievements("Drugs sales", "actions", "Drugs sales", 0, i));
+            };
 
             for (var i = 0; i < this.actions.list.length; i++) {
                 this.actions.complete.push(false);
