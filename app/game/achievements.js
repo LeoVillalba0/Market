@@ -120,6 +120,10 @@ define(['angular'], function() {
                 };
 
                 $("#achievements-actions-total").html("(" + owned + "/" + total + ")");
+                $("#achievements-progress").css({
+                    width: Math.round(owned / total * 100, 0) + '%'
+                });
+                $("#achievements-progress-info").html(Math.round(owned / total * 100, 0) + '%');
             };
         },
 
@@ -129,7 +133,7 @@ define(['angular'], function() {
             desc = action + ' at level ' + lvl;
             reqName = 'owned[' + index + ']';
 
-            if (lvl === 200 || lvl === 300 || lvl === 400) {
+            if (lvl <= 400) {
                 desc2 = action + ' speed x2';
                 multiType = 'timeMultiplier[' + index + ']';
                 multi = '*2';
