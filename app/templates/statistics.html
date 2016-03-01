@@ -1,18 +1,60 @@
-<div class="container small well options">
+<div class="container small well statistics">
     <div class="row">
-		<div class="table-responsive table-statistics" id="table-statistics">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>&nbsp;</th>
-                  <th>Actual</th>
-                  <th>This run</th>
-                  <th>All time</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
+        <div class="table-responsive table-statistics">
+            <table id="stats-player" class="table table-striped">
+                <thead>
+                    <tr class="active">
+                        <th>&nbsp;</th>
+                        <th>Actual</th>
+                        <th>This run</th>
+                        <th>All time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr id="stats-money">
+                        <th>Money :</th>
+                        <td id="stats-money-atm"></td>
+                        <td id="stats-money-run"></td>
+                        <td id="stats-money-all"></td>
+                    </tr>
+
+                    <tr id="stats-rep">
+                        <th>Reputation :</th>
+                        <td id="stats-rep-atm"></td>
+                        <td id="stats-rep-run"></td>
+                        <td id="stats-rep-all"></td>
+                    </tr>
+
+                    <tr id="stats-money-mult">
+                        <th>Total money multiplier :</th>
+                        <td colspan="3" id="stats-money-mult-atm"></td>
+                    </tr>
+
+                    <tr id="stats-time-mult">
+                        <th>Total time multiplier :</th>
+                        <td colspan="3" id="stats-time-mult-atm"></td>
+                    </tr>
+
+                    <tr id="stats-rep-mult">
+                        <th>Total reputation multiplier :</th>
+                        <td colspan="3" id="stats-rep-mult-atm"></td>
+                    </tr>
+                </tbody>
             </table>
-    	</div>
+
+            <table id="stats-actions" class="table table-striped">
+                <thead>
+                    <tr class="active">
+                        <th>Action</th>
+                        <th>Level</th>
+                        <th>Reward</th>
+                        <th>$/sec</th>
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </div>
