@@ -27,7 +27,8 @@ if (isDev) {
             'prestige': 'app/game/prestige',
             'gangs': 'app/game/gangs',
             'collections': 'app/game/collections',
-            'save': 'app/game/save'
+            'save': 'app/game/save',
+            'statistics': 'app/game/statistics'
         },
 
         shim: {
@@ -64,7 +65,8 @@ if (isDev) {
             'prestige': 'app/game-optimized/prestige',
             'gangs': 'app/game-optimized/gangs',
             'collections': 'app/game-optimized/collections',
-            'save': 'app/game-optimized/save'
+            'save': 'app/game-optimized/save',
+            'statistics': 'app/game/statistics'
         },
 
         shim: {
