@@ -118,7 +118,7 @@ define(['angular'], function() {
             };
 
             $("#stats-started").html('Game started : ' + startedMonth + '/' + startedDay + '/' + startedYear + ' - ' +
-            startedHour + ':' + startedMinute + ':' + startedSecond);
+                startedHour + ':' + startedMinute + ':' + startedSecond);
 
             this.display();
         },
