@@ -10,8 +10,11 @@ define(['angular'], function() {
             var toSave = {
                 money: game.money,
                 totalMoney: game.totalMoney,
+                allTimeMoney: game.allTimeMoney,
                 level: game.level,
                 reputation: game.reputation,
+                totalReputation: game.totalReputation,
+                allTimeReputation: game.allTimeReputation,
                 reputationNeed: game.reputationNeed,
 
                 actionsProgress: game.actions.progress,
@@ -47,8 +50,11 @@ define(['angular'], function() {
 
                 game.money = savegame.money;
                 game.totalMoney = savegame.totalMoney;
+                game.allTimeMoney = savegame.allTimeMoney;
                 game.level = savegame.level;
                 game.reputation = savegame.reputation;
+                game.totalReputation = savegame.totalReputation;
+                game.allTimeReputation = savegame.allTimeReputation;
                 game.reputationNeed = savegame.reputationNeed;
 
                 game.actions.progress = savegame.actionsProgress;
