@@ -75,11 +75,13 @@ define(['angular'], function() {
         getItemDroppedByChance: function() {
             var randNum = Math.random().toFixed(3);
             var chance = this.chanceEarningItemMultiplier * this.chanceEarningItem;
+
             if (randNum <= chance) {
                 this.earnItem();
-                game.animateMenu('collections');
+                game.animateMenu('more');
                 return true;
-            }
+            };
+
             return false;
         },
 
@@ -111,7 +113,8 @@ define(['angular'], function() {
                     // production
                 case 1:
                     break;
-            }
+            };
+
             this.owned.reverse();
             this.owned[(this.owned.length)] = item;
             this.owned.reverse();
