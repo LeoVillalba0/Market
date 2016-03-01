@@ -133,7 +133,7 @@ define(['angular'], function() {
             desc = action + ' at level ' + lvl;
             reqName = 'owned[' + index + ']';
 
-            if (lvl <= 400) {
+            if (lvl === 200 || lvl === 300 || lvl === 400) {
                 desc2 = action + ' speed x2';
                 multiType = 'timeMultiplier[' + index + ']';
                 multi = '*2';
