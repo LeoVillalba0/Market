@@ -140,18 +140,12 @@ define(['angular'], function() {
                         desc: this.actions.list[index].desc,
                         price: this.actions.list[index].price
                     };
-
+                    $("#research-actions-total").html("(" + bought + "/" + total + ")");
                     $("#research-actions-upgrade-" + (i + 1)).html('<b>' + html.name + '</b><span>Cost <b>$' + fix(html.price, 2) + '</b></span><br>' + html.desc);
                     $("#research-actions-upgrade-" + (i + 1)).attr('onclick', 'game.research.buy(0, ' + index + ');');
                 } else {
                     $("#research-actions-upgrade-" + (i + 1)).html('<b>All available Upgrades baught!</b>');
-                };
-                $("#research-actions-total").html("(" + bought + "/" + total + ")");
-
-                $("#research-progress").css({
-                    width: Math.round(bought / total * 100, 0) + '%'
-                });
-                $("#research-progress-info").html(Math.round(bought / total * 100, 0) + '%');
+                }
             };
 
         },

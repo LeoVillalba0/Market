@@ -2,14 +2,9 @@ define([], function() {
     var game = {
         money: 0,
         totalMoney: 0,
-        allTimeMoney: 0,
         level: 1,
         reputation: 0,
-        totalReputation: 0,
-        allTimeReputation: 0,
         reputationNeed: 100,
-        moneyActions: new Array(),
-        repActions: new Array(),
 
         options: {
             fps: 20,
@@ -40,13 +35,10 @@ define([], function() {
         gainMoney: function(amount) {
             this.money += amount;
             this.totalMoney += amount;
-            this.allTimeMoney += amount;
         },
 
         gainRep: function(amount) {
             this.reputation += amount;
-            this.totalReputation += amount;
-            this.allTimeReputation += amount;
         },
 
         repLevelUp: function() {
@@ -140,7 +132,6 @@ define([], function() {
             this.display();
 
             game.actions.run(times, offline);
-            game.statistics.display();
             //game.production.run(times);
         },
 
@@ -154,7 +145,7 @@ define([], function() {
 
             require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
-                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save', 'statistics'], function() {
+                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save'], function() {
                     game.save.load();
 
                     if (localStorage.getItem((game.save.name + game.save.salt)) === null)
