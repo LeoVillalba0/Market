@@ -95,6 +95,14 @@ define(['angular'], function() {
         varInit: function() {},
 
         domInit: function() {
+            var short = new Date(game.options.started);
+            var startedYear = short.getFullYear();
+            var startedMonth = ((short.getMonth() + 1) < 10 ? '0' + (short.getMonth() + 1) : (short.getMonth() + 1));
+            var startedDay = (short.getDate() < 10 ? '0' + short.getDate() : short.getDate());
+            var startedHour = (short.getHours() < 10 ? '0' + short.getHours() : short.getHours());
+            var startedMinute = (short.getMinutes() < 10 ? '0' + short.getMinutes() : short.getMinutes());
+            var startedSecond = (short.getSeconds() < 10 ? '0' + short.getSeconds() : short.getSeconds());
+
             for (var i = 0; i < game.actions.list.length; i++) {
                 var html = {
                     name: game.actions.list[i]
@@ -106,7 +114,11 @@ define(['angular'], function() {
                     '<td id="action-reward-' + (i + 1) + '"></td>' +
                     '<td id="action-persec-' + (i + 1) + '"></td>' +
                     '</tr>');
+
             };
+
+            $("#stats-started").html('Game started : ' + startedMonth + '/' + startedDay + '/' + startedYear + ' - ' +
+            startedHour + ':' + startedMinute + ':' + startedSecond);
 
             this.display();
         },

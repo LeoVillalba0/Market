@@ -21,6 +21,7 @@ define([], function() {
             menu: 'navbar',
             before: new Date().getTime(),
             now: new Date().getTime(),
+            started: new Date().getTime(),
             version: 0.001
         },
 

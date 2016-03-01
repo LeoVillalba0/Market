@@ -31,7 +31,8 @@ define(['angular'], function() {
 
                 optionsBefore: game.options.before,
                 optionsFirstTime: game.options.firstTime,
-                optionsVersion: game.options.version
+                optionsVersion: game.options.version,
+                optionsStarted: game.options.started
             };
 
             if (game.options.init)
@@ -70,6 +71,7 @@ define(['angular'], function() {
 
                 game.options.before = savegame.optionsBefore;
                 game.options.firstTime = savegame.optionsFirstTime;
+                game.options.started = savegame.optionsStarted;
 
                 game.collections.owned = savegame.collectionsOwned;
 

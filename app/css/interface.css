@@ -123,6 +123,10 @@ a {
     padding-top: 0;
     padding-bottom: 0;
 }
+.statistics p {
+    margin-right: 5px;
+    font-size: 18px;
+}
 
 .well.research {
     padding-bottom: 0;
