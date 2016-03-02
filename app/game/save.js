@@ -41,7 +41,8 @@ define(['angular'], function() {
             if (from == 'user')
                 notify.pop("success", "Game successfully saved!");
 
-            log("Game saved.");
+            if (from !== 'silent')
+                log("Game saved.");
         },
 
         load: function(from) {
@@ -81,7 +82,8 @@ define(['angular'], function() {
                 if (from == 'user')
                     notify.pop("success", "Save-game successfully loaded!");
 
-                log("Savegame loaded.");
+                if (from !== 'silent')
+                    log("Savegame loaded.");
             };
         },
 
@@ -192,6 +194,15 @@ define(['angular'], function() {
             this.saveInterval = window.setInterval(function() {
                 game.save.save();
             }, 1000);
+
+            log("Save interval set - ID " + this.saveInterval);
+        },
+
+        removeInt: function() {
+            var saveIntervalID = this.saveInterval;
+
+            window.clearInterval(saveIntervalID);
+            log("Save interval removed.");
         },
 
         init: function() {
