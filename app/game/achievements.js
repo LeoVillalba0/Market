@@ -137,7 +137,7 @@ define(['angular'], function() {
                 desc2 = action + ' speed x2';
                 multiType = 'timeMultiplier[' + index + ']';
                 multi = '*2';
-            } else if (lvl / 100 % 0) {
+            } else if ((lvl %= 100) == 0) {
                 desc2 = action + ' reward x2';
                 multiType = 'rewardMultiplier[' + index + ']';
                 multi = '*3';
