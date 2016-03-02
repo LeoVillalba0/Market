@@ -17,16 +17,6 @@ module.exports = function(grunt) {
             }
         },
 
-        concat: {
-            options: {
-                separator: ';\r\n'
-            },
-            dist: {
-                src: ['app/game-optimized/*.js'],
-                dest: 'app/game-dist/game.js'
-            }
-        },
-
         shell: {
             dist: {
                 command: [
@@ -39,5 +29,4 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['jsbeautifier:all', 'shell:dist']);
-    grunt.registerTask('concat_all', ['shell:dist', 'concat:dist']);
 };

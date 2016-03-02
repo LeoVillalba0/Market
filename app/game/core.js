@@ -21,7 +21,19 @@ define([], function() {
             menu: 'navbar',
             before: new Date().getTime(),
             now: new Date().getTime(),
+            started: new Date().getTime(),
             version: 0.001
+        },
+
+        getObjLength: function(obj) {
+            var size = 0,
+                key;
+
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            };
+
+            return size;
         },
 
         scope: function(selector) {
@@ -112,9 +124,9 @@ define([], function() {
         },
 
         display: function() {
-            //this.production.displayDrugs();
             $("#sidebar-version").html("v" + this.options.version);
             $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
+            //this.production.displayDrugs();
         },
 
         coreLoop: function() {
@@ -137,11 +149,10 @@ define([], function() {
         },
 
         updateGame: function(times, offline) {
-            this.display();
-
             game.actions.run(times, offline);
             game.statistics.display();
             //game.production.run(times);
+            this.display();
         },
 
         domInit: function() {
@@ -151,6 +162,8 @@ define([], function() {
         init: function() {
             window["game"] = this;
             window["log"] = console.info.bind(console, "BR-" + this.options.version + " :");
+            window["warn"] = console.warn.bind(console);
+            window["debug"] = console.debug.bind(console);
 
             require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
