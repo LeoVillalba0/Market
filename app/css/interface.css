@@ -203,6 +203,10 @@ a {
     float: left;
 }
 
+.prestige p {
+    font-size: 18px;
+}
+
 .really {
     cursor: default;
 }
