@@ -161,7 +161,7 @@ define(['angular'], function() {
                     this.owned.forEach(function(item) {
                         var category = game.collections.categories[item.category];
                         var color = game.collections.getTableColor(game.collections.tiers[item.tier]);
-                        (item.active === true) ? active = 'true': active = false;
+                        (item.active === true) ? active = '<i class="fa fa-check" style="color: green;"></i>': active = '<i class="fa fa-check" style="color: red;"></i>';
 
                         $("#collection-" + category + "-tbody").append(
                             '<tr class="' + color + '">' +
