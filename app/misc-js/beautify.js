@@ -20,6 +20,8 @@ define([], function() {
                 var z = Math.floor(this.logFloor(x) / 3);
                 var s = this.beautify(x / Math.pow(10, 3 * z), n);
                 return s + "" + this.prefixes[z - 2];
+            } else if (x === 0 || typeof x == "undefined" || isNaN(x)) {
+                return 0;
             } else {
                 return this.numberWithCommas(x.toFixed(n));
             };

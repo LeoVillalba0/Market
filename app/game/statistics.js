@@ -39,23 +39,6 @@ define(['angular'], function() {
         },
 
         display: function() {
-            // $("#table-statistics tbody").html("");
-            // $("#table-statistics tbody").append(this.cR("Money", fix(game.money, 3), fix(game.totalMoney, 3), fix(game.allTimeMoney, 3)));
-            // $("#table-statistics tbody").append(this.cR("Reputation", fix(game.reputation, 3), fix(game.totalReputation, 3), fix(game.allTimeReputation, 3)));
-            // $("#table-statistics tbody").append(this.cR("Total Money Multiplier", 'x' + fix(game.actions.totalRewardMultiplier, 3), '', ''));
-            // $("#table-statistics tbody").append(this.cR("Total Time Multiplier", 'x' + fix(game.actions.totalTimeMultiplier, 3), '', ''));
-            // $("#table-statistics tbody").append(this.cR("Total Reputation Multiplier", 'x' + fix(game.actions.totalReputationMultiplier, 3), '', ''));
-            // $("#table-statistics tbody").append(this.cSH("<b>ACTIONS</b>"));
-            //
-            // var aList = game.actions.list;
-            //
-            // for (var i = 0; i < aList.length; i++) {
-            //     name = aList[i];
-            //     reward = game.actions.getReward(i);
-            //     perSec = game.actions.getPerSec(i);
-            //     lvl = game.actions.owned[i];
-            //     $("#table-statistics tbody").append(this.cR(name, 'Lvl: ' + lvl, '$' + fix(reward), '$' + fix(perSec) + '/Sec.'));
-            // };
 
             for (var i = 0; i < game.actions.list.length; i++) {
                 var html = {
@@ -78,7 +61,8 @@ define(['angular'], function() {
                 reputationAll: game.allTimeReputation,
                 moneyMult: game.actions.totalRewardMultiplier,
                 timeMult: game.actions.totalTimeMultiplier,
-                reputationMult: game.actions.totalReputationMultiplier
+                reputationMult: game.actions.totalReputationMultiplier,
+                countReset: game.options.countReset
             };
 
             $("#stats-money-atm").html("$" + fix(html.money, 3));
@@ -90,6 +74,7 @@ define(['angular'], function() {
             $("#stats-money-mult-atm").html("x" + fix(html.moneyMult, 3));
             $("#stats-time-mult-atm").html("x" + fix(html.timeMult, 3));
             $("#stats-rep-mult-atm").html("x" + fix(html.reputationMult, 3));
+            $("#stats-reset-count-atm").html(html.countReset);
         },
 
         varInit: function() {},

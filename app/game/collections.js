@@ -96,25 +96,39 @@ define(['angular'], function() {
             this.otherEffect = otherEffect;
         },
 
+        prepareSoftReset: function() {
+            this.markAllActive();
+        },
+
+        markAllActive: function() {
+            if (this.owned.length > 0) {
+
+                for (var i = 0; i < this.owned.length; i++) {
+                    // set every item to active
+                    this.owned[i].active = true;
+
+                    switch (this.owned[i]['category']) {
+                        // actions
+                        case 0:
+                            // save multipliers to temp
+                            game['actions'][this.owned[i]['who']] *= this.owned[i]['effect'];
+                            game['actions'][this.owned[i]['otherWho']] *= this.owned[i]['otherEffect'];
+
+                            break;
+                            // production
+                        case 1:
+                            break;
+                    };
+                };
+            }
+        },
+
         addRandomItem: function() {
             var item = this.getRandItem(this.getRandTier());
 
             var tierNamesLength = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]].length;
             item.name = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]][Math.floor(Math.random() * tierNamesLength)];
             item.active = false;
-
-            switch (item.category) {
-                // actions
-                case 0:
-                    //var totalReputationMultiplier = game.actions.totalReputationMultiplier;
-                    //var totalRewardMultiplier = game.actions.totalRewardMultiplier;
-                    //window["game"]["actions"][item.who] = window["game"]["actions"][item.who] * item.effect;
-                    //window["game"]["actions"][item.otherWho] = window["game"]["actions"][item.otherWho] * item.otherEffect;
-                    break;
-                    // production
-                case 1:
-                    break;
-            };
 
             this.owned.reverse();
             this.owned[(this.owned.length)] = item;
