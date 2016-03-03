@@ -44,12 +44,16 @@ define(['angular'], function() {
                 var html = {
                     reward: game.actions.getReward(i),
                     perSec: game.actions.getPerSec(i),
-                    level: game.actions.owned[i]
+                    level: game.actions.owned[i],
+                    rewardMulti: game.actions.rewardMultiplier[i],
+                    timeMulti: game.actions.timeMultiplier[i]
                 };
 
-                $("#action-level-" + (i + 1)).html("Level " + html.level);
+                $("#action-level-" + (i + 1)).html(html.level);
                 $("#action-reward-" + (i + 1)).html(fix(html.reward, 3) + "$");
                 $("#action-persec-" + (i + 1)).html(fix(html.perSec, 3) + "$/sec");
+                $("#action-timemulti-" + (i + 1)).html("x" + fix(html.rewardMulti, 3));
+                $("#action-rewardmulti-" + (i + 1)).html("x" + fix(html.timeMulti, 3));
             };
 
             var html = {
@@ -96,6 +100,8 @@ define(['angular'], function() {
                 $("#stats-actions tbody").append('<tr id="action-' + (i + 1) + '">' +
                     '<td id="action-name-' + (i + 1) + '">' + html.name + '</td>' +
                     '<td id="action-level-' + (i + 1) + '"></td>' +
+                    '<td id="action-timemulti-' + (i + 1) + '"></td>' +
+                    '<td id="action-rewardmulti-' + (i + 1) + '"></td>' +
                     '<td id="action-reward-' + (i + 1) + '"></td>' +
                     '<td id="action-persec-' + (i + 1) + '"></td>' +
                     '</tr>');

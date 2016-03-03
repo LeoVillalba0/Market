@@ -144,13 +144,18 @@ define(['angular'], function() {
                 var totalPrice = this.displayPrice(i);
                 var maxrep = this.reputation[i];
                 var repEarn = this.getRep(i);
+                if (game.money >= price)
+                    colorClass = 'colorGreen';
+                else
+                    colorClass = 'colorRed';
 
                 $("#action-name-" + (i + 1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
                 $("#action-info-" + (i + 1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" +
                     fix(time) + " sec.<br>" +
                     "+" + fix(repEarn, 0) + " rep."
                 );
-                $("#action-cost-" + (i + 1)).html("Cost $" + fix(price));
+
+                $("#action-cost-" + (i + 1)).html("Cost $" + fix(price)).attr("class", colorClass);
             };
 
             var indexOfCheapest = game.research.getCheapest(0);
