@@ -101,14 +101,15 @@ define(['angular'], function() {
 
             var tierNamesLength = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]].length;
             item.name = window["game"]["collections"]["names"][this.categories[item.category]][game.collections.tiers[item.tier]][Math.floor(Math.random() * tierNamesLength)];
+            item.active = false;
 
             switch (item.category) {
                 // actions
                 case 0:
-                    var totalReputationMultiplier = game.actions.totalReputationMultiplier;
-                    var totalRewardMultiplier = game.actions.totalRewardMultiplier;
-                    window["game"]["actions"][item.who] = window["game"]["actions"][item.who] * item.effect;
-                    window["game"]["actions"][item.otherWho] = window["game"]["actions"][item.otherWho] * item.otherEffect;
+                    //var totalReputationMultiplier = game.actions.totalReputationMultiplier;
+                    //var totalRewardMultiplier = game.actions.totalRewardMultiplier;
+                    //window["game"]["actions"][item.who] = window["game"]["actions"][item.who] * item.effect;
+                    //window["game"]["actions"][item.otherWho] = window["game"]["actions"][item.otherWho] * item.otherEffect;
                     break;
                     // production
                 case 1:
@@ -160,12 +161,14 @@ define(['angular'], function() {
                     this.owned.forEach(function(item) {
                         var category = game.collections.categories[item.category];
                         var color = game.collections.getTableColor(game.collections.tiers[item.tier]);
+                        (item.active === true) ? active = '<i class="fa fa-check" style="color: green;"></i>': active = '<i class="fa fa-check" style="color: red;"></i>';
 
                         $("#collection-" + category + "-tbody").append(
                             '<tr class="' + color + '">' +
                             '<th>' + capF(game.collections.tiers[item.tier]) + '</th>' +
                             '<td>' + item.name + '</td>' +
                             '<td>' + item.desc + '</td>' +
+                            '<td>' + active + '</td>' +
                             '</tr>'
                         );
                     });
