@@ -43,6 +43,7 @@ define(['angular'], function() {
             'options.softReset',
             'actions.totalRewardMultiplier',
             'actions.totalTimeMultiplier',
+            'actions.totalReputationMultiplier',
             'options.countReset'
         ],
 
@@ -120,6 +121,7 @@ define(['angular'], function() {
             // reset Multipliers
             game['actions']['totalReputationMultiplier'] = 1;
             game['actions']['totalRewardMultiplier'] = 1;
+            game['actions']['totalTimeMultiplier'] = 1;
             game['options']['countReset'] += 1;
 
             // recalculate multipliers and set all items active
