@@ -22,7 +22,9 @@ define([], function() {
             before: new Date().getTime(),
             now: new Date().getTime(),
             started: new Date().getTime(),
-            version: 0.001
+            softReset: false,
+            version: 0.001,
+            countReset: 0
         },
 
         getObjLength: function(obj) {
@@ -101,26 +103,24 @@ define([], function() {
             });
         },
 
-        toggleModal: function() {
-            if (this.options.firstTime) {
-                $("#modal-newPlayer").modal({
-                    keyboard: false,
-                    backdrop: 'static'
-                });
+        toggleModal: function(name) {
+            name = '#' + name;
+            $(name).modal({
+                keyboard: false,
+                backdrop: 'static'
+            });
 
-                $("#modal-newPlayer").fadeIn('slow');
-            };
+            $(name).fadeIn('slow');
         },
 
-        closeModal: function() {
-            if (this.options.firstTime) {
-                this.options.firstTime = false;
-                game.options.pause = false;
+        closeModal: function(name) {
+            game.options.pause = false;
+            game.options.firstTime = false;
+            game.options.softReset = false;
 
-                window.setTimeout(function() {
-                    $("#modal-newPlayer").remove();
-                }, 3000);
-            };
+            window.setTimeout(function() {
+                $(name).remove();
+            }, 3000);
         },
 
         display: function() {
@@ -175,21 +175,22 @@ define([], function() {
 
                     log("----------");
                     require(['angular', 'bootstrap'], function() {
-                        if (!game.options.firstTime) {
+
+                        if (!game.options.firstTime && !game.options.softReset) {
                             game.options.pause = false;
-                        } else {
+                        } else if (game.options.firstTime) {
                             window.setTimeout(function() {
-                                game.toggleModal();
+                                game.toggleModal('modal-newPlayer');
+                            }, 1000);
+                        } else if (game.options.softReset) {
+                            window.setTimeout(function() {
+                                game.toggleModal('modal-reset');
                             }, 1000);
                         };
 
                         game.domInit();
 
                         game.options.init = true;
-
-                        /*$(function() { // don't activate when changing page
-                            $('[data-toggle="tooltip"]').tooltip();
-                        });*/
 
                         log("Angular & Bootstrap init. Ready to play.");
                     });

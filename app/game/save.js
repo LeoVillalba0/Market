@@ -26,8 +26,24 @@ define(['angular'], function() {
             'collections.owned',
             'options.before',
             'options.firstTime',
+            'options.softReset',
             'options.version',
-            'options.started'
+            'options.started',
+            'options.countReset'
+        ],
+
+        softResetSaveVars: [
+            'allTimeMoney',
+            'allTimeReputation',
+            'reputation',
+            'level',
+            'collections.owned',
+            'options.started',
+            'options.firstTime',
+            'options.softReset',
+            'actions.totalRewardMultiplier',
+            'actions.totalTimeMultiplier',
+            'options.countReset'
         ],
 
         setObjValByPath: function(obj, val, path) {
@@ -96,6 +112,26 @@ define(['angular'], function() {
 
         eventListenerSave: function() {
             game.save.save();
+        },
+
+        softResetSave: function() {
+            var toSave = new Object();
+
+            // reset Multipliers
+            game['actions']['totalReputationMultiplier'] = 1;
+            game['actions']['totalRewardMultiplier'] = 1;
+            game['options']['countReset'] += 1;
+
+            // recalculate multipliers and set all items active
+            game.collections.prepareSoftReset();
+
+            // now save needed vars
+            for (y = 0; y < this.softResetSaveVars.length; y++) {
+                toSave[this.softResetSaveVars[y]] = this.getObjValByPath(game, this.softResetSaveVars[y]);
+            };
+            localStorage.removeItem((game.save.name + game.save.salt));
+
+            localStorage.setItem((this.name + this.salt), JSON.stringify(toSave));
         },
 
         reset: function(yes, no) {
