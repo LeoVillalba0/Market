@@ -6,6 +6,7 @@ define(['angularApp'], function(app) {
                 game.actions.angularInit();
                 game.options.angularInit = true;
             };
+            game.options.angularInit();
         };
 
         $timeout($scope.init);

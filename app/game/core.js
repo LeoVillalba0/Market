@@ -14,8 +14,8 @@ define([], function() {
         gameInterval: undefined,
 
         options: {
-            fps: 60,
-            interval: (1000 / 60),
+            fps: 20,
+            interval: (1000 / 20),
             angularInit: false,
             init: false,
             pause: true,
@@ -31,13 +31,12 @@ define([], function() {
 
         setFPS: function(fps) {
             fps = parseInt(fps);
-            if (fps >= 1 && fps <= 60) {
-                this.stopGame();
-                this.options.fps = fps;
-                this.options.interval = 1000 / fps;
-                $("#choosedFPS").html(game.options.fps);
-                this.runGame();
-            };
+            if (fps < 1 || fps > 60) fps = 20;
+            this.stopGame();
+            this.options.fps = fps;
+            this.options.interval = 1000 / fps;
+            $("#choosedFPS").html(game.options.fps);
+            this.runGame();
         },
 
         getObjLength: function(obj) {
@@ -170,14 +169,6 @@ define([], function() {
 
         domInit: function() {
             $("#navbar-save").attr('onclick', 'game.save.save("user");');
-            $("#fpsSlider").on("input change", function() {
-                game.setFPS(this.value);
-                $("#choosedFPS").html(game.options.fps);
-            });
-
-            $("#fpsSlider").val(game.options.fps);
-            $("#choosedFPS").html(game.options.fps);
-
         },
 
         runGame: function() {
@@ -198,7 +189,7 @@ define([], function() {
 
             require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
-                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save', 'statistics'], function() {
+                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save', 'statistics', 'options'], function() {
                     game.save.load();
 
                     if (localStorage.getItem((game.save.name + game.save.salt)) === null)

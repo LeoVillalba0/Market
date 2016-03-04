@@ -28,7 +28,8 @@ if (isDev) {
             'gangs': 'app/game/gangs',
             'collections': 'app/game/collections',
             'save': 'app/game/save',
-            'statistics': 'app/game/statistics'
+            'statistics': 'app/game/statistics',
+            'options': 'app/game/options'
         },
 
         shim: {
@@ -66,7 +67,8 @@ if (isDev) {
             'gangs': 'app/game-optimized/gangs',
             'collections': 'app/game-optimized/collections',
             'save': 'app/game-optimized/save',
-            'statistics': 'app/game/statistics'
+            'statistics': 'app/game-optimized/statistics',
+            'options': 'app/game-optimized/options'
         },
 
         shim: {
