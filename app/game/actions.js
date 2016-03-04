@@ -130,9 +130,17 @@ define(['angular'], function() {
 
                         $("#action-progress-" + (i + 1)).css('width', width + '%');
                         $("#action-progress-" + (i + 1) + "-info").html(Math.floor(width) + "%");
+                        $("#action-cost-" + (i + 1)).html("Cost $" + fix(this.displayPrice(i))).attr("class", this.getColor(this.displayPrice(i)));
                     };
                 };
             };
+        },
+
+        getColor: function(price) {
+            if (game.money >= price)
+                return 'colorGreen';
+            else
+                return 'colorRed';
         },
 
         display: function() {
@@ -144,10 +152,6 @@ define(['angular'], function() {
                 var totalPrice = this.displayPrice(i);
                 var maxrep = this.reputation[i];
                 var repEarn = this.getRep(i);
-                if (game.money >= price)
-                    colorClass = 'colorGreen';
-                else
-                    colorClass = 'colorRed';
 
                 $("#action-name-" + (i + 1)).html(this.list[i] + " (lvl. " + this.owned[i] + ")");
                 $("#action-info-" + (i + 1)).html("+$" + fix(reward) + " <span>($" + fix(perSec, 3) + "/sec)</span><br>" +
@@ -155,7 +159,7 @@ define(['angular'], function() {
                     "+" + fix(repEarn, 0) + " rep."
                 );
 
-                $("#action-cost-" + (i + 1)).html("Cost $" + fix(price)).attr("class", colorClass);
+                $("#action-cost-" + (i + 1)).html("Cost $" + fix(price)).attr("class", this.getColor(price));
             };
 
             var indexOfCheapest = game.research.getCheapest(0);
