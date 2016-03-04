@@ -147,7 +147,7 @@ define([], function() {
             that.options.now = new Date().getTime();
             var elapsed = that.options.now - that.options.before;
             if (elapsed > that.options.interval) {
-                if (elapsed > 1000) {
+                if (elapsed > 2000) {
                     that.updateGame(Math.floor(elapsed / that.options.interval), true);
                     notify.pop("success", "While you were offline, you gained:<br>" +
                         "$" + fix(game.actions.gainedMoneyThisRun, 3) + "<br>" +
@@ -225,7 +225,7 @@ define([], function() {
 
                         log("Angular & Bootstrap init. Ready to play.");
 
-                        game.runGame();
+                        game.setFPS(game.options.fps);
                     });
                 });
             });
