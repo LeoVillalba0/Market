@@ -29,7 +29,8 @@ define(['angular'], function() {
             'options.softReset',
             'options.version',
             'options.started',
-            'options.countReset'
+            'options.countReset',
+            'options.fps'
         ],
 
         softResetSaveVars: [

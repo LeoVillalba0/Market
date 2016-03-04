@@ -11,9 +11,11 @@ define([], function() {
         moneyActions: new Array(),
         repActions: new Array(),
 
+        gameInterval: undefined,
+
         options: {
-            fps: 20,
-            interval: (1000 / 20),
+            fps: 60,
+            interval: (1000 / 60),
             angularInit: false,
             init: false,
             pause: true,
@@ -25,6 +27,17 @@ define([], function() {
             softReset: false,
             version: 0.001,
             countReset: 0
+        },
+
+        setFPS: function(fps) {
+            fps = parseInt(fps);
+            if (fps >= 1 && fps <= 60) {
+                this.stopGame();
+                this.options.fps = fps;
+                this.options.interval = 1000 / fps;
+                $("#choosedFPS").html(game.options.fps);
+                this.runGame();
+            };
         },
 
         getObjLength: function(obj) {
@@ -130,7 +143,7 @@ define([], function() {
         },
 
         coreLoop: function() {
-            var that = this.game;
+            var that = game;
             that.options.now = new Date().getTime();
             var elapsed = that.options.now - that.options.before;
             if (elapsed > that.options.interval) {
@@ -157,6 +170,24 @@ define([], function() {
 
         domInit: function() {
             $("#navbar-save").attr('onclick', 'game.save.save("user");');
+            $("#fpsSlider").on("input change", function() {
+                game.setFPS(this.value);
+                $("#choosedFPS").html(game.options.fps);
+            });
+
+            $("#fpsSlider").val(game.options.fps);
+            $("#choosedFPS").html(game.options.fps);
+
+        },
+
+        runGame: function() {
+            this.gameInterval = window.setInterval(function() {
+                game.coreLoop();
+            }, game.options.interval);
+        },
+
+        stopGame: function() {
+            window.clearInterval(this.gameInterval);
         },
 
         init: function() {
@@ -193,6 +224,8 @@ define([], function() {
                         game.options.init = true;
 
                         log("Angular & Bootstrap init. Ready to play.");
+
+                        game.runGame();
                     });
                 });
             });

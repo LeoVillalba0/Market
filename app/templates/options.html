@@ -42,6 +42,14 @@
             <a id="options-navbar" class="btn btn-warning btn-block" onclick="game.menuSwitch('navbar');">Navbar</a>
         </div>
     </div>
+    
+    <div class="row">
+    	<div class="col-xs-12 col-sm-12 col-md-12">
+    		<strong>If the game laggs, you can change how fast the game should run (this only effects how often the display is updated)</strong><br />
+        	<input type="range" name="fpsSlider" id="fpsSlider" class="slider ng-pristine ng-untouched ng-valid ng-not-empty" step="1" min="1" max="60">
+        	Game runs with: <span id="choosedFPS"></span> FPS 
+        </div>
+    </div>
 
     <br>
 
