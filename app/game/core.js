@@ -31,7 +31,10 @@ define([], function() {
 
         setFPS: function(fps) {
             fps = parseInt(fps);
-            if (fps < 1 || fps > 60) fps = 20;
+            if (fps >= 1 && fps <= 60)
+                fps = fps;
+            else
+                fps = 20;
             this.stopGame();
             this.options.fps = fps;
             this.options.interval = 1000 / fps;
