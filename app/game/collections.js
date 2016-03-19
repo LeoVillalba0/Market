@@ -117,6 +117,7 @@ define(['angular'], function() {
                             break;
                             // production
                         case 1:
+                            game['production'][this.owned[i]['who']] *= this.owned[i]['effect'];
                             break;
                     };
                 };

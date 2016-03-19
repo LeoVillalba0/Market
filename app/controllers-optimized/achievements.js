@@ -1,1 +1,1 @@
-define(["angularApp"],function(e){e.controller("AchievementsCtrl",["$scope","$interval","$timeout",function(e,t,n){e.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.achievements.angularInit()},n(e.init)}])});
+define(["angularApp"],function(n){n.controller("AchievementsCtrl",["$scope","$interval","$timeout",function(n,i,t){n.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.achievements.angularInit()},t(n.init)}])});

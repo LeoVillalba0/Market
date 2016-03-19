@@ -1,1 +1,1 @@
-define(["angularApp"],function(e){e.controller("HelpCtrl",["$scope","$interval","$timeout",function(e,t,n){e.init=function(){game.options.angularInit||(game.actions.angularInit(),game.options.angularInit=!0)},n(e.init)}])});
+define(["angularApp"],function(n){n.controller("HelpCtrl",["$scope","$interval","$timeout",function(n,i,t){n.init=function(){game.options.angularInit||(game.actions.angularInit(),game.options.angularInit=!0)},t(n.init)}])});

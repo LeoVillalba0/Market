@@ -13,21 +13,7 @@ define([], function() {
 
         gameInterval: undefined,
 
-        options: {
-            fps: 20,
-            interval: (1000 / 20),
-            angularInit: false,
-            init: false,
-            pause: true,
-            firstTime: true,
-            menu: 'navbar',
-            before: new Date().getTime(),
-            now: new Date().getTime(),
-            started: new Date().getTime(),
-            softReset: false,
-            version: 0.001,
-            countReset: 0
-        },
+        options: {},
 
         setFPS: function(fps) {
             fps = parseInt(fps);
@@ -141,7 +127,7 @@ define([], function() {
         display: function() {
             $("#sidebar-version").html("v" + this.options.version);
             $(".navbar-brand").html("$" + beautify.fix(game.money) + " - reputation lvl. " + this.level + " <small>(" + fix(this.reputation, 0) + "/" + fix(this.reputationNeed, 0) + ")");
-            //this.production.displayDrugs();
+            this.production.displayDrugs();
         },
 
         coreLoop: function() {
@@ -166,7 +152,7 @@ define([], function() {
         updateGame: function(times, offline) {
             game.actions.run(times, offline);
             game.statistics.display();
-            //game.production.run(times);
+            game.production.run(times);
             this.display();
         },
 
@@ -192,7 +178,7 @@ define([], function() {
 
             require(['beautify', 'sidebar', 'notify', 'helper'], function() {
                 log("----------");
-                require(['actions', 'research-center', 'achievements', 'prestige', 'collections', 'save', 'statistics', 'options'], function() {
+                require(['actions', 'research-center', 'achievements', 'production', 'prestige', 'collections', 'save', 'statistics', 'options'], function() {
                     game.save.load();
 
                     if (localStorage.getItem((game.save.name + game.save.salt)) === null)

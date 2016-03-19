@@ -1,6 +1,20 @@
 define(['angular'], function() {
     var options = {
 
+        fps: 20,
+        interval: (1000 / 20),
+        angularInit: false,
+        init: false,
+        pause: true,
+        firstTime: true,
+        menu: 'navbar',
+        before: new Date().getTime(),
+        now: new Date().getTime(),
+        started: new Date().getTime(),
+        softReset: false,
+        version: 0.001,
+        countReset: 0,
+
         display: function() {
             game.setFPS(game.options.fps);
             $("#fpsSlider").on("input change", function() {

@@ -1,1 +1,1 @@
-define(["angularApp"],function(e){e.controller("GangsCtrl",["$scope","$interval","$timeout",function(e,t,n){e.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.gangs.angularInit()},n(e.init)}])});
+define(["angularApp"],function(n){n.controller("GangsCtrl",["$scope","$interval","$timeout",function(n,i,t){n.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.gangs.angularInit()},t(n.init)}])});

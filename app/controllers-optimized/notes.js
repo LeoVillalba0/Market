@@ -1,1 +1,1 @@
-define(["angularApp"],function(e){e.controller("NotesCtrl",["$scope","$interval","$timeout",function(e,t,n){e.init=function(){game.options.angularInit||(game.actions.angularInit(),game.options.angularInit=!0)},n(e.init)}])});
+define(["angularApp"],function(n){n.controller("NotesCtrl",["$scope","$interval","$timeout",function(n,t,i){n.init=function(){game.options.angularInit||(game.actions.angularInit(),game.options.angularInit=!0)},i(n.init)}])});

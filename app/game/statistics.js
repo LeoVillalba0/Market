@@ -66,7 +66,8 @@ define(['angular'], function() {
                 moneyMult: game.actions.totalRewardMultiplier,
                 timeMult: game.actions.totalTimeMultiplier,
                 reputationMult: game.actions.totalReputationMultiplier,
-                countReset: game.options.countReset
+                countReset: game.options.countReset,
+                prodMoneyMult: game.production.totalRewardMultiplier
             };
 
             $("#stats-money-atm").html("$" + fix(html.money, 3));
@@ -79,6 +80,7 @@ define(['angular'], function() {
             $("#stats-time-mult-atm").html("x" + fix(html.timeMult, 3));
             $("#stats-rep-mult-atm").html("x" + fix(html.reputationMult, 3));
             $("#stats-reset-count-atm").html(html.countReset);
+            $("#stats-prod-money-mult-atm").html("x" + fix(html.prodMoneyMult, 3));
         },
 
         varInit: function() {},

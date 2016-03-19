@@ -1,1 +1,1 @@
-define(["angularApp"],function(e){e.controller("ResearchCenterCtrl",["$scope","$interval","$timeout",function(e,t,n){e.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.research.angularInit()},n(e.init)}])});
+define(["angularApp"],function(n){n.controller("ResearchCenterCtrl",["$scope","$interval","$timeout",function(n,t,e){n.init=function(){game.options.angularInit||(game.options.angularInit=!0),game.research.angularInit()},e(n.init)}])});

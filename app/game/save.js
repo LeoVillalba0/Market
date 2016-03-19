@@ -30,7 +30,23 @@ define(['angular'], function() {
             'options.version',
             'options.started',
             'options.countReset',
-            'options.fps'
+            'options.fps',
+            'production.invested',
+            'production.multipliers',
+            'production.totalRewardMultiplier',
+            'production.stock',
+            'production.prod.cocaineOwned',
+            'production.prod.methOwned',
+            'production.prod.weedOwned',
+            'production.prod.cocainePerSec',
+            'production.prod.methPerSec',
+            'production.prod.weedPerSec',
+            'production.sell.cocaineOwned',
+            'production.sell.methOwned',
+            'production.sell.weedOwned',
+            'production.sell.cocainePerSec',
+            'production.sell.methPerSec',
+            'production.sell.weedPerSec'
         ],
 
         softResetSaveVars: [
@@ -45,7 +61,8 @@ define(['angular'], function() {
             'actions.totalRewardMultiplier',
             'actions.totalTimeMultiplier',
             'actions.totalReputationMultiplier',
-            'options.countReset'
+            'options.countReset',
+            'production.totalRewardMultiplier'
         ],
 
         setObjValByPath: function(obj, val, path) {
@@ -99,6 +116,7 @@ define(['angular'], function() {
                 for (x = 0; x < this.saveVars.length; x++) {
                     saveVar = this.saveVars[x];
                     val = savegame[saveVar];
+                    console.log(saveVar + ': ' + val + ': ' + this.checkExists(val));
                     if (this.checkExists(val)) this.setObjValByPath(game, val, this.saveVars[x]);
                 }
 
